@@ -1,0 +1,1299 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>PriceHunt — Smart Price Comparison</title>
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Space+Grotesk:wght@500;700&display=swap" rel="stylesheet" />
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root {
+    --bg: #0f0f10;
+    --surface: #1a1a1e;
+    --surface2: #222228;
+    --surface3: #2a2a32;
+    --border: rgba(255,255,255,0.08);
+    --border2: rgba(255,255,255,0.14);
+    --text: #f0f0f0;
+    --text2: #9999a8;
+    --text3: #5e5e72;
+    --accent: #7c6af7;
+    --accent2: #9d8fff;
+    --accentbg: rgba(124,106,247,0.12);
+    --green: #22c55e;
+    --greenbg: rgba(34,197,94,0.1);
+    --amber: #f59e0b;
+    --amberbg: rgba(245,158,11,0.1);
+    --red: #ef4444;
+    --redbg: rgba(239,68,68,0.1);
+    --radius: 12px;
+    --radius-sm: 8px;
+    --shadow: 0 4px 24px rgba(0,0,0,0.4);
+  }
+
+  body {
+    font-family: 'Inter', sans-serif;
+    background: var(--bg);
+    color: var(--text);
+    min-height: 100vh;
+    font-size: 14px;
+    line-height: 1.6;
+  }
+
+  /* ── NAV ── */
+  nav {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 2rem;
+    height: 56px;
+    border-bottom: 1px solid var(--border);
+    background: var(--bg);
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    backdrop-filter: blur(10px);
+  }
+
+  .logo {
+    font-family: 'Space Grotesk', sans-serif;
+    font-size: 20px;
+    font-weight: 700;
+    color: var(--text);
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    text-decoration: none;
+  }
+
+  .logo-icon {
+    width: 28px; height: 28px;
+    background: linear-gradient(135deg, var(--accent), #a78bfa);
+    border-radius: 8px;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 14px;
+  }
+
+  .nav-right {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+  }
+
+  .nav-btn {
+    padding: 6px 14px;
+    border-radius: var(--radius-sm);
+    font-size: 13px;
+    border: 1px solid var(--border2);
+    background: transparent;
+    color: var(--text2);
+    cursor: pointer;
+    transition: all 0.15s;
+    font-family: 'Inter', sans-serif;
+    display: flex;
+    align-items: center;
+    gap: 5px;
+  }
+  .nav-btn:hover { background: var(--surface2); color: var(--text); }
+  .nav-btn.active { background: var(--accentbg); color: var(--accent2); border-color: rgba(124,106,247,0.3); }
+
+  .wishlist-badge {
+    background: var(--accent);
+    color: white;
+    font-size: 10px;
+    width: 16px; height: 16px;
+    border-radius: 50%;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: 600;
+  }
+
+  /* ── HERO ── */
+  .hero {
+    padding: 3rem 2rem 2rem;
+    max-width: 860px;
+    margin: 0 auto;
+  }
+
+  .hero-eyebrow {
+    font-size: 11px;
+    font-weight: 600;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--accent2);
+    margin-bottom: 12px;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+  }
+
+  .hero-eyebrow::before {
+    content: '';
+    width: 20px; height: 1px;
+    background: var(--accent);
+  }
+
+  .hero h1 {
+    font-family: 'Space Grotesk', sans-serif;
+    font-size: clamp(28px, 5vw, 44px);
+    font-weight: 700;
+    line-height: 1.15;
+    color: var(--text);
+    margin-bottom: 12px;
+  }
+
+  .hero h1 span {
+    background: linear-gradient(90deg, var(--accent), #a78bfa, #60a5fa);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
+
+  .hero-sub {
+    color: var(--text2);
+    font-size: 15px;
+    margin-bottom: 2rem;
+    max-width: 500px;
+  }
+
+  /* ── REGION TABS ── */
+  .region-tabs {
+    display: flex;
+    gap: 6px;
+    margin-bottom: 1.5rem;
+    flex-wrap: wrap;
+  }
+
+  .rtab {
+    padding: 7px 16px;
+    border-radius: 20px;
+    font-size: 13px;
+    border: 1px solid var(--border2);
+    background: var(--surface);
+    color: var(--text2);
+    cursor: pointer;
+    transition: all 0.15s;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    font-family: 'Inter', sans-serif;
+    font-weight: 500;
+  }
+  .rtab:hover { border-color: var(--accent); color: var(--text); }
+  .rtab.active { background: var(--accentbg); color: var(--accent2); border-color: rgba(124,106,247,0.4); }
+
+  /* ── CATEGORY PILLS ── */
+  .categories {
+    display: flex;
+    gap: 6px;
+    margin-bottom: 1.25rem;
+    flex-wrap: wrap;
+  }
+
+  .catpill {
+    padding: 5px 12px;
+    border-radius: 20px;
+    font-size: 12px;
+    border: 1px solid var(--border);
+    background: transparent;
+    color: var(--text3);
+    cursor: pointer;
+    transition: all 0.15s;
+    font-family: 'Inter', sans-serif;
+  }
+  .catpill:hover { border-color: var(--border2); color: var(--text2); }
+  .catpill.active { background: var(--surface2); color: var(--text); border-color: var(--border2); }
+
+  /* ── SEARCH BOX ── */
+  .search-wrap {
+    display: flex;
+    gap: 10px;
+    margin-bottom: 1.5rem;
+  }
+
+  .search-input-wrap {
+    flex: 1;
+    position: relative;
+  }
+
+  .search-icon {
+    position: absolute;
+    left: 14px;
+    top: 50%;
+    transform: translateY(-50%);
+    color: var(--text3);
+    font-size: 16px;
+    pointer-events: none;
+  }
+
+  .search-input {
+    width: 100%;
+    padding: 13px 14px 13px 42px;
+    border-radius: var(--radius);
+    border: 1px solid var(--border2);
+    background: var(--surface);
+    color: var(--text);
+    font-size: 15px;
+    font-family: 'Inter', sans-serif;
+    outline: none;
+    transition: border-color 0.15s;
+  }
+  .search-input::placeholder { color: var(--text3); }
+  .search-input:focus { border-color: var(--accent); box-shadow: 0 0 0 3px rgba(124,106,247,0.15); }
+
+  .search-btn {
+    padding: 13px 24px;
+    border-radius: var(--radius);
+    background: var(--accent);
+    color: white;
+    border: none;
+    font-size: 14px;
+    font-weight: 600;
+    font-family: 'Inter', sans-serif;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    transition: all 0.15s;
+    white-space: nowrap;
+  }
+  .search-btn:hover { background: #8b7af8; }
+  .search-btn:disabled { opacity: 0.5; cursor: not-allowed; }
+
+  /* ── PLATFORM TOGGLES ── */
+  .platform-section {
+    margin-bottom: 1.5rem;
+  }
+
+  .platform-label {
+    font-size: 11px;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    color: var(--text3);
+    margin-bottom: 8px;
+  }
+
+  .platform-chips {
+    display: flex;
+    gap: 6px;
+    flex-wrap: wrap;
+  }
+
+  .pchip {
+    padding: 5px 12px;
+    border-radius: var(--radius-sm);
+    font-size: 12px;
+    border: 1px solid var(--border);
+    background: var(--surface);
+    color: var(--text2);
+    cursor: pointer;
+    transition: all 0.15s;
+    font-family: 'Inter', sans-serif;
+    display: flex;
+    align-items: center;
+    gap: 5px;
+  }
+  .pchip.on { border-color: rgba(124,106,247,0.4); background: var(--accentbg); color: var(--accent2); }
+  .pchip:hover { border-color: var(--border2); }
+
+  /* ── AGENT LOG ── */
+  .agent-panel {
+    background: var(--surface);
+    border: 1px solid var(--border2);
+    border-radius: var(--radius);
+    padding: 12px 16px;
+    margin-bottom: 1.25rem;
+    display: none;
+  }
+
+  .agent-header {
+    font-size: 11px;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    color: var(--text3);
+    margin-bottom: 8px;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+  }
+
+  .agent-dot {
+    width: 6px; height: 6px;
+    border-radius: 50%;
+    background: var(--green);
+    animation: blink 1s ease-in-out infinite;
+  }
+
+  @keyframes blink { 0%,100%{opacity:1} 50%{opacity:0.2} }
+
+  .agent-lines {
+    display: flex;
+    flex-direction: column;
+    gap: 3px;
+    max-height: 90px;
+    overflow-y: auto;
+    font-family: 'Space Grotesk', monospace;
+    font-size: 12px;
+  }
+
+  .aline { color: var(--text2); display: flex; gap: 8px; align-items: flex-start; }
+  .aline.done { color: var(--green); }
+  .aline.err { color: var(--red); }
+  .aline-icon { flex-shrink: 0; margin-top: 1px; }
+
+  /* ── SUMMARY BAR ── */
+  .summary-bar {
+    display: none;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 10px;
+    margin-bottom: 1.25rem;
+  }
+
+  .sum-card {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    padding: 12px 16px;
+  }
+
+  .sum-label { font-size: 11px; color: var(--text3); font-weight: 500; margin-bottom: 4px; }
+  .sum-val { font-size: 18px; font-weight: 600; color: var(--text); }
+  .sum-val.green { color: var(--green); }
+  .sum-val.accent { color: var(--accent2); }
+
+  /* ── CONTROLS ── */
+  .controls-row {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 12px;
+    gap: 10px;
+    flex-wrap: wrap;
+  }
+
+  .result-count { font-size: 13px; color: var(--text2); }
+  .result-count strong { color: var(--text); }
+
+  .sort-wrap { display: flex; align-items: center; gap: 8px; }
+  .sort-wrap label { font-size: 12px; color: var(--text3); }
+  .sort-select {
+    padding: 6px 10px;
+    border-radius: var(--radius-sm);
+    border: 1px solid var(--border2);
+    background: var(--surface);
+    color: var(--text);
+    font-size: 13px;
+    font-family: 'Inter', sans-serif;
+    cursor: pointer;
+    outline: none;
+  }
+
+  /* ── RESULTS ── */
+  .results-list { display: flex; flex-direction: column; gap: 8px; }
+
+  .result-card {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    padding: 16px 20px;
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    transition: border-color 0.15s, transform 0.1s;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .result-card:hover { border-color: var(--border2); transform: translateY(-1px); }
+  .result-card.best-deal { border-color: rgba(34,197,94,0.4); background: linear-gradient(135deg, var(--surface) 0%, rgba(34,197,94,0.04) 100%); }
+  .result-card.best-deal::before {
+    content: '';
+    position: absolute;
+    left: 0; top: 0; bottom: 0;
+    width: 3px;
+    background: var(--green);
+    border-radius: 3px 0 0 3px;
+  }
+
+  .plat-logo {
+    width: 48px; height: 48px;
+    border-radius: 10px;
+    border: 1px solid var(--border);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 18px;
+    flex-shrink: 0;
+    background: var(--surface2);
+  }
+
+  .result-middle { flex: 1; min-width: 0; }
+
+  .result-name {
+    font-size: 14px;
+    font-weight: 500;
+    color: var(--text);
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    margin-bottom: 5px;
+  }
+
+  .result-meta {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    flex-wrap: wrap;
+  }
+
+  .plat-name {
+    font-size: 12px;
+    font-weight: 600;
+    color: var(--accent2);
+  }
+
+  .stars {
+    color: var(--amber);
+    font-size: 11px;
+    letter-spacing: 1px;
+  }
+
+  .review-count { font-size: 11px; color: var(--text3); }
+
+  .delivery-tag {
+    font-size: 11px;
+    color: var(--text2);
+    display: flex;
+    align-items: center;
+    gap: 3px;
+  }
+
+  .badge {
+    font-size: 10px;
+    font-weight: 600;
+    padding: 2px 8px;
+    border-radius: 20px;
+    text-transform: uppercase;
+    letter-spacing: 0.04em;
+  }
+
+  .badge-green { background: var(--greenbg); color: var(--green); }
+  .badge-amber { background: var(--amberbg); color: var(--amber); }
+  .badge-accent { background: var(--accentbg); color: var(--accent2); }
+  .badge-red { background: var(--redbg); color: var(--red); }
+
+  .result-right {
+    text-align: right;
+    flex-shrink: 0;
+  }
+
+  .price {
+    font-family: 'Space Grotesk', sans-serif;
+    font-size: 22px;
+    font-weight: 700;
+    color: var(--text);
+  }
+
+  .price.best { color: var(--green); }
+
+  .orig-price {
+    font-size: 12px;
+    color: var(--text3);
+    text-decoration: line-through;
+    margin-bottom: 2px;
+  }
+
+  .discount-pct {
+    font-size: 12px;
+    font-weight: 600;
+    color: var(--green);
+    margin-bottom: 8px;
+  }
+
+  .btn-row {
+    display: flex;
+    gap: 6px;
+    justify-content: flex-end;
+  }
+
+  .buy-btn {
+    padding: 7px 16px;
+    border-radius: var(--radius-sm);
+    background: var(--accent);
+    color: white;
+    border: none;
+    font-size: 12px;
+    font-weight: 600;
+    font-family: 'Inter', sans-serif;
+    cursor: pointer;
+    transition: background 0.15s;
+  }
+  .buy-btn:hover { background: #8b7af8; }
+
+  .wish-btn {
+    padding: 7px 10px;
+    border-radius: var(--radius-sm);
+    background: transparent;
+    color: var(--text2);
+    border: 1px solid var(--border2);
+    font-size: 14px;
+    cursor: pointer;
+    transition: all 0.15s;
+    line-height: 1;
+  }
+  .wish-btn:hover { color: var(--red); border-color: rgba(239,68,68,0.4); }
+  .wish-btn.wishlisted { color: var(--red); border-color: rgba(239,68,68,0.4); background: var(--redbg); }
+
+  /* ── SKELETONS ── */
+  .skeleton-card {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    padding: 16px 20px;
+    display: flex;
+    gap: 16px;
+    align-items: center;
+  }
+
+  .skel {
+    background: var(--surface3);
+    border-radius: 6px;
+    animation: shimmer 1.5s ease-in-out infinite;
+  }
+
+  @keyframes shimmer {
+    0%,100% { opacity: 1; }
+    50% { opacity: 0.4; }
+  }
+
+  /* ── EMPTY / NO RESULTS ── */
+  .empty-state {
+    text-align: center;
+    padding: 4rem 2rem;
+    color: var(--text3);
+  }
+
+  .empty-icon { font-size: 48px; margin-bottom: 12px; }
+  .empty-state h3 { font-size: 16px; font-weight: 500; color: var(--text2); margin-bottom: 6px; }
+  .empty-state p { font-size: 13px; }
+
+  /* ── SUGGEST CHIPS ── */
+  .suggest-row {
+    display: flex;
+    gap: 6px;
+    flex-wrap: wrap;
+    margin-bottom: 1.5rem;
+  }
+
+  .suggest-chip {
+    padding: 6px 14px;
+    border-radius: 20px;
+    font-size: 12px;
+    border: 1px dashed var(--border2);
+    background: transparent;
+    color: var(--text2);
+    cursor: pointer;
+    transition: all 0.15s;
+    font-family: 'Inter', sans-serif;
+  }
+  .suggest-chip:hover { background: var(--surface2); color: var(--text); border-style: solid; }
+
+  /* ── WISHLIST PANEL ── */
+  .wishlist-panel {
+    display: none;
+    background: var(--surface);
+    border: 1px solid var(--border2);
+    border-radius: var(--radius);
+    padding: 1.25rem;
+    margin-bottom: 1.5rem;
+  }
+
+  .wishlist-panel.open { display: block; }
+  .wishlist-title { font-size: 14px; font-weight: 600; margin-bottom: 12px; display: flex; align-items: center; gap: 8px; }
+  .wish-item {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 8px 0;
+    border-bottom: 1px solid var(--border);
+    font-size: 13px;
+    color: var(--text2);
+  }
+  .wish-item:last-child { border-bottom: none; }
+  .wish-item-name { flex: 1; color: var(--text); font-weight: 500; font-size: 12px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; max-width: 220px; }
+  .wish-item-price { color: var(--green); font-weight: 600; font-size: 13px; margin-left: 8px; }
+  .wish-item-plat { font-size: 11px; color: var(--text3); margin-left: 4px; }
+  .wish-remove { background: none; border: none; color: var(--text3); cursor: pointer; font-size: 14px; padding: 2px 6px; border-radius: 4px; }
+  .wish-remove:hover { color: var(--red); background: var(--redbg); }
+
+  /* ── HISTORY ── */
+  .history-row {
+    margin-bottom: 1rem;
+    font-size: 12px;
+    color: var(--text3);
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    flex-wrap: wrap;
+  }
+
+  .hist-chip {
+    padding: 3px 10px;
+    border-radius: 20px;
+    border: 1px solid var(--border);
+    background: transparent;
+    color: var(--text3);
+    cursor: pointer;
+    font-size: 11px;
+    font-family: 'Inter', sans-serif;
+    transition: all 0.15s;
+  }
+  .hist-chip:hover { color: var(--text2); border-color: var(--border2); }
+
+  /* ── TOAST ── */
+  .toast {
+    position: fixed;
+    bottom: 24px;
+    right: 24px;
+    background: var(--surface2);
+    border: 1px solid var(--border2);
+    border-radius: var(--radius);
+    padding: 12px 18px;
+    font-size: 13px;
+    color: var(--text);
+    box-shadow: var(--shadow);
+    transform: translateY(80px);
+    opacity: 0;
+    transition: all 0.25s cubic-bezier(0.34, 1.56, 0.64, 1);
+    z-index: 999;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    max-width: 300px;
+  }
+  .toast.show { transform: translateY(0); opacity: 1; }
+
+  /* ── FOOTER ── */
+  footer {
+    border-top: 1px solid var(--border);
+    padding: 1.5rem 2rem;
+    margin-top: 3rem;
+    text-align: center;
+    color: var(--text3);
+    font-size: 12px;
+  }
+
+  /* ── RESPONSIVE ── */
+  @media (max-width: 600px) {
+    nav { padding: 0 1rem; }
+    .hero { padding: 2rem 1rem 1.5rem; }
+    .summary-bar { grid-template-columns: repeat(2, 1fr); }
+    .result-card { flex-wrap: wrap; gap: 10px; }
+    .result-right { width: 100%; text-align: left; display: flex; align-items: center; justify-content: space-between; }
+    .btn-row { justify-content: flex-start; }
+    .search-wrap { flex-direction: column; }
+    .search-btn { justify-content: center; }
+  }
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <a class="logo" href="#">
+    <span class="logo-icon">🔍</span>
+    PriceHunt
+  </a>
+  <div class="nav-right">
+    <button class="nav-btn" id="wishlistToggle" onclick="toggleWishlist()">
+      ♥ Wishlist <span class="wishlist-badge" id="wishBadge" style="display:none">0</span>
+    </button>
+  </div>
+</nav>
+
+<!-- MAIN -->
+<main style="max-width: 860px; margin: 0 auto; padding: 0 1.5rem 2rem;">
+
+  <!-- HERO -->
+  <div class="hero" style="padding-left:0;padding-right:0">
+    <div class="hero-eyebrow">AI-Powered Shopping Agent</div>
+    <h1>Compare prices across<br><span>every platform at once</span></h1>
+    <p class="hero-sub">Search any product — our agent scans Flipkart, Amazon, Meesho & more to find you the best deal instantly.</p>
+  </div>
+
+  <!-- REGION TABS -->
+  <div class="region-tabs" id="regionTabs">
+    <button class="rtab active" onclick="setRegion(this,'IN')">🇮🇳 India</button>
+    <button class="rtab" onclick="setRegion(this,'US')">🇺🇸 North America</button>
+    <button class="rtab" onclick="setRegion(this,'UK')">🇬🇧 United Kingdom</button>
+    <button class="rtab" onclick="setRegion(this,'AE')">🇦🇪 Middle East</button>
+    <button class="rtab" onclick="setRegion(this,'SG')">🇸🇬 Southeast Asia</button>
+  </div>
+
+  <!-- CATEGORIES -->
+  <div class="categories" id="categoryRow"></div>
+
+  <!-- SEARCH -->
+  <div class="search-wrap">
+    <div class="search-input-wrap">
+      <span class="search-icon">🔍</span>
+      <input class="search-input" id="searchInput" type="text" placeholder="Search for dress, phone, shoes, laptop…" />
+    </div>
+    <button class="search-btn" id="searchBtn" onclick="doSearch()">
+      🤖 Find Best Price
+    </button>
+  </div>
+
+  <!-- SUGGESTIONS -->
+  <div id="suggestRow" class="suggest-row"></div>
+
+  <!-- HISTORY -->
+  <div class="history-row" id="historyRow" style="display:none">
+    <span>Recent:</span>
+    <span id="histChips"></span>
+  </div>
+
+  <!-- PLATFORMS -->
+  <div class="platform-section">
+    <div class="platform-label">Compare on</div>
+    <div class="platform-chips" id="platformChips"></div>
+  </div>
+
+  <!-- WISHLIST PANEL -->
+  <div class="wishlist-panel" id="wishlistPanel">
+    <div class="wishlist-title">♥ My Wishlist <span id="wishCount" style="color:var(--text3);font-weight:400;font-size:12px"></span></div>
+    <div id="wishItems"><div style="color:var(--text3);font-size:13px">No items saved yet.</div></div>
+  </div>
+
+  <!-- AGENT LOG -->
+  <div class="agent-panel" id="agentPanel">
+    <div class="agent-header"><div class="agent-dot"></div> Agent Activity</div>
+    <div class="agent-lines" id="agentLines"></div>
+  </div>
+
+  <!-- SUMMARY BAR -->
+  <div class="summary-bar" id="summaryBar"></div>
+
+  <!-- CONTROLS -->
+  <div class="controls-row" id="controlsRow" style="display:none">
+    <div class="result-count" id="resultCount"></div>
+    <div class="sort-wrap">
+      <label>Sort:</label>
+      <select class="sort-select" onchange="sortResults(this.value)">
+        <option value="price_asc">Price ↑</option>
+        <option value="price_desc">Price ↓</option>
+        <option value="discount">Best Discount</option>
+        <option value="rating">Top Rated</option>
+        <option value="delivery">Fastest Delivery</option>
+      </select>
+    </div>
+  </div>
+
+  <!-- RESULTS -->
+  <div class="results-list" id="resultsList">
+    <div class="empty-state">
+      <div class="empty-icon">🛍️</div>
+      <h3>Ready to find the best deal?</h3>
+      <p>Enter a product name and hit search. Our AI agent will compare prices across all platforms for you.</p>
+    </div>
+  </div>
+
+</main>
+
+<footer>
+  PriceHunt — AI price comparison agent · Prices are simulated for demo purposes
+</footer>
+
+<!-- TOAST -->
+<div class="toast" id="toast"></div>
+
+<script>
+/* ─── DATA ─── */
+const REGIONS = {
+  IN: {
+    name: 'India', currency: '₹', symbol: 'INR',
+    platforms: [
+      { name: 'Flipkart', icon: '🛒' },
+      { name: 'Amazon.in', icon: '📦' },
+      { name: 'Meesho', icon: '👗' },
+      { name: 'Myntra', icon: '👠' },
+      { name: 'Snapdeal', icon: '🏷️' },
+      { name: 'Nykaa', icon: '💄' },
+      { name: 'Ajio', icon: '✨' },
+      { name: 'JioMart', icon: '🛍️' }
+    ],
+    categories: ['👗 Fashion', '📱 Mobiles', '💻 Electronics', '🏠 Home', '💄 Beauty', '👟 Footwear', '📚 Books', '🍳 Kitchen'],
+    suggestions: ['kurti under ₹500', 'iPhone 15', 'Samsung Galaxy S24', 'Nike Air Max', 'boAt earphones', 'saree silk', 'laptop bag', 'LED TV 55 inch']
+  },
+  US: {
+    name: 'USA', currency: '$', symbol: 'USD',
+    platforms: [
+      { name: 'Amazon', icon: '📦' },
+      { name: 'Walmart', icon: '🏬' },
+      { name: 'Target', icon: '🎯' },
+      { name: 'eBay', icon: '🌐' },
+      { name: 'Best Buy', icon: '💻' },
+      { name: 'Costco', icon: '🏪' },
+      { name: 'Macy\'s', icon: '👔' },
+      { name: 'Wayfair', icon: '🛋️' }
+    ],
+    categories: ['👕 Clothing', '📱 Tech', '🏠 Home', '⚽ Sports', '🎮 Gaming', '🍳 Kitchen', '💄 Beauty', '🐾 Pets'],
+    suggestions: ['Nike running shoes', 'AirPods Pro', 'PS5 controller', 'Instant Pot', 'MacBook Air', 'winter jacket', 'coffee maker', 'yoga mat']
+  },
+  UK: {
+    name: 'UK', currency: '£', symbol: 'GBP',
+    platforms: [
+      { name: 'Amazon UK', icon: '📦' },
+      { name: 'ASOS', icon: '👗' },
+      { name: 'Currys', icon: '🔌' },
+      { name: 'John Lewis', icon: '🏬' },
+      { name: 'Argos', icon: '📋' },
+      { name: 'Tesco', icon: '🛒' },
+      { name: 'Marks & Spencer', icon: '🌹' },
+      { name: 'Next', icon: '👔' }
+    ],
+    categories: ['👔 Fashion', '📱 Tech', '🏠 Home', '🛒 Grocery', '💄 Beauty', '⚽ Sports', '🎮 Gaming', '📚 Books'],
+    suggestions: ['Barbour jacket', 'Dyson vacuum', 'iPhone 15', 'Ted Baker bag', 'Hunter boots', 'Nespresso machine', 'cashmere sweater', 'PS5']
+  },
+  AE: {
+    name: 'Middle East', currency: 'AED', symbol: 'AED',
+    platforms: [
+      { name: 'Amazon.ae', icon: '📦' },
+      { name: 'Noon', icon: '☀️' },
+      { name: 'Namshi', icon: '👟' },
+      { name: 'Carrefour', icon: '🛒' },
+      { name: 'Sharaf DG', icon: '📺' },
+      { name: 'Centrepoint', icon: '👕' },
+      { name: 'Ounass', icon: '💎' },
+      { name: 'LuLu', icon: '🏪' }
+    ],
+    categories: ['👗 Fashion', '📱 Mobiles', '💻 Electronics', '🏠 Home', '💄 Beauty', '⌚ Watches', '🍳 Kitchen', '⚽ Sports'],
+    suggestions: ['Louis Vuitton bag', 'Samsung Galaxy', 'Rolex watch', 'Gucci sneakers', 'iPhone 15 Pro', 'perfume oud', 'smart TV', 'gaming laptop']
+  },
+  SG: {
+    name: 'Southeast Asia', currency: 'SGD', symbol: 'SGD',
+    platforms: [
+      { name: 'Shopee', icon: '🛒' },
+      { name: 'Lazada', icon: '📦' },
+      { name: 'Amazon SG', icon: '📫' },
+      { name: 'Zalora', icon: '👗' },
+      { name: 'Courts', icon: '💻' },
+      { name: 'Harvey Norman', icon: '🏬' },
+      { name: 'Qoo10', icon: '🌏' },
+      { name: 'RedMart', icon: '🍎' }
+    ],
+    categories: ['👗 Fashion', '📱 Mobiles', '💻 Electronics', '🏠 Home', '💄 Beauty', '🍳 Kitchen', '⚽ Sports', '🐾 Pets'],
+    suggestions: ['K-beauty skincare', 'iPhone 15', 'gaming chair', 'air fryer', 'Nike shoes', 'Samsung TV', 'laptop bag', 'robot vacuum']
+  }
+};
+
+/* ─── STATE ─── */
+let currentRegion = 'IN';
+let activePlatforms = new Set();
+let allResults = [];
+let wishlist = JSON.parse(localStorage.getItem('ph_wishlist') || '[]');
+let searchHistory = JSON.parse(localStorage.getItem('ph_history') || '[]');
+let logLines = [];
+
+/* ─── INIT ─── */
+function init() {
+  activePlatforms = new Set(REGIONS['IN'].platforms.map(p => p.name));
+  renderPlatforms();
+  renderCategories();
+  renderSuggestions();
+  renderHistory();
+  updateWishlistUI();
+  document.getElementById('searchInput').addEventListener('keydown', e => { if (e.key === 'Enter') doSearch(); });
+}
+
+/* ─── REGION ─── */
+function setRegion(btn, code) {
+  document.querySelectorAll('.rtab').forEach(b => b.classList.remove('active'));
+  btn.classList.add('active');
+  currentRegion = code;
+  activePlatforms = new Set(REGIONS[code].platforms.map(p => p.name));
+  renderPlatforms();
+  renderCategories();
+  renderSuggestions();
+  clearResults();
+}
+
+/* ─── PLATFORMS ─── */
+function renderPlatforms() {
+  const c = document.getElementById('platformChips');
+  c.innerHTML = '';
+  REGIONS[currentRegion].platforms.forEach(p => {
+    const chip = document.createElement('button');
+    chip.className = 'pchip on';
+    chip.innerHTML = `${p.icon} ${p.name}`;
+    chip.onclick = () => togglePlatform(chip, p.name);
+    c.appendChild(chip);
+  });
+}
+
+function togglePlatform(chip, name) {
+  if (activePlatforms.has(name)) {
+    if (activePlatforms.size === 1) { showToast('⚠️ At least one platform required'); return; }
+    activePlatforms.delete(name);
+    chip.classList.remove('on');
+  } else {
+    activePlatforms.add(name);
+    chip.classList.add('on');
+  }
+}
+
+/* ─── CATEGORIES ─── */
+function renderCategories() {
+  const c = document.getElementById('categoryRow');
+  c.innerHTML = '';
+  REGIONS[currentRegion].categories.forEach(cat => {
+    const pill = document.createElement('button');
+    pill.className = 'catpill';
+    pill.textContent = cat;
+    pill.onclick = () => {
+      document.getElementById('searchInput').value = cat.replace(/^[^\s]+\s/, '');
+      pill.classList.add('active');
+      setTimeout(() => pill.classList.remove('active'), 500);
+      doSearch();
+    };
+    c.appendChild(pill);
+  });
+}
+
+/* ─── SUGGESTIONS ─── */
+function renderSuggestions() {
+  const c = document.getElementById('suggestRow');
+  c.innerHTML = '';
+  REGIONS[currentRegion].suggestions.slice(0, 6).forEach(s => {
+    const chip = document.createElement('button');
+    chip.className = 'suggest-chip';
+    chip.textContent = s;
+    chip.onclick = () => { document.getElementById('searchInput').value = s; doSearch(); };
+    c.appendChild(chip);
+  });
+}
+
+/* ─── HISTORY ─── */
+function renderHistory() {
+  if (!searchHistory.length) { document.getElementById('historyRow').style.display = 'none'; return; }
+  document.getElementById('historyRow').style.display = 'flex';
+  const c = document.getElementById('histChips');
+  c.innerHTML = '';
+  searchHistory.slice(0, 5).forEach(h => {
+    const chip = document.createElement('button');
+    chip.className = 'hist-chip';
+    chip.textContent = h;
+    chip.onclick = () => { document.getElementById('searchInput').value = h; doSearch(); };
+    c.appendChild(chip);
+  });
+}
+
+function addToHistory(q) {
+  searchHistory = [q, ...searchHistory.filter(h => h !== q)].slice(0, 8);
+  localStorage.setItem('ph_history', JSON.stringify(searchHistory));
+  renderHistory();
+}
+
+/* ─── WISHLIST ─── */
+function toggleWishlist() {
+  const panel = document.getElementById('wishlistPanel');
+  panel.classList.toggle('open');
+  const btn = document.getElementById('wishlistToggle');
+  btn.classList.toggle('active');
+}
+
+function updateWishlistUI() {
+  const badge = document.getElementById('wishBadge');
+  badge.style.display = wishlist.length ? 'inline-flex' : 'none';
+  badge.textContent = wishlist.length;
+  renderWishlistItems();
+}
+
+function renderWishlistItems() {
+  const c = document.getElementById('wishItems');
+  document.getElementById('wishCount').textContent = wishlist.length ? `(${wishlist.length} item${wishlist.length > 1 ? 's' : ''})` : '';
+  if (!wishlist.length) { c.innerHTML = '<div style="color:var(--text3);font-size:13px">No items saved yet.</div>'; return; }
+  c.innerHTML = wishlist.map((w, i) => `
+    <div class="wish-item">
+      <span class="wish-item-name" title="${w.name}">${w.platform} · ${w.name}</span>
+      <span class="wish-item-price">${w.currency}${w.price?.toLocaleString()}</span>
+      <button class="wish-remove" onclick="removeWish(${i})" title="Remove">✕</button>
+    </div>`).join('');
+}
+
+function removeWish(idx) {
+  wishlist.splice(idx, 1);
+  localStorage.setItem('ph_wishlist', JSON.stringify(wishlist));
+  updateWishlistUI();
+}
+
+function toggleWish(btn, item) {
+  const idx = wishlist.findIndex(w => w.name === item.name && w.platform === item.platform);
+  if (idx >= 0) {
+    wishlist.splice(idx, 1);
+    btn.classList.remove('wishlisted');
+    btn.textContent = '♡';
+    showToast('Removed from wishlist');
+  } else {
+    wishlist.push(item);
+    btn.classList.add('wishlisted');
+    btn.textContent = '♥';
+    showToast('♥ Added to wishlist');
+  }
+  localStorage.setItem('ph_wishlist', JSON.stringify(wishlist));
+  updateWishlistUI();
+}
+
+/* ─── AGENT LOG ─── */
+function log(msg, state = 'running') {
+  logLines.push({ msg, state });
+  const panel = document.getElementById('agentPanel');
+  const lines = document.getElementById('agentLines');
+  panel.style.display = 'block';
+  lines.innerHTML = logLines.map(l => {
+    const icon = l.state === 'done' ? '✓' : l.state === 'err' ? '✕' : '▸';
+    return `<div class="aline ${l.state === 'done' ? 'done' : l.state === 'err' ? 'err' : ''}">\
+<span class="aline-icon">${icon}</span>${l.msg}</div>`;
+  }).join('');
+  lines.scrollTop = lines.scrollHeight;
+}
+
+function clearLog() {
+  logLines = [];
+  document.getElementById('agentLines').innerHTML = '';
+  document.getElementById('agentPanel').style.display = 'none';
+}
+
+/* ─── SEARCH ─── */
+async function doSearch() {
+  const q = document.getElementById('searchInput').value.trim();
+  if (!q) { showToast('⚠️ Enter a product to search'); return; }
+
+  const btn = document.getElementById('searchBtn');
+  btn.disabled = true;
+  btn.textContent = '⏳ Searching…';
+
+  clearResults();
+  clearLog();
+
+  const reg = REGIONS[currentRegion];
+  const platforms = [...activePlatforms];
+  const currency = reg.currency;
+
+  log(`Agent started — "${q}" in ${reg.name}`);
+  log(`Platforms: ${platforms.join(', ')}`);
+
+  showSkeletons(platforms.length);
+
+  const system = `You are a price comparison AI agent for ${reg.name}.
+Given a product search, return ONLY a raw JSON array (no markdown, no backticks, no explanation).
+Platforms to include: ${platforms.join(', ')}.
+Each object must have exactly these fields:
+- platform: string (use exact platform name provided)
+- productName: string (specific, realistic product name, max 60 chars)
+- price: number (${currency}, realistic for the region and product)
+- originalPrice: number (>= price, the strikethrough price)
+- rating: number (3.2 to 4.9, one decimal)
+- reviews: number (integer, 50 to 50000)
+- delivery: string (e.g. "Same day", "2 days", "3-5 days", "Next day")
+- inStock: boolean (90% true)
+- badge: string or null ("Best Seller", "Deal of the Day", "New Arrival", "Limited Stock", or null)
+- freeShipping: boolean
+Rules:
+- Vary prices realistically — cheapest should be 10-40% less than most expensive
+- Use ${currency} price ranges appropriate for the product category
+- One result per platform, even if inStock is false`;
+
+  try {
+    log('Querying AI agent…');
+    const res = await fetch('https://api.anthropic.com/v1/messages', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({
+        model: 'claude-sonnet-4-6',
+        max_tokens: 1000,
+        system,
+        messages: [{ role: 'user', content: `Product: "${q}"` }]
+      })
+    });
+
+    const data = await res.json();
+    const raw = (data.content || []).map(c => c.text || '').join('').trim();
+    const clean = raw.replace(/```json|```/g, '').trim();
+    const results = JSON.parse(clean);
+
+    allResults = results;
+    const inStock = results.filter(r => r.inStock !== false);
+    const minPrice = Math.min(...inStock.map(r => r.price));
+
+    log(`Received ${results.length} results`, 'done');
+    log(`Best deal: ${inStock.find(r=>r.price===minPrice)?.platform} at ${currency}${minPrice?.toLocaleString()}`, 'done');
+
+    addToHistory(q);
+
+    setTimeout(() => {
+      renderResults(results, currency);
+      renderSummary(results, currency);
+      document.getElementById('controlsRow').style.display = 'flex';
+      document.getElementById('resultCount').innerHTML = `<strong>${results.length}</strong> results for "${q}"`;
+      btn.disabled = false;
+      btn.textContent = '🤖 Find Best Price';
+    }, 300);
+
+  } catch(e) {
+    log('Agent error: ' + e.message, 'err');
+    document.getElementById('resultsList').innerHTML = `
+      <div class="empty-state">
+        <div class="empty-icon">⚠️</div>
+        <h3>Something went wrong</h3>
+        <p>Please try again in a moment.</p>
+      </div>`;
+    btn.disabled = false;
+    btn.textContent = '🤖 Find Best Price';
+  }
+}
+
+/* ─── SKELETONS ─── */
+function showSkeletons(n) {
+  const list = document.getElementById('resultsList');
+  list.innerHTML = Array(Math.min(n, 8)).fill(0).map(() => `
+    <div class="skeleton-card">
+      <div class="skel" style="width:48px;height:48px;border-radius:10px"></div>
+      <div style="flex:1;display:flex;flex-direction:column;gap:8px">
+        <div class="skel" style="height:14px;width:60%"></div>
+        <div class="skel" style="height:12px;width:40%"></div>
+      </div>
+      <div style="text-align:right;display:flex;flex-direction:column;gap:6px;align-items:flex-end">
+        <div class="skel" style="height:22px;width:80px"></div>
+        <div class="skel" style="height:28px;width:90px;border-radius:8px"></div>
+      </div>
+    </div>`).join('');
+}
+
+/* ─── RENDER RESULTS ─── */
+function renderResults(results, currency) {
+  const list = document.getElementById('resultsList');
+  if (!results.length) {
+    list.innerHTML = '<div class="empty-state"><div class="empty-icon">🔍</div><h3>No results</h3><p>Try a different search term.</p></div>';
+    return;
+  }
+  const inStockResults = results.filter(r => r.inStock !== false);
+  const minPrice = inStockResults.length ? Math.min(...inStockResults.map(r => r.price)) : Infinity;
+
+  list.innerHTML = results.map(r => {
+    const isBest = r.inStock !== false && r.price === minPrice;
+    const disc = r.originalPrice > r.price ? Math.round((1 - r.price / r.originalPrice) * 100) : 0;
+    const stars = '★'.repeat(Math.round(r.rating || 4)) + '☆'.repeat(5 - Math.round(r.rating || 4));
+    const isWished = wishlist.some(w => w.name === r.productName && w.platform === r.platform);
+    const wishItem = { name: r.productName, platform: r.platform, price: r.price, currency };
+    return `
+    <div class="result-card${isBest ? ' best-deal' : ''}${r.inStock === false ? ' out-of-stock' : ''}" style="${r.inStock === false ? 'opacity:0.55' : ''}">
+      <div class="plat-logo">${REGIONS[currentRegion].platforms.find(p => p.name === r.platform)?.icon || '🛒'}</div>
+      <div class="result-middle">
+        <div class="result-name" title="${r.productName}">${r.productName}</div>
+        <div class="result-meta">
+          <span class="plat-name">${r.platform}</span>
+          <span class="stars" aria-label="${r.rating} stars">${stars}</span>
+          <span class="review-count">(${(r.reviews||0).toLocaleString()})</span>
+          ${isBest ? '<span class="badge badge-green">Best Price</span>' : ''}
+          ${r.badge ? `<span class="badge badge-amber">${r.badge}</span>` : ''}
+          ${r.freeShipping ? '<span class="badge badge-accent">Free Shipping</span>' : ''}
+          ${r.inStock === false ? '<span class="badge badge-red">Out of Stock</span>' : ''}
+        </div>
+        <div class="result-meta" style="margin-top:4px">
+          <span class="delivery-tag">🚚 ${r.delivery || '3-5 days'}</span>
+        </div>
+      </div>
+      <div class="result-right">
+        ${disc > 0 ? `<div class="orig-price">${currency}${(r.originalPrice||0).toLocaleString()}</div>` : ''}
+        <div class="price${isBest ? ' best' : ''}">${currency}${(r.price||0).toLocaleString()}</div>
+        ${disc > 0 ? `<div class="discount-pct">↓ ${disc}% off</div>` : ''}
+        <div class="btn-row">
+          <button class="wish-btn${isWished?' wishlisted':''}" id="wish_${r.platform.replace(/\s/g,'')}" onclick="toggleWish(this, ${JSON.stringify(wishItem).replace(/"/g, '&quot;')})">${isWished ? '♥' : '♡'}</button>
+          ${r.inStock !== false ? `<button class="buy-btn" onclick="buyNow('${r.platform}', '${r.productName.replace(/'/g,"\\'")}')">Buy now →</button>` : '<span style="font-size:12px;color:var(--text3);padding:7px 8px">Unavailable</span>'}
+        </div>
+      </div>
+    </div>`;
+  }).join('');
+}
+
+/* ─── SUMMARY ─── */
+function renderSummary(results, currency) {
+  const inStock = results.filter(r => r.inStock !== false);
+  if (!inStock.length) return;
+  const prices = inStock.map(r => r.price);
+  const min = Math.min(...prices);
+  const max = Math.max(...prices);
+  const best = inStock.find(r => r.price === min);
+  const avgDisc = Math.round(inStock.reduce((s, r) => s + (r.originalPrice > r.price ? (1 - r.price / r.originalPrice) * 100 : 0), 0) / inStock.length);
+  const bar = document.getElementById('summaryBar');
+  bar.style.display = 'grid';
+  bar.innerHTML = `
+    <div class="sum-card">
+      <div class="sum-label">Best Price</div>
+      <div class="sum-val green">${currency}${min.toLocaleString()}</div>
+    </div>
+    <div class="sum-card">
+      <div class="sum-label">On</div>
+      <div class="sum-val accent">${best.platform}</div>
+    </div>
+    <div class="sum-card">
+      <div class="sum-label">You Save</div>
+      <div class="sum-val">${currency}${(max - min).toLocaleString()}</div>
+    </div>
+    <div class="sum-card">
+      <div class="sum-label">Avg Discount</div>
+      <div class="sum-val">${avgDisc}%</div>
+    </div>`;
+}
+
+/* ─── SORT ─── */
+function sortResults(mode) {
+  const reg = REGIONS[currentRegion];
+  const sorted = [...allResults];
+  const deliveryDays = d => { const m = d?.match(/(\d+)/); return m ? +m[1] : 99; };
+  if (mode === 'price_asc') sorted.sort((a, b) => a.price - b.price);
+  else if (mode === 'price_desc') sorted.sort((a, b) => b.price - a.price);
+  else if (mode === 'discount') sorted.sort((a, b) => (b.originalPrice - b.price) / b.originalPrice - (a.originalPrice - a.price) / a.originalPrice);
+  else if (mode === 'rating') sorted.sort((a, b) => (b.rating || 0) - (a.rating || 0));
+  else if (mode === 'delivery') sorted.sort((a, b) => deliveryDays(a.delivery) - deliveryDays(b.delivery));
+  renderResults(sorted, reg.currency);
+}
+
+/* ─── BUY ─── */
+function buyNow(platform, product) {
+  showToast(`Opening ${platform} for "${product}"…`);
+}
+
+/* ─── CLEAR ─── */
+function clearResults() {
+  allResults = [];
+  document.getElementById('resultsList').innerHTML = `
+    <div class="empty-state">
+      <div class="empty-icon">🛍️</div>
+      <h3>Ready to find the best deal?</h3>
+      <p>Enter a product name and hit search.</p>
+    </div>`;
+  document.getElementById('summaryBar').style.display = 'none';
+  document.getElementById('controlsRow').style.display = 'none';
+}
+
+/* ─── TOAST ─── */
+let toastTimer;
+function showToast(msg) {
+  const t = document.getElementById('toast');
+  t.textContent = msg;
+  t.classList.add('show');
+  clearTimeout(toastTimer);
+  toastTimer = setTimeout(() => t.classList.remove('show'), 2800);
+}
+
+init();
+</script>
+</body>
+</html>

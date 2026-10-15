@@ -1,0 +1,1208 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Lakshana's 90-Day AI Engineer Transformation</title>
+<style>
+:root {
+ --lav:#7E7FAE; --blue:#8C99D4; --peach:#EABD90; --light:#C8D3FF;
+ --nav:#BFC9F3; --ink:#14214D; --muted:#56658F; --bg:#F7F8FD;
+ --line:#DCE2F2; --white:#fff; --purple:#DCD1FF;
+}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--ink);font-family:Inter,Segoe UI,Arial,sans-serif}
+button,input,textarea{font:inherit}
+button{cursor:pointer}
+.app{min-height:100vh;display:flex}
+.sidebar{position:fixed;left:0;top:0;bottom:0;width:235px;background:linear-gradient(180deg,#B7C2EF,#C8D1F5);padding:18px 16px;z-index:10;display:flex;flex-direction:column}
+.logo{height:90px;display:flex;align-items:center;justify-content:center;font-size:48px}
+.nav{display:grid;gap:8px}
+.nav button{border:0;background:transparent;color:#233A78;padding:14px 16px;border-radius:16px;text-align:left;font-size:17px;font-weight:800}
+.nav button.active{background:#6075B8;color:#fff;box-shadow:0 8px 18px #5f73b633}
+.sidebar-quote{margin-top:auto;background:#FFF9F4;border-radius:18px;padding:16px 14px;text-align:center;color:#334A92;line-height:1.55;font-family:Georgia,serif}
+.sidebar-quote .en{font-size:17px;font-weight:700}
+.sidebar-quote .ta{font-family:"Noto Sans Tamil",Latha,Georgia,serif;font-size:15px;margin-top:8px}
+.main{margin-left:235px;width:calc(100% - 235px);min-width:0}
+.hero{background:linear-gradient(110deg,#EEF1FF 0%,#DDE5FF 55%,#FFF0E2 100%);padding:18px 26px;border-bottom:1px solid var(--line)}
+.hero-row{display:grid;grid-template-columns:1fr 310px 270px;gap:20px;align-items:center}
+.brand{display:flex;gap:12px;align-items:center}
+.brand-icon{font-size:40px}
+.kicker{font-size:17px;font-weight:900;color:#40548D}
+h1{margin:1px 0 3px;font-size:38px;letter-spacing:-1px;line-height:1}
+.subtitle{font-size:18px;color:#344A87;font-style:italic}
+.hero-note{background:#CDD5FFB8;border-radius:32px;padding:14px 24px;text-align:center;font-family:cursive;font-size:19px;line-height:1.25}
+.daybox{background:#FFEFE1D9;border-radius:20px;padding:15px 18px}
+.daybox-title{font-size:20px;font-weight:900}
+.progress{height:11px;background:#D5DAEC;border-radius:20px;overflow:hidden;margin-top:10px}
+.progress>div{height:100%;background:var(--lav);width:0}
+.content{padding:15px 22px 40px}
+.stats{display:grid;grid-template-columns:repeat(4,1fr);gap:14px;margin-bottom:13px}
+.stat{background:#fff;border:1px solid var(--line);border-radius:18px;padding:13px 17px;display:flex;gap:12px;align-items:center;box-shadow:0 5px 18px #4c5f9b0d}
+.icon{font-size:29px}
+.num{font-size:25px;font-weight:900}
+.label{font-weight:800;color:#30457F}
+.sub{font-size:12px;color:#6A7699;margin-top:2px}
+.toolbar{display:flex;align-items:center;justify-content:space-between;gap:12px;background:#EDF0FF;padding:7px 9px;border-radius:15px;margin-bottom:10px}
+.tabs{display:flex;align-items:center;gap:2px;flex-wrap:wrap}
+.tab{border:0;background:transparent;color:#253B7B;padding:10px 17px;border-radius:11px;font-weight:900}
+.tab.active{background:#6075B8;color:#fff}
+.search{position:relative;width:340px}
+.search input{width:100%;border:1px solid #C9D0E3;border-radius:12px;padding:10px 12px 10px 38px;outline:none}
+.search span{position:absolute;left:12px;top:7px;font-size:20px;color:#4F608C}
+.table-card{background:#fff;border:1px solid #D5DCEB;border-radius:18px;overflow:hidden;box-shadow:0 7px 24px #45598f10}
+.table-wrap{overflow:auto}
+table{border-collapse:collapse;width:100%;min-width:1400px}
+thead th{background:#D7DFF7;color:#243A76;padding:11px 10px;text-align:left;font-size:12px;position:sticky;top:0;z-index:3;border-right:1px solid #C7D0E7}
+tbody td{padding:10px;border-bottom:1px solid #E4E7F0;vertical-align:top;font-size:12px;border-right:1px solid #EDF0F5}
+tbody tr:hover{background:#FBFCFF}
+.day{width:65px;text-align:center;font-weight:900;font-size:14px;white-space:nowrap}
+.check{width:18px;height:18px;accent-color:var(--lav);vertical-align:middle}
+.topic{font-weight:900;line-height:1.2;font-size:13px}
+.pill{display:inline-block;border-radius:9px;padding:5px 8px;font-size:11px;font-weight:900;margin-bottom:6px}
+.dsa{background:#D8E4FF;color:#1E3C9B}
+.aiml{background:#FFE0C9;color:#8A4A1E}
+.project{background:#D7F4E1;color:#1E6B44}
+.gate{background:#C9D5FF;color:#253F9B}
+.apt{background:#DED1FF;color:#4C338E}
+.time{display:inline-block;background:#F0F2FA;color:#3E4D78;border-radius:7px;padding:3px 6px;font-weight:800;font-size:10px;margin-left:4px}
+ul{margin:5px 0 0;padding-left:16px}li{margin:2px 0}
+.cover-title{font-weight:900;color:#3B4B79}
+.practice{color:#3F4B6B}
+.linkbadge{display:inline-block;margin-top:4px;background:#EAF3E4;color:#2F6B3A;border:1px solid #CFE7C7;border-radius:10px;padding:2px 8px;font-size:11px;font-weight:800}
+.resource{display:inline-block;background:#E4EAFF;color:#2845A1;padding:6px 8px;border-radius:8px;font-size:10px;font-weight:900;text-decoration:none}
+.practice-resource{margin:4px 4px 0 0;background:#FFF0E2;color:#8A4A1E;border:1px solid #F0D1B0;text-decoration:none;display:inline-block}
+.resource-stack{display:flex;flex-wrap:wrap;gap:4px;align-items:center}
+
+.quote-cell{min-width:255px;background:linear-gradient(135deg,#FFF7F0,#EEF1FF)}
+.quote-en{font-weight:900;font-size:14px;line-height:1.3}
+.quote-ta{font-family:"Noto Sans Tamil",Latha,Georgia,serif;font-size:13px;margin-top:6px;line-height:1.45}
+.pagination{display:flex;justify-content:center;align-items:center;gap:6px;margin-top:12px;flex-wrap:wrap}
+.pagebtn{border:0;background:#E7EBFA;color:#233B7C;padding:8px 11px;border-radius:9px;font-weight:900}
+.pagebtn.active{background:#6075B8;color:#fff}
+.goto{display:flex;align-items:center;gap:6px;margin-left:10px}
+.goto input{width:55px;border:1px solid #CBD2E3;border-radius:8px;padding:8px}
+
+.guide-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:14px;margin-top:14px}
+.guide-grid .card{line-height:1.6}
+.guide-grid .card h3{margin-top:0}
+.phase-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px;margin-top:12px}
+.phase{background:#F7F8FD;border:1px solid #DCE2F2;border-radius:14px;padding:13px;line-height:1.5}
+.phase b{display:block;margin-bottom:5px}
+.phase span{color:#56658F;font-size:13px}
+@media(max-width:900px){.guide-grid,.phase-grid{grid-template-columns:1fr}}
+
+.panel{background:#fff;border:1px solid var(--line);border-radius:18px;padding:20px}
+.hidden{display:none!important}
+.notes{width:100%;min-height:300px;border:1px solid #D5DCEB;border-radius:12px;padding:13px;resize:vertical}
+.nt-head{display:flex;align-items:center;gap:12px;flex-wrap:wrap}
+.nt-head h2{margin:0}
+.nt-status{font-size:13px;font-weight:800;color:#40548D}
+.nt-layout{display:grid;grid-template-columns:270px 1fr;gap:18px;margin-top:14px;align-items:start}
+.nt-side{background:#F7F8FD;border:1px solid var(--line);border-radius:14px;padding:12px;position:sticky;top:10px}
+.nt-new{width:100%;padding:11px}
+.nt-search{width:100%;margin:10px 0;border:1px solid #D5DCEB;border-radius:10px;padding:9px 11px}
+.nt-list{display:grid;gap:8px;max-height:60vh;overflow:auto}
+.nt-item{text-align:left;border:1px solid var(--line);background:#fff;border-radius:12px;padding:10px 12px;width:100%}
+.nt-item.active{border-color:#6075B8;box-shadow:0 0 0 2px #6075B833;background:#F1F4FF}
+.nt-item b{display:block;font-size:14px;color:var(--ink);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.nt-item span.snip{display:block;font-size:12px;color:var(--muted);margin-top:3px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.nt-badges{display:flex;gap:5px;flex-wrap:wrap;margin-top:6px}
+.nt-badge{font-size:11px;font-weight:800;background:#E7EBFA;color:#233B7C;border-radius:20px;padding:2px 8px}
+.nt-editor{min-width:0}
+.nt-title{width:100%;border:1px solid #D5DCEB;border-radius:12px;padding:12px 14px;font-size:20px;font-weight:800;color:var(--ink)}
+.nt-meta{display:flex;gap:14px;flex-wrap:wrap;align-items:center;margin:10px 0;font-size:13px;font-weight:700;color:var(--muted)}
+.nt-meta select{border:1px solid #D5DCEB;border-radius:8px;padding:6px 8px;margin-left:5px;background:#fff}
+.nt-toolbar{display:flex;gap:6px;flex-wrap:wrap;margin-bottom:8px}
+.nt-toolbar button{border:1px solid #D5DCEB;background:#fff;color:#233B7C;border-radius:8px;padding:5px 10px;font-weight:800;font-size:13px}
+.nt-toolbar button:hover{background:#EEF1FF}
+.nt-editor .notes{min-height:280px;line-height:1.6}
+.nt-drop{margin-top:14px;border:2px dashed #9AA8DB;border-radius:14px;padding:22px;text-align:center;background:#F7F8FD;color:#40548D;font-weight:800;transition:.15s}
+.nt-drop.over{background:#E4EAFF;border-color:#6075B8}
+.nt-drop small{display:block;font-weight:600;color:var(--muted);margin-top:4px}
+.nt-drop label{color:#6075B8;text-decoration:underline;cursor:pointer}
+.nt-files{display:grid;grid-template-columns:repeat(auto-fill,minmax(170px,1fr));gap:12px;margin-top:14px}
+.nt-file{border:1px solid var(--line);border-radius:12px;padding:10px;background:#fff;display:flex;flex-direction:column;gap:6px}
+.nt-file img{width:100%;height:110px;object-fit:cover;border-radius:8px;background:#EEF1FF}
+.nt-ico{height:110px;border-radius:8px;background:#EEF1FF;display:flex;align-items:center;justify-content:center;font-size:44px}
+.nt-fname{font-size:13px;font-weight:800;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.nt-fsize{font-size:12px;color:var(--muted)}
+.nt-fbtns{display:flex;gap:5px;flex-wrap:wrap}
+.nt-fbtns button{border:0;background:#E7EBFA;color:#233B7C;border-radius:7px;padding:4px 8px;font-size:12px;font-weight:800}
+.nt-fbtns button.x{background:#FFE3E3;color:#B32222}
+.nt-actions{display:flex;gap:10px;margin-top:16px;flex-wrap:wrap}
+.pagebtn.danger{background:#FFE3E3;color:#B32222}
+@media(max-width:900px){.nt-layout{grid-template-columns:1fr}.nt-side{position:static}.nt-list{max-height:220px}}
+
+/* file viewer */
+.nt-thumb{cursor:pointer}
+.nt-fname{cursor:pointer}
+.nt-fname:hover{text-decoration:underline}
+.fv-overlay{position:fixed;inset:0;background:rgba(20,33,77,.55);z-index:1000;display:flex;align-items:center;justify-content:center;padding:22px}
+.fv-panel{background:#fff;border-radius:18px;width:min(1000px,100%);height:min(92vh,100%);display:flex;flex-direction:column;overflow:hidden;box-shadow:0 24px 70px rgba(20,33,77,.4)}
+.fv-bar{display:flex;align-items:center;gap:8px;padding:12px 16px;border-bottom:1px solid var(--line);background:#F7F8FD}
+.fv-name{flex:1;min-width:0;font-weight:800;font-size:15px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.fv-body{flex:1;overflow:auto;padding:26px 32px;background:#fff}
+.fv-doc{max-width:820px;margin:0 auto;line-height:1.6;font-size:15px;white-space:pre-wrap;overflow-wrap:anywhere}
+.fv-doc p{margin:0 0 10px}
+.fv-doc h1,.fv-doc h2,.fv-doc h3,.fv-doc h4,.fv-doc h5,.fv-doc h6{color:var(--ink);line-height:1.25;margin:22px 0 8px;white-space:normal}
+.fv-doc h1{font-size:26px}.fv-doc h2{font-size:21px}.fv-doc h3{font-size:18px}.fv-doc h4{font-size:16px}.fv-doc h5,.fv-doc h6{font-size:15px}
+.fv-doc h1.fv-title{font-size:30px;margin-top:0}
+.fv-doc .fv-sub{color:var(--muted);font-size:17px}
+.fv-doc a{color:#3E58B0}
+.fv-gap{height:8px}
+.fv-li{display:flex;gap:9px;margin:0 0 5px}
+.fv-mk{flex:none;min-width:1.3em;text-align:right;color:var(--muted);font-weight:700}
+.fv-lt{flex:1;min-width:0}
+.fv-mono{font-family:Consolas,Menlo,"Courier New",monospace;font-size:.92em}
+.fv-code{font-family:Consolas,Menlo,"Courier New",monospace;font-size:13.5px;line-height:1.5;background:#F3F5FC;border-left:3px solid var(--blue);border-radius:6px;padding:10px 14px;margin:0 0 12px;overflow-x:auto}
+.fv-code .fv-mono{font-size:1em}
+.fv-tw{overflow-x:auto;margin:0 0 14px}
+.fv-t{border-collapse:collapse;width:100%;min-width:0}
+.fv-t td,.fv-t th{font-size:14px;border:1px solid #C9D1EA;padding:6px 9px;vertical-align:top;text-align:left}
+.fv-t tr:hover{background:transparent}
+.fv-t td p:last-child{margin-bottom:0}
+.fv-t.fv-x{width:max-content;min-width:100%}
+.fv-t.fv-x th{background:#EEF1FF;color:var(--muted);font-weight:800;text-align:center}
+.fv-t.fv-x td{white-space:pre-wrap;min-width:60px}
+.fv-img{max-width:100%;height:auto;border-radius:6px}
+.fv-imgwrap{text-align:center}
+.fv-pb{border:0;border-top:2px dashed #C9D1EA;margin:18px 0}
+.fv-msg{color:var(--muted);font-weight:700;white-space:normal}
+.fv-noimg{color:var(--muted);font-style:italic}
+.fv-pdf{width:100%;height:100%;min-height:70vh;border:0}
+.fv-text{margin:0;white-space:pre-wrap;overflow-wrap:anywhere;font-family:Consolas,Menlo,monospace;font-size:13.5px;line-height:1.55}
+.fv-slide{border:1px solid var(--line);border-radius:12px;padding:14px 18px;margin:0 0 14px;background:#F7F8FD;white-space:normal}
+.fv-sn{font-size:12px;font-weight:800;color:var(--muted);margin-bottom:6px}
+.fv-st{font-size:18px;font-weight:800;margin:0 0 8px}
+@media(max-width:700px){.fv-overlay{padding:0}.fv-panel{border-radius:0;height:100%}.fv-body{padding:16px}}
+@media print{.fv-overlay{display:none!important}}
+.print-only{display:none}
+@media(max-width:1100px){.sidebar{width:75px}.sidebar .nav button{font-size:0;text-align:center}.sidebar-quote{display:none}.main{margin-left:75px;width:calc(100% - 75px)}.hero-row{grid-template-columns:1fr 250px}.hero-note{display:none}.stats{grid-template-columns:repeat(2,1fr)}}
+@media(max-width:700px){.sidebar{display:none}.main{margin-left:0;width:100%}.hero-row{grid-template-columns:1fr}.stats{grid-template-columns:1fr 1fr}.content{padding:10px}.search{width:100%}.toolbar{flex-direction:column;align-items:stretch}}
+@media print{.sidebar,.toolbar,.stats,.pagination,.hero-note,.daybox{display:none!important}.main{margin:0;width:100%}.content{padding:0}.table-card{box-shadow:none;border:0}table{min-width:0;font-size:9px}thead th{position:static}}
+</style>
+</head>
+<body>
+<div class="app">
+<aside class="sidebar">
+  <div class="logo">🌱</div>
+  <div class="nav">
+    <button class="active" data-page="dashboard">⌂ &nbsp; Dashboard</button>
+    <button data-page="plan">▣ &nbsp; My Plan</button>
+    <button data-page="progress">▥ &nbsp; Progress</button>
+    <button data-page="resources">▤ &nbsp; Resources</button>
+    <button data-page="guide">☰ &nbsp; Track Guide</button>
+    <button data-page="notes">▤ &nbsp; Notes</button>
+    <button data-page="routine">♥ &nbsp; Healthy Routine</button>
+    <button data-page="print">▣ &nbsp; Export / Print</button>
+  </div>
+  <div id="sideQuote" class="sidebar-quote"></div>
+</aside>
+
+<main class="main">
+<header class="hero">
+  <div class="hero-row">
+    <div class="brand">
+      <div class="brand-icon">🌿</div>
+      <div>
+        <div class="kicker">Lakshana's</div>
+        <h1>90-Day AI Engineer Transformation</h1>
+        <div class="subtitle">Java DSA · AI Engineer · Agentic AI · GATE DA · Aptitude · Projects</div>
+        <div class="subtitle">“Consistent effort today, a brighter tomorrow.”</div>
+      </div>
+    </div>
+    <div class="hero-note">You can.<br>You will.<br>Keep building ♡</div>
+    <div class="daybox">
+      <div class="daybox-title">📅 Day <span id="currentDay">1</span> / 90</div>
+      <div class="progress"><div id="topBar"></div></div>
+      <div id="topPct" style="margin-top:7px;font-size:12px;color:#40548D">0% Complete</div>
+    </div>
+  </div>
+</header>
+
+<div class="content">
+<section id="dashboard">
+  <div class="stats">
+    <div class="stat"><div class="icon">🎯</div><div><div class="num">90</div><div class="label">Days to Transform</div><div class="sub">Small steps. Big results.</div></div></div>
+    <div class="stat"><div class="icon">☑</div><div><div class="num">6</div><div class="label">Tracks in One Place</div><div class="sub">Java DSA | AI/ML | Project | GATE DA | Aptitude | Health</div></div></div>
+    <div class="stat"><div class="icon">◷</div><div><div class="num">5.5 hrs</div><div class="label">Core Daily Study</div><div class="sub">1.5h Java DSA · 1.5h AI/ML · 1h Project · 1h GATE DA · 30m Aptitude</div></div></div>
+    <div class="stat"><div class="icon">▥</div><div><div class="num" id="pct">0%</div><div class="label">Overall Progress</div><div class="sub" id="count">0 / 90 days completed</div></div></div>
+  </div>
+
+  <div class="toolbar">
+    <div class="tabs">
+      <button class="tab active" data-filter="all">All Tracks</button>
+      <button class="tab" data-filter="aiml">AI/ML</button>
+      <button class="tab" data-filter="project">Project</button>
+      <button class="tab" data-filter="dsa">DSA</button>
+      <button class="tab" data-filter="gate">GATE DA</button>
+      <button class="tab" data-filter="apt">Aptitude</button>
+    </div>
+    <div class="search"><span>⌕</span><input id="search" placeholder="Search topics (arrays, DBMS, percentage...)"></div>
+<div style="margin:8px 22px 10px;padding:10px 14px;background:#FFF6E9;border:1px solid #F3DDB0;border-radius:14px;font-size:12.5px;color:#5A4620;line-height:1.5">
+  <b>Java DSA (1.5 hrs):</b> 25 min concept &rarr; 55 min solving &rarr; 10 min mistake review. Target ~150&ndash;200 well-chosen problems, not hundreds solved randomly. &nbsp;|&nbsp;
+  <b>Aptitude (30 min):</b> learn formulas &rarr; 15 Qs &rarr; timed test &rarr; mistake notebook. &nbsp;|&nbsp;
+  <b>GATE (1 hr):</b> Concept &rarr; solve PYQs on that topic immediately &rarr; analyze mistakes &rarr; revise with formula sheet/mistake notebook. Don&apos;t save all PYQs for the end.<br><b>AIML pacing:</b> Foundation first, then ML/DL/NLP/Transformers, GenAI/RAG and deployment, followed by shorter framework modules where the goal is working proficiency, not memorizing APIs.
+</div>
+<div style="margin:8px 22px 10px;padding:9px 14px;background:#EEF7FF;border:1px solid #CBDDF3;border-radius:14px;font-size:12.5px;color:#304B72;line-height:1.5">
+  <b>Practice platforms:</b> Click the practice links in each row — DSA: LeetCode + GeeksforGeeks &nbsp;|&nbsp; AI/ML: Kaggle Learn + Hugging Face Learn &nbsp;|&nbsp; GATE: NPTEL + GATE Official &nbsp;|&nbsp; Aptitude: IndiaBIX.
+</div>
+<div style="display:none">
+</div>
+  </div>
+
+  <div class="table-card">
+    <div class="table-wrap">
+      <table>
+        <thead><tr>
+          <th class="day">Day</th>
+          <th>Track</th>
+          <th>Topic</th>
+          <th>What to cover today (Detailed)</th>
+          <th>Time</th>
+          <th>Practice / Task</th>
+          <th>Resources</th>
+          <th id="quoteHead">Daily Motivation</th>
+        </tr></thead>
+        <tbody id="tbody"></tbody>
+      </table>
+    </div>
+  </div>
+  <div class="pagination" id="pagination"></div>
+</section>
+
+<section id="progressPage" class="panel hidden">
+<h2>📊 Progress</h2><p><b id="progressCount">0 / 90</b> days completed.</p>
+<div class="progress" style="height:16px"><div id="progressBar" style="background:var(--peach);width:0"></div></div>
+<div id="streakBox" style="margin-top:14px;display:flex;gap:20px;flex-wrap:wrap"></div>
+<div id="quarterBox" style="margin-top:14px"></div>
+<p style="color:var(--muted);margin-top:14px">Your progress is saved in this browser.</p>
+<button onclick="resetProgress()" class="pagebtn" style="background:#F3D8D8;color:#7A2A2A">Reset Progress</button>
+<button onclick="exportData()" class="pagebtn">⬇ Export Progress (JSON)</button>
+<label class="pagebtn" style="display:inline-block">⬆ Import Progress<input id="importFile" type="file" accept="application/json" style="display:none" onchange="importData(this.files[0])"></label>
+<span id="importStatus"></span>
+</section>
+
+<section id="resourcesPage" class="panel hidden">
+<h2>📚 Resources</h2>
+<div id="resourcesBody"></div>
+</section>
+
+<section id="notesPage" class="panel hidden">
+<div class="nt-head"><h2>📝 Notes</h2><span id="noteStatus" class="nt-status"></span></div>
+<div class="nt-layout">
+  <aside class="nt-side">
+    <button class="pagebtn nt-new" onclick="newNote()">＋ New note</button>
+    <input id="ntSearch" class="nt-search" placeholder="Search notes &amp; file names…">
+    <div id="ntList" class="nt-list"></div>
+  </aside>
+  <div class="nt-editor">
+    <input id="ntTitle" class="nt-title" placeholder="Note title (e.g. Day 12 – DSA/GATE/AI mistakes)">
+    <div class="nt-meta">
+      <label>Day <select id="ntDay"></select></label>
+      <label>Type <select id="ntType"></select></label>
+      <span id="ntStamp"></span>
+    </div>
+    <div class="nt-toolbar">
+      <button type="button" onclick="ntInsert('## ','')">Heading</button>
+      <button type="button" onclick="ntInsert('• ','')">• Bullet</button>
+      <button type="button" onclick="ntInsert('☐ ','')">☐ Checkbox</button>
+      <button type="button" onclick="ntInsert('**','**')">Bold</button>
+      <button type="button" onclick="ntInsert('\n---\n','')">Divider</button>
+    </div>
+    <textarea id="ntBody" class="notes" placeholder="Write today's mistakes, formulas, doubts, interview notes… (you can also paste screenshots here)"></textarea>
+    <div id="ntDrop" class="nt-drop">
+      📎 Drag &amp; drop files here, or <label>browse<input id="ntFile" type="file" multiple hidden></label>
+      <small>Images, PDF, Word, Excel, PPT, text… up to 10 MB each · stays in this browser · click an uploaded file to read it here</small>
+    </div>
+    <div id="ntFiles" class="nt-files"></div>
+    <div class="nt-actions">
+      <button class="pagebtn" onclick="saveCurrent(true)">Save note</button>
+      <button class="pagebtn danger" onclick="deleteNote()">Delete note</button>
+    </div>
+  </div>
+</div>
+</section>
+
+
+
+<section id="guidePage" class="panel hidden">
+<h2>☰ 90-Day Track Guide</h2>
+<p style="line-height:1.65;color:#56658F">
+This page explains what every part of the challenge is for, what you should actually do,
+and how each track helps you become placement-ready for an AI Engineer role.
+You do not need to master everything in one day. Learn → practice → build → review.
+</p>
+
+<div class="guide-grid">
+  <div class="card">
+    <h3>💻 1. Java DSA — Placement Core</h3>
+    <p><b>What it is:</b> Data Structures and Algorithms using Java for coding rounds and technical interviews.</p>
+    <p><b>What you learn:</b> Java basics, arrays, strings, two pointers, sliding window, hashing, linked lists, stacks, queues, recursion, trees, heaps, graphs, greedy and dynamic programming.</p>
+    <p><b>Daily method:</b> 25 min concept → 55 min problem solving → 10 min mistake review.</p>
+    <p><b>Goal:</b> Build problem-solving speed, understand patterns, and explain your solution clearly during placements.</p>
+  </div>
+
+  <div class="card">
+    <h3>🤖 2. AI Engineer — Main Skill Track</h3>
+    <p><b>What it is:</b> The technical path from programming and data handling to machine learning, deep learning, LLM applications and deployment.</p>
+    <p><b>What you learn:</b> Python, NumPy, Pandas, EDA, statistics, ML, DL, CNNs, NLP, Transformers, Hugging Face, GenAI, embeddings, RAG, AI Agents + FastAPI and deployment basics.</p>
+    <p><b>Daily method:</b> Learn one concept, code it yourself, test it on a small dataset, and write down what you understood.</p>
+    <p><b>Goal:</b> Become capable of building an AI feature from data → model → application → API/deployment.</p>
+  
+    <p><b>Complete roadmap:</b> Python → NumPy/Pandas → Statistics → ML → DL → NLP → Transformers → Hugging Face → GenAI/LLMs → Prompt Engineering → Embeddings → RAG → <b>Agentic AI → AI Agents → LangChain → LangGraph → MCP</b> → AI Agents + FastAPI → Docker → Cloud Deployment → Evaluation/LLMOps → Capstone.</p>
+</div>
+
+  <div class="card">
+    <h3>🚀 3. Daily Project — Build in Public</h3>
+    <p><b>What it is:</b> Small practical builds that turn your learning into a visible portfolio.</p>
+    <p><b>What you do:</b> Build small Java/Python tools first, then ML/DL/NLP/GenAI applications, APIs and finally your capstone.</p>
+    <p><b>Daily method:</b> Build → test → fix → Git commit → add a short README/demo note.</p>
+    <p><b>Goal:</b> Have proof that you can build, debug, document and explain real projects instead of only completing tutorials.</p>
+  </div>
+
+  <div class="card">
+    <h3>📚 4. GATE DA — Exam Track</h3>
+    <p><b>What it is:</b> A parallel preparation track for GATE Data Science and Artificial Intelligence.</p>
+    <p><b>What you learn:</b> Probability, statistics, linear algebra, calculus/optimization, programming, data structures, algorithms, DBMS, machine learning, AI and mixed practice.</p>
+    <p><b>Daily method:</b> Concept → topic-wise PYQs → analyze mistakes → update formula/error notes.</p>
+    <p><b>Goal:</b> Build exam-level fundamentals while strengthening concepts that also support your AI/ML learning.</p>
+  </div>
+
+  <div class="card">
+    <h3>🧠 5. Aptitude — Placement Speed</h3>
+    <p><b>What it is:</b> Quantitative, logical and verbal practice used in many placement assessments.</p>
+    <p><b>What you learn:</b> Percentages, ratio, averages, profit/loss, time/work, time/distance, probability, permutations, number systems, DI, logical reasoning, verbal ability and reading comprehension.</p>
+    <p><b>Daily method:</b> Formula/reasoning → timed questions → check mistakes → record the shortcut or concept you missed.</p>
+    <p><b>Goal:</b> Improve accuracy first, then speed under a time limit.</p>
+  </div>
+
+  <div class="card">
+    <h3>🌿 6. Healthy Routine — Energy & Consistency</h3>
+    <p><b>What it is:</b> A simple routine that protects your sleep, meals, movement, breaks and study consistency.</p>
+    <p><b>Morning:</b> Wake around 4:30 AM only when you can still get enough sleep; hydrate, freshen up, do gentle movement, then start focused DSA.</p>
+    <p><b>Day:</b> Attend college, eat regular balanced meals, drink water, take short screen breaks and move around normally.</p>
+    <p><b>Night:</b> Review the day, prepare tomorrow's priorities and aim for about 8 hours of sleep if waking at 4:30 AM.</p>
+    <p><b>Goal:</b> Sustainable progress. The target is consistency, not exhaustion.</p>
+  </div>
+</div>
+
+
+<h3 style="margin-top:22px">🧩 Agentic AI & AI Agents Mini-Roadmap</h3>
+<div class="phase-grid">
+  <div class="phase"><b>1. Agentic AI Foundations</b><span>Understand agents vs normal LLM apps, tool calling, state, workflows, planning and multi-step tasks.</span></div>
+  <div class="phase"><b>2. AI Agents</b><span>Build agents that can choose tools, execute actions, observe results and continue a task.</span></div>
+  <div class="phase"><b>3. LangChain</b><span>Learn prompts, models, tools, chains, structured outputs, retrievers and agent building blocks.</span></div>
+  <div class="phase"><b>4. LangGraph</b><span>Build stateful agent workflows using graphs, nodes, edges, loops, checkpoints and human-in-the-loop patterns.</span></div>
+  <div class="phase"><b>5. MCP</b><span>Learn how Model Context Protocol connects AI systems with reusable tools and external resources.</span></div>
+  <div class="phase"><b>6. Production Agents</b><span>Evaluate agent responses, control failures, add logging, expose APIs and deploy the final application.</span></div>
+</div>
+
+<h3 style="margin-top:22px">🗺️ How the 90 Days Progress</h3>
+<div class="phase-grid">
+  <div class="phase"><b>Days 1–15 · Foundation</b><span>Java basics, Python recall, data handling, probability, percentages and small coding builds.</span></div>
+  <div class="phase"><b>Days 16–30 · Core ML + DSA</b><span>Arrays/strings, linked lists, hashing, sorting/searching plus ML algorithms and evaluation.</span></div>
+  <div class="phase"><b>Days 31–45 · Deep Learning</b><span>Trees/heaps/graphs, GATE DA mathematics and AI foundations, neural networks, PyTorch and CNNs.</span></div>
+  <div class="phase"><b>Days 46–60 · NLP + Transformers</b><span>Recursion/backtracking/DP plus NLP, RNN/LSTM, Transformers and Hugging Face practice.</span></div>
+  <div class="phase"><b>Days 61–72 · GenAI + RAG</b><span>Prompting, structured outputs, embeddings, semantic search, RAG and evaluation.</span></div>
+  <div class="phase"><b>Days 73–82 · Deployment + Capstone</b><span>AI Agents + FastAPI, Docker, logging, health checks, integration and a portfolio-level capstone.</span></div>
+  <div class="phase"><b>Days 83–90 · Placement Challenge</b><span>Mixed DSA, aptitude, GATE revision, resume/GitHub cleanup, mock interviews and final demo.</span></div>
+</div>
+
+<div class="card" style="margin-top:18px;background:#EEF7FF">
+  <h3>✅ The Daily Rule</h3>
+  <p style="line-height:1.7;margin-bottom:0">
+  <b>Learn:</b> understand the concept → <b>Practice:</b> solve questions → <b>Build:</b> apply it in a project →
+  <b>Review:</b> write mistakes → <b>Track:</b> mark the day complete. If college or travel makes the full 5.5-hour study block impossible,
+  complete the most important blocks first and continue the next day instead of sacrificing sleep.
+  </p>
+</div>
+</section>
+
+<section id="routinePage" class="panel hidden">
+<h2>♥ Healthy 90-Day Routine</h2>
+<p style="line-height:1.65;color:#56658F">
+Health is part of the challenge, not an extra subject. The purpose of this routine is to help you study consistently
+without turning the 90 days into an exhaustion challenge.
+</p>
+<div style="background:#FFF6E9;border:1px solid #F3DDB0;border-radius:14px;padding:13px;line-height:1.55">
+<b>Sleep first:</b> This dashboard uses an <b>8-hour sleep target</b>. If a 4:30 AM wake-up makes it difficult
+to get enough sleep, move the wake-up later. The schedule should fit your real college and travel days.
+</div>
+<div style="display:grid;grid-template-columns:repeat(2,1fr);gap:14px;margin-top:14px">
+<div class="card"><h3>🌅 Morning — 4:30 AM</h3><ul>
+<li>4:30 — wake, water, hygiene</li><li>4:45 — gentle stretching / movement</li>
+<li>5:00–6:15 — Java DSA deep work</li><li>Breakfast + college preparation</li></ul></div>
+<div class="card"><h3>🎓 College / Day</h3><ul>
+<li>Attend classes and use small gaps for light revision</li><li>Regular balanced meals + water</li>
+<li>Take short screen/eye breaks</li><li>Normal outdoor movement when practical</li></ul></div>
+<div class="card"><h3>🌆 Evening</h3><ul>
+<li>60–90 min AI/ML coding</li><li>45–60 min GATE DA</li>
+<li>30 min aptitude</li><li>45–60 min daily project / GitHub</li></ul></div>
+<div class="card"><h3>🌙 Night</h3><ul>
+<li>Review DSA/GATE mistakes</li><li>Write tomorrow's top 3 priorities</li>
+<li>Prepare bag/desk</li><li><b>~8:30 PM sleep target</b> for 4:30 AM wake-up</li></ul></div>
+</div>
+<h3>🧘 Daily Health Checklist</h3>
+<ul>
+<li>☐ Enough sleep and a consistent bedtime</li><li>☐ Water regularly throughout the day</li><li>☐ Regular balanced meals</li>
+<li>☐ Short breaks between study blocks and screens</li><li>☐ Some normal movement/outdoor time</li>
+<li>☐ Keep study posture comfortable and change position regularly</li><li>☐ Stop when the planned work is done — consistency matters more than exhaustion</li>
+</ul>
+</section>
+
+<section id="printPage" class="panel hidden">
+<h2>🖨 Export / Print</h2>
+<p>Use Print → Save as PDF to export the current 90-day transformation plan.</p>
+<button onclick="window.print()" class="pagebtn">Print / Save PDF</button>
+</section>
+</div>
+</main>
+</div>
+
+<div id="fvOverlay" class="fv-overlay hidden" onclick="if(event.target===this)fvClose()">
+  <div class="fv-panel" role="dialog" aria-modal="true" aria-labelledby="fvName">
+    <div class="fv-bar">
+      <div id="fvName" class="fv-name"></div>
+      <button class="pagebtn" onclick="fvSave()">Save</button>
+      <button class="pagebtn" onclick="fvClose()">✕ Close</button>
+    </div>
+    <div id="fvBody" class="fv-body"></div>
+  </div>
+</div>
+
+<script>
+const DATA=[{"day": 1, "dsa": {"area": "Java + Placement DSA", "topic": "Java Setup + Big-O", "cover": "Install/configure Java, input/output, variables, data types, operators", "practice": "2 easy problems + Big-O notes", "resource": "LeetCode / GeeksforGeeks", "time": "1.5 hrs"}, "aiml": {"area": "AI Engineer", "topic": "Python Recall", "cover": "syntax, functions, collections, exceptions", "practice": "20 short coding questions", "resource": "Kaggle Learn / Hugging Face Learn", "time": "1.5 hrs"}, "project": {"area": "Daily Build", "topic": "CLI To-Do List in Java", "cover": "Build → test → Git commit → write a 3-line README/demo note.", "practice": "Build → test → Git commit → 3-line README/demo note.", "resource": "GitHub / Portfolio", "time": "1 hr"}, "gate": {"subject": "GATE DA", "topic": "Probability Basics", "cover": "sample space, events, conditional probability", "practice": "20 questions", "resource": "GATE PYQs / NPTEL", "time": "1 hr"}, "apt": {"area": "Placement Aptitude", "topic": "Percentages", "cover": "percentage change and comparison", "practice": "20 questions", "resource": "IndiaBIX / Placement Practice", "time": "30 min"}, "health": "Wake 4:30 AM only if you can consistently get enough sleep; water, hygiene, 5–10 min gentle movement.", "quote": {"en": "Discipline is choosing what matters today.", "ta": ""}}, {"day": 2, "dsa": {"area": "Java + Placement DSA", "topic": "Conditionals + Loops", "cover": "if/else, switch, for/while, nested loops", "practice": "5 basic pattern/loop problems", "resource": "LeetCode / GeeksforGeeks", "time": "1.5 hrs"}, "aiml": {"area": "AI Engineer", "topic": "NumPy", "cover": "arrays, shapes, indexing, vectorized operations", "practice": "Mini numerical notebook", "resource": "Kaggle Learn / Hugging Face Learn", "time": "1.5 hrs"}, "project": {"area": "Daily Build", "topic": "Student Grade Calculator", "cover": "Build → test → Git commit → write a 3-line README/demo note.", "practice": "Build → test → Git commit → 3-line README/demo note.", "resource": "GitHub / Portfolio", "time": "1 hr"}, "gate": {"subject": "GATE DA", "topic": "Bayes + Random Variables", "cover": "Bayes theorem, expectation basics", "practice": "20 questions", "resource": "GATE PYQs / NPTEL", "time": "1 hr"}, "apt": {"area": "Placement Aptitude", "topic": "Ratio + Proportion", "cover": "ratios, mixtures, proportions", "practice": "20 questions", "resource": "IndiaBIX / Placement Practice", "time": "30 min"}, "health": "Healthy breakfast + water; 5–10 min walk/stretch during the day.", "quote": {"en": "One focused day can change the direction of a month.", "ta": ""}}, {"day": 3, "dsa": {"area": "Java + Placement DSA", "topic": "Methods + Arrays", "cover": "methods, 1D arrays, traversal, min/max/sum", "practice": "5 array problems", "resource": "LeetCode / GeeksforGeeks", "time": "1.5 hrs"}, "aiml": {"area": "AI Engineer", "topic": "Pandas", "cover": "Series/DataFrame, filtering, groupby, merge", "practice": "Analyze a small CSV", "resource": "Kaggle Learn / Hugging Face Learn", "time": "1.5 hrs"}, "project": {"area": "Daily Build", "topic": "Contact Book", "cover": "Build → test → Git commit → write a 3-line README/demo note.", "practice": "Build → test → Git commit → 3-line README/demo note.", "resource": "GitHub / Portfolio", "time": "1 hr"}, "gate": {"subject": "GATE DA", "topic": "Distributions", "cover": "common discrete/continuous distributions", "practice": "20 questions", "resource": "GATE PYQs / NPTEL", "time": "1 hr"}, "apt": {"area": "Placement Aptitude", "topic": "Averages", "cover": "weighted and simple averages", "practice": "20 questions", "resource": "IndiaBIX / Placement Practice", "time": "30 min"}, "health": "Keep regular meals; take short screen breaks every study block.", "quote": {"en": "Small progress is still progress.", "ta": ""}}, {"day": 4, "dsa": {"area": "Java + Placement DSA", "topic": "2D Arrays", "cover": "matrices, row/column traversal", "practice": "3 matrix problems", "resource": "LeetCode / GeeksforGeeks", "time": "1.5 hrs"}, "aiml": {"area": "AI Engineer", "topic": "EDA", "cover": "missing values, outliers, distributions, correlations", "practice": "EDA report", "resource": "Kaggle Learn / Hugging Face Learn", "time": "1.5 hrs"}, "project": {"area": "Daily Build", "topic": "Number Guessing Game", "cover": "Build → test → Git commit → write a 3-line README/demo note.", "practice": "Build → test → Git commit → 3-line README/demo note.", "resource": "GitHub / Portfolio", "time": "1 hr"}, "gate": {"subject": "GATE DA", "topic": "Descriptive Statistics", "cover": "mean, variance, covariance, correlation", "practice": "20 questions", "resource": "GATE PYQs / NPTEL", "time": "1 hr"}, "apt": {"area": "Placement Aptitude", "topic": "Profit + Loss", "cover": "cost, selling price, discount", "practice": "20 questions", "resource": "IndiaBIX / Placement Practice", "time": "30 min"}, "health": "10–20 min light movement; prepare tomorrow's study list before bed.", "quote": {"en": "Build skills, not just certificates.", "ta": ""}}, {"day": 5, "dsa": {"area": "Java + Placement DSA", "topic": "Strings in Java", "cover": "String, StringBuilder, char operations", "practice": "5 string basics", "resource": "LeetCode / GeeksforGeeks", "time": "1.5 hrs"}, "aiml": {"area": "AI Engineer", "topic": "Statistics", "cover": "mean, median, variance, probability basics", "practice": "20 stats questions", "resource": "Kaggle Learn / Hugging Face Learn", "time": "1.5 hrs"}, "project": {"area": "Daily Build", "topic": "Expense Tracker", "cover": "Build → test → Git commit → write a 3-line README/demo note.", "practice": "Build → test → Git commit → 3-line README/demo note.", "resource": "GitHub / Portfolio", "time": "1 hr"}, "gate": {"subject": "GATE DA", "topic": "Linear Algebra I", "cover": "vectors, matrices, systems", "practice": "20 questions", "resource": "GATE PYQs / NPTEL", "time": "1 hr"}, "apt": {"area": "Placement Aptitude", "topic": "Simple Interest", "cover": "SI formulas and applications", "practice": "20 questions", "resource": "IndiaBIX / Placement Practice", "time": "30 min"}, "health": "Hydration + balanced meals; avoid studying continuously for hours.", "quote": {"en": "Your future engineer self is built by today's practice.", "ta": ""}}, {"day": 6, "dsa": {"area": "Java + Placement DSA", "topic": "Two Pointers", "cover": "left/right pointers and sorted-array patterns", "practice": "4 two-pointer problems", "resource": "LeetCode / GeeksforGeeks", "time": "1.5 hrs"}, "aiml": {"area": "AI Engineer", "topic": "Probability", "cover": "conditional probability, Bayes theorem", "practice": "15 probability questions", "resource": "Kaggle Learn / Hugging Face Learn", "time": "1.5 hrs"}, "project": {"area": "Daily Build", "topic": "File-based Notes App", "cover": "Build → test → Git commit → write a 3-line README/demo note.", "practice": "Build → test → Git commit → 3-line README/demo note.", "resource": "GitHub / Portfolio", "time": "1 hr"}, "gate": {"subject": "GATE DA", "topic": "Linear Algebra II", "cover": "eigen concepts, transformations", "practice": "20 questions", "resource": "GATE PYQs / NPTEL", "time": "1 hr"}, "apt": {"area": "Placement Aptitude", "topic": "Compound Interest", "cover": "growth and comparison", "practice": "20 questions", "resource": "IndiaBIX / Placement Practice", "time": "30 min"}, "health": "Morning sunlight/normal outdoor time; keep evening routine calm.", "quote": {"en": "Consistency beats random bursts.", "ta": ""}}, {"day": 7, "dsa": {"area": "Java + Placement DSA", "topic": "Sliding Window", "cover": "fixed and variable windows", "practice": "4 sliding-window problems", "resource": "LeetCode / GeeksforGeeks", "time": "1.5 hrs"}, "aiml": {"area": "AI Engineer", "topic": "Linear Algebra", "cover": "vectors, matrices, dot products", "practice": "NumPy matrix notebook", "resource": "Kaggle Learn / Hugging Face Learn", "time": "1.5 hrs"}, "project": {"area": "Daily Build", "topic": "Array Statistics Tool", "cover": "Build → test → Git commit → write a 3-line README/demo note.", "practice": "Build → test → Git commit → 3-line README/demo note.", "resource": "GitHub / Portfolio", "time": "1 hr"}, "gate": {"subject": "GATE DA", "topic": "Calculus", "cover": "limits, derivatives, partial derivatives", "practice": "20 questions", "resource": "GATE PYQs / NPTEL", "time": "1 hr"}, "apt": {"area": "Placement Aptitude", "topic": "Time + Work", "cover": "work-rate problems", "practice": "20 questions", "resource": "IndiaBIX / Placement Practice", "time": "30 min"}, "health": "Weekly reset: tidy desk, plan meals/study, review sleep consistency.", "quote": {"en": "Learn it. Build it. Explain it.", "ta": ""}}, {"day": 8, "dsa": {"area": "Java + Placement DSA", "topic": "Prefix Sum", "cover": "prefix arrays and range-sum thinking", "practice": "4 prefix-sum problems", "resource": "LeetCode / GeeksforGeeks", "time": "1.5 hrs"}, "aiml": {"area": "AI Engineer", "topic": "ML Workflow", "cover": "problem framing, train/validation/test, leakage", "practice": "Build a clean ML pipeline", "resource": "Kaggle Learn / Hugging Face Learn", "time": "1.5 hrs"}, "project": {"area": "Daily Build", "topic": "Matrix Calculator", "cover": "Build → test → Git commit → write a 3-line README/demo note.", "practice": "Build → test → Git commit → 3-line README/demo note.", "resource": "GitHub / Portfolio", "time": "1 hr"}, "gate": {"subject": "GATE DA", "topic": "Optimization", "cover": "unconstrained optimization and gradients", "practice": "20 questions", "resource": "GATE PYQs / NPTEL", "time": "1 hr"}, "apt": {"area": "Placement Aptitude", "topic": "Time + Distance", "cover": "speed, distance, trains", "practice": "20 questions", "resource": "IndiaBIX / Placement Practice", "time": "30 min"}, "health": "Wake 4:30 AM only if you can consistently get enough sleep; water, hygiene, 5–10 min gentle movement.", "quote": {"en": "Discipline is choosing what matters today.", "ta": ""}}, {"day": 9, "dsa": {"area": "Java + Placement DSA", "topic": "Sorting", "cover": "built-in sort, bubble/selection/insertion concepts", "practice": "5 sorting problems", "resource": "LeetCode / GeeksforGeeks", "time": "1.5 hrs"}, "aiml": {"area": "AI Engineer", "topic": "Linear Regression", "cover": "loss, gradient idea, evaluation", "practice": "Regression mini-project", "resource": "Kaggle Learn / Hugging Face Learn", "time": "1.5 hrs"}, "project": {"area": "Daily Build", "topic": "String Analyzer", "cover": "Build → test → Git commit → write a 3-line README/demo note.", "practice": "Build → test → Git commit → 3-line README/demo note.", "resource": "GitHub / Portfolio", "time": "1 hr"}, "gate": {"subject": "GATE DA", "topic": "Programming Fundamentals", "cover": "Python/programming logic and complexity", "practice": "20 questions", "resource": "GATE PYQs / NPTEL", "time": "1 hr"}, "apt": {"area": "Placement Aptitude", "topic": "Pipes + Cisterns", "cover": "combined work rates", "practice": "15 questions", "resource": "IndiaBIX / Placement Practice", "time": "30 min"}, "health": "Healthy breakfast + water; 5–10 min walk/stretch during the day.", "quote": {"en": "One focused day can change the direction of a month.", "ta": ""}}, {"day": 10, "dsa": {"area": "Java + Placement DSA", "topic": "Binary Search", "cover": "search space, lower/upper bound idea", "practice": "5 binary-search problems", "resource": "LeetCode / GeeksforGeeks", "time": "1.5 hrs"}, "aiml": {"area": "AI Engineer", "topic": "Logistic Regression", "cover": "classification, sigmoid, threshold", "practice": "Binary classifier", "resource": "Kaggle Learn / Hugging Face Learn", "time": "1.5 hrs"}, "project": {"area": "Daily Build", "topic": "Mini Quiz App", "cover": "Build → test → Git commit → write a 3-line README/demo note.", "practice": "Build → test → Git commit → 3-line README/demo note.", "resource": "GitHub / Portfolio", "time": "1 hr"}, "gate": {"subject": "GATE DA", "topic": "Data Structures", "cover": "arrays, stacks, queues, trees, graphs", "practice": "20 questions", "resource": "GATE PYQs / NPTEL", "time": "1 hr"}, "apt": {"area": "Placement Aptitude", "topic": "Permutations", "cover": "counting basics", "practice": "20 questions", "resource": "IndiaBIX / Placement Practice", "time": "30 min"}, "health": "Keep regular meals; take short screen breaks every study block.", "quote": {"en": "Small progress is still progress.", "ta": ""}}, {"day": 11, "dsa": {"area": "Java + Placement DSA", "topic": "Array Revision", "cover": "mixed arrays, strings, two pointers, prefix sum", "practice": "Timed 8-question set", "resource": "LeetCode / GeeksforGeeks", "time": "1.5 hrs"}, "aiml": {"area": "AI Engineer", "topic": "KNN", "cover": "distance, scaling, choosing K", "practice": "KNN comparison", "resource": "Kaggle Learn / Hugging Face Learn", "time": "1.5 hrs"}, "project": {"area": "Daily Build", "topic": "Python Data Cleaner", "cover": "Build → test → Git commit → write a 3-line README/demo note.", "practice": "Build → test → Git commit → 3-line README/demo note.", "resource": "GitHub / Portfolio", "time": "1 hr"}, "gate": {"subject": "GATE DA", "topic": "Algorithms", "cover": "sorting, searching, graph algorithms", "practice": "20 questions", "resource": "GATE PYQs / NPTEL", "time": "1 hr"}, "apt": {"area": "Placement Aptitude", "topic": "Combinations", "cover": "selection/counting", "practice": "20 questions", "resource": "IndiaBIX / Placement Practice", "time": "30 min"}, "health": "10–20 min light movement; prepare tomorrow's study list before bed.", "quote": {"en": "Build skills, not just certificates.", "ta": ""}}, {"day": 12, "dsa": {"area": "Java + Placement DSA", "topic": "Linked List Basics", "cover": "Node, traversal, insert/delete", "practice": "4 linked-list problems", "resource": "LeetCode / GeeksforGeeks", "time": "1.5 hrs"}, "aiml": {"area": "AI Engineer", "topic": "Decision Trees", "cover": "splits, entropy/Gini, overfitting", "practice": "Tree classifier", "resource": "Kaggle Learn / Hugging Face Learn", "time": "1.5 hrs"}, "project": {"area": "Daily Build", "topic": "CSV EDA Dashboard", "cover": "Build → test → Git commit → write a 3-line README/demo note.", "practice": "Build → test → Git commit → 3-line README/demo note.", "resource": "GitHub / Portfolio", "time": "1 hr"}, "gate": {"subject": "GATE DA", "topic": "DBMS I", "cover": "ER model, relational model, SQL", "practice": "20 questions", "resource": "GATE PYQs / NPTEL", "time": "1 hr"}, "apt": {"area": "Placement Aptitude", "topic": "Probability Aptitude", "cover": "basic probability questions", "practice": "20 questions", "resource": "IndiaBIX / Placement Practice", "time": "30 min"}, "health": "Hydration + balanced meals; avoid studying continuously for hours.", "quote": {"en": "Your future engineer self is built by today's practice.", "ta": ""}}, {"day": 13, "dsa": {"area": "Java + Placement DSA", "topic": "Linked List Patterns", "cover": "reverse, middle, cycle", "practice": "4 problems", "resource": "LeetCode / GeeksforGeeks", "time": "1.5 hrs"}, "aiml": {"area": "AI Engineer", "topic": "Random Forest", "cover": "bagging, feature randomness", "practice": "Compare tree vs forest", "resource": "Kaggle Learn / Hugging Face Learn", "time": "1.5 hrs"}, "project": {"area": "Daily Build", "topic": "Student Performance EDA", "cover": "Build → test → Git commit → write a 3-line README/demo note.", "practice": "Build → test → Git commit → 3-line README/demo note.", "resource": "GitHub / Portfolio", "time": "1 hr"}, "gate": {"subject": "GATE DA", "topic": "DBMS II", "cover": "normalization, transactions, indexing", "practice": "20 questions", "resource": "GATE PYQs / NPTEL", "time": "1 hr"}, "apt": {"area": "Placement Aptitude", "topic": "Number System", "cover": "divisibility, HCF, LCM", "practice": "20 questions", "resource": "IndiaBIX / Placement Practice", "time": "30 min"}, "health": "Morning sunlight/normal outdoor time; keep evening routine calm.", "quote": {"en": "Consistency beats random bursts.", "ta": ""}}, {"day": 14, "dsa": {"area": "Java + Placement DSA", "topic": "Stack", "cover": "Stack API, parentheses, monotonic thinking", "practice": "5 stack problems", "resource": "LeetCode / GeeksforGeeks", "time": "1.5 hrs"}, "aiml": {"area": "AI Engineer", "topic": "SVM", "cover": "margin, kernel intuition", "practice": "SVM classifier", "resource": "Kaggle Learn / Hugging Face Learn", "time": "1.5 hrs"}, "project": {"area": "Daily Build", "topic": "Sales Analysis Notebook", "cover": "Build → test → Git commit → write a 3-line README/demo note.", "practice": "Build → test → Git commit → 3-line README/demo note.", "resource": "GitHub / Portfolio", "time": "1 hr"}, "gate": {"subject": "GATE DA", "topic": "Machine Learning I", "cover": "supervised learning, regression/classification", "practice": "20 questions", "resource": "GATE PYQs / NPTEL", "time": "1 hr"}, "apt": {"area": "Placement Aptitude", "topic": "Algebra", "cover": "equations and identities", "practice": "20 questions", "resource": "IndiaBIX / Placement Practice", "time": "30 min"}, "health": "Weekly reset: tidy desk, plan meals/study, review sleep consistency.", "quote": {"en": "Learn it. Build it. Explain it.", "ta": ""}}, {"day": 15, "dsa": {"area": "Java + Placement DSA", "topic": "Queue + Deque", "cover": "Queue, ArrayDeque, BFS-ready patterns", "practice": "5 queue/deque problems", "resource": "LeetCode / GeeksforGeeks", "time": "1.5 hrs"}, "aiml": {"area": "AI Engineer", "topic": "Naive Bayes", "cover": "probabilistic classification", "practice": "Text classifier", "resource": "Kaggle Learn / Hugging Face Learn", "time": "1.5 hrs"}, "project": {"area": "Daily Build", "topic": "House Price Regression", "cover": "Build → test → Git commit → write a 3-line README/demo note.", "practice": "Build → test → Git commit → 3-line README/demo note.", "resource": "GitHub / Portfolio", "time": "1 hr"}, "gate": {"subject": "GATE DA", "topic": "Machine Learning II", "cover": "trees, ensembles, clustering, PCA", "practice": "20 questions", "resource": "GATE PYQs / NPTEL", "time": "1 hr"}, "apt": {"area": "Placement Aptitude", "topic": "Data Interpretation", "cover": "tables and charts", "practice": "2 DI sets", "resource": "IndiaBIX / Placement Practice", "time": "30 min"}, "health": "Wake 4:30 AM only if you can consistently get enough sleep; water, hygiene, 5–10 min gentle movement.", "quote": {"en": "Discipline is choosing what matters today.", "ta": ""}}, {"day": 16, "dsa": {"area": "Java + Placement DSA", "topic": "HashMap + HashSet", "cover": "frequency counting, lookup, duplicates", "practice": "6 hashmap/set problems", "resource": "LeetCode / GeeksforGeeks", "time": "1.5 hrs"}, "aiml": {"area": "AI Engineer", "topic": "Clustering", "cover": "K-Means and cluster evaluation", "practice": "Customer clustering mini-project", "resource": "Kaggle Learn / Hugging Face Learn", "time": "1.5 hrs"}, "project": {"area": "Daily Build", "topic": "Heart Disease Classifier", "cover": "Build → test → Git commit → write a 3-line README/demo note.", "practice": "Build → test → Git commit → 3-line README/demo note.", "resource": "GitHub / Portfolio", "time": "1 hr"}, "gate": {"subject": "GATE DA", "topic": "AI I", "cover": "search, knowledge representation basics", "practice": "20 questions", "resource": "GATE PYQs / NPTEL", "time": "1 hr"}, "apt": {"area": "Placement Aptitude", "topic": "Logical Series", "cover": "number/letter series", "practice": "20 questions", "resource": "IndiaBIX / Placement Practice", "time": "30 min"}, "health": "Healthy breakfast + water; 5–10 min walk/stretch during the day.", "quote": {"en": "One focused day can change the direction of a month.", "ta": ""}}, {"day": 17, "dsa": {"area": "Java + Placement DSA", "topic": "Recursion Basics", "cover": "base case, call stack, simple recursion", "practice": "4 recursion problems", "resource": "LeetCode / GeeksforGeeks", "time": "1.5 hrs"}, "aiml": {"area": "AI Engineer", "topic": "PCA", "cover": "dimensionality reduction", "practice": "2D PCA visualization", "resource": "Kaggle Learn / Hugging Face Learn", "time": "1.5 hrs"}, "project": {"area": "Daily Build", "topic": "Customer Churn Classifier", "cover": "Build → test → Git commit → write a 3-line README/demo note.", "practice": "Build → test → Git commit → 3-line README/demo note.", "resource": "GitHub / Portfolio", "time": "1 hr"}, "gate": {"subject": "GATE DA", "topic": "AI II", "cover": "probabilistic reasoning and learning concepts", "practice": "20 questions", "resource": "GATE PYQs / NPTEL", "time": "1 hr"}, "apt": {"area": "Placement Aptitude", "topic": "Coding-Decoding", "cover": "pattern-based reasoning", "practice": "20 questions", "resource": "IndiaBIX / Placement Practice", "time": "30 min"}, "health": "Keep regular meals; take short screen breaks every study block.", "quote": {"en": "Small progress is still progress.", "ta": ""}}, {"day": 18, "dsa": {"area": "Java + Placement DSA", "topic": "Backtracking Basics", "cover": "subsets, permutations, choose/explore/unchoose", "practice": "3 backtracking problems", "resource": "LeetCode / GeeksforGeeks", "time": "1.5 hrs"}, "aiml": {"area": "AI Engineer", "topic": "Model Evaluation", "cover": "precision, recall, F1, ROC-AUC, confusion matrix", "practice": "Evaluation notebook", "resource": "Kaggle Learn / Hugging Face Learn", "time": "1.5 hrs"}, "project": {"area": "Daily Build", "topic": "Spam Message Classifier", "cover": "Build → test → Git commit → write a 3-line README/demo note.", "practice": "Build → test → Git commit → 3-line README/demo note.", "resource": "GitHub / Portfolio", "time": "1 hr"}, "gate": {"subject": "GATE DA", "topic": "Mixed PYQ Set 1", "cover": "Probability + Linear Algebra", "practice": "25 PYQs", "resource": "GATE PYQs / NPTEL", "time": "1 hr"}, "apt": {"area": "Placement Aptitude", "topic": "Syllogisms", "cover": "logical deductions", "practice": "20 questions", "resource": "IndiaBIX / Placement Practice", "time": "30 min"}, "health": "10–20 min light movement; prepare tomorrow's study list before bed.", "quote": {"en": "Build skills, not just certificates.", "ta": ""}}, {"day": 19, "dsa": {"area": "Java + Placement DSA", "topic": "Trees Basics", "cover": "binary tree, DFS traversals", "practice": "5 tree problems", "resource": "LeetCode / GeeksforGeeks", "time": "1.5 hrs"}, "aiml": {"area": "AI Engineer", "topic": "Feature Engineering", "cover": "encoding, scaling, feature selection", "practice": "Improve a baseline model", "resource": "Kaggle Learn / Hugging Face Learn", "time": "1.5 hrs"}, "project": {"area": "Daily Build", "topic": "Loan Risk Classifier", "cover": "Build → test → Git commit → write a 3-line README/demo note.", "practice": "Build → test → Git commit → 3-line README/demo note.", "resource": "GitHub / Portfolio", "time": "1 hr"}, "gate": {"subject": "GATE DA", "topic": "Mixed PYQ Set 2", "cover": "Calculus + Programming", "practice": "25 PYQs", "resource": "GATE PYQs / NPTEL", "time": "1 hr"}, "apt": {"area": "Placement Aptitude", "topic": "Blood Relations + Directions", "cover": "relationship and direction problems", "practice": "20 questions", "resource": "IndiaBIX / Placement Practice", "time": "30 min"}, "health": "Hydration + balanced meals; avoid studying continuously for hours.", "quote": {"en": "Your future engineer self is built by today's practice.", "ta": ""}}, {"day": 20, "dsa": {"area": "Java + Placement DSA", "topic": "BST", "cover": "search, insert, min/max, inorder property", "practice": "4 BST problems", "resource": "LeetCode / GeeksforGeeks", "time": "1.5 hrs"}, "aiml": {"area": "AI Engineer", "topic": "ML Project Sprint", "cover": "choose dataset, baseline, experiments", "practice": "Model card + results", "resource": "Kaggle Learn / Hugging Face Learn", "time": "1.5 hrs"}, "project": {"area": "Daily Build", "topic": "ML Model Comparison", "cover": "Build → test → Git commit → write a 3-line README/demo note.", "practice": "Build → test → Git commit → 3-line README/demo note.", "resource": "GitHub / Portfolio", "time": "1 hr"}, "gate": {"subject": "GATE DA", "topic": "Mixed PYQ Set 3", "cover": "DBMS + ML", "practice": "25 PYQs", "resource": "GATE PYQs / NPTEL", "time": "1 hr"}, "apt": {"area": "Placement Aptitude", "topic": "Seating Arrangement", "cover": "linear/circular arrangements", "practice": "3 sets", "resource": "IndiaBIX / Placement Practice", "time": "30 min"}, "health": "Morning sunlight/normal outdoor time; keep evening routine calm.", "quote": {"en": "Consistency beats random bursts.", "ta": ""}}, {"day": 21, "dsa": {"area": "Java + Placement DSA", "topic": "Tree Patterns", "cover": "height, diameter, balanced tree", "practice": "4 tree problems", "resource": "LeetCode / GeeksforGeeks", "time": "1.5 hrs"}, "aiml": {"area": "AI Engineer", "topic": "Neural Networks", "cover": "neurons, activations, forward pass", "practice": "Tiny ANN in PyTorch", "resource": "Kaggle Learn / Hugging Face Learn", "time": "1.5 hrs"}, "project": {"area": "Daily Build", "topic": "ANN Classifier", "cover": "Build → test → Git commit → write a 3-line README/demo note.", "practice": "Build → test → Git commit → 3-line README/demo note.", "resource": "GitHub / Portfolio", "time": "1 hr"}, "gate": {"subject": "GATE DA", "topic": "Mixed PYQ Set 4", "cover": "AI + Data Structures", "practice": "25 PYQs", "resource": "GATE PYQs / NPTEL", "time": "1 hr"}, "apt": {"area": "Placement Aptitude", "topic": "Clocks + Calendars", "cover": "common aptitude patterns", "practice": "20 questions", "resource": "IndiaBIX / Placement Practice", "time": "30 min"}, "health": "Weekly reset: tidy desk, plan meals/study, review sleep consistency.", "quote": {"en": "Learn it. Build it. Explain it.", "ta": ""}}, {"day": 22, "dsa": {"area": "Java + Placement DSA", "topic": "Heap / PriorityQueue", "cover": "min/max heap, top-K pattern", "practice": "4 heap problems", "resource": "LeetCode / GeeksforGeeks", "time": "1.5 hrs"}, "aiml": {"area": "AI Engineer", "topic": "Backpropagation", "cover": "loss, gradients, optimizer intuition", "practice": "Train an MLP", "resource": "Kaggle Learn / Hugging Face Learn", "time": "1.5 hrs"}, "project": {"area": "Daily Build", "topic": "CNN Image Classifier", "cover": "Build → test → Git commit → write a 3-line README/demo note.", "practice": "Build → test → Git commit → 3-line README/demo note.", "resource": "GitHub / Portfolio", "time": "1 hr"}, "gate": {"subject": "GATE DA", "topic": "DA Formula Revision", "cover": "build one-page formula sheet", "practice": "30-minute recall", "resource": "GATE PYQs / NPTEL", "time": "1 hr"}, "apt": {"area": "Placement Aptitude", "topic": "Grammar", "cover": "sentence correction and usage", "practice": "20 questions", "resource": "IndiaBIX / Placement Practice", "time": "30 min"}, "health": "Wake 4:30 AM only if you can consistently get enough sleep; water, hygiene, 5–10 min gentle movement.", "quote": {"en": "Discipline is choosing what matters today.", "ta": ""}}, {"day": 23, "dsa": {"area": "Java + Placement DSA", "topic": "Graphs Basics", "cover": "adjacency list, BFS, DFS", "practice": "4 graph traversal problems", "resource": "LeetCode / GeeksforGeeks", "time": "1.5 hrs"}, "aiml": {"area": "AI Engineer", "topic": "PyTorch Basics", "cover": "tensors, Dataset, DataLoader, training loop", "practice": "Reusable training template", "resource": "Kaggle Learn / Hugging Face Learn", "time": "1.5 hrs"}, "project": {"area": "Daily Build", "topic": "Transfer Learning Classifier", "cover": "Build → test → Git commit → write a 3-line README/demo note.", "practice": "Build → test → Git commit → 3-line README/demo note.", "resource": "GitHub / Portfolio", "time": "1 hr"}, "gate": {"subject": "GATE DA", "topic": "GATE DA Mini Mock", "cover": "mixed timed practice", "practice": "1 mini mock", "resource": "GATE PYQs / NPTEL", "time": "1 hr"}, "apt": {"area": "Placement Aptitude", "topic": "Vocabulary", "cover": "context-based vocabulary", "practice": "20 questions", "resource": "IndiaBIX / Placement Practice", "time": "30 min"}, "health": "Healthy breakfast + water; 5–10 min walk/stretch during the day.", "quote": {"en": "One focused day can change the direction of a month.", "ta": ""}}, {"day": 24, "dsa": {"area": "Java + Placement DSA", "topic": "Graphs Shortest Path", "cover": "BFS shortest path, weighted-graph concept", "practice": "3 shortest-path problems", "resource": "LeetCode / GeeksforGeeks", "time": "1.5 hrs"}, "aiml": {"area": "AI Engineer", "topic": "CNN", "cover": "convolution, pooling, image classification", "practice": "CNN mini-project", "resource": "Kaggle Learn / Hugging Face Learn", "time": "1.5 hrs"}, "project": {"area": "Daily Build", "topic": "Sequence Classifier", "cover": "Build → test → Git commit → write a 3-line README/demo note.", "practice": "Build → test → Git commit → 3-line README/demo note.", "resource": "GitHub / Portfolio", "time": "1 hr"}, "gate": {"subject": "GATE DA", "topic": "Error Log Day", "cover": "redo every wrong/guessed question", "practice": "20 corrected solutions", "resource": "GATE PYQs / NPTEL", "time": "1 hr"}, "apt": {"area": "Placement Aptitude", "topic": "Reading Comprehension", "cover": "short passages", "practice": "3 passages", "resource": "IndiaBIX / Placement Practice", "time": "30 min"}, "health": "Keep regular meals; take short screen breaks every study block.", "quote": {"en": "Small progress is still progress.", "ta": ""}}, {"day": 25, "dsa": {"area": "Java + Placement DSA", "topic": "Greedy + Intervals", "cover": "interval merge, scheduling, greedy choices", "practice": "5 greedy/interval problems", "resource": "LeetCode / GeeksforGeeks", "time": "1.5 hrs"}, "aiml": {"area": "AI Engineer", "topic": "Transfer Learning", "cover": "pretrained models, fine-tuning", "practice": "Fine-tune a small image model", "resource": "Kaggle Learn / Hugging Face Learn", "time": "1.5 hrs"}, "project": {"area": "Daily Build", "topic": "LSTM Text Classifier", "cover": "Build → test → Git commit → write a 3-line README/demo note.", "practice": "Build → test → Git commit → 3-line README/demo note.", "resource": "GitHub / Portfolio", "time": "1 hr"}, "gate": {"subject": "GATE DA", "topic": "GATE DA Mock 1", "cover": "full mixed mock", "practice": "Analyze score + mistakes", "resource": "GATE PYQs / NPTEL", "time": "1 hr"}, "apt": {"area": "Placement Aptitude", "topic": "Placement Mixed 1", "cover": "quant + logic", "practice": "25 timed questions", "resource": "IndiaBIX / Placement Practice", "time": "30 min"}, "health": "10–20 min light movement; prepare tomorrow's study list before bed.", "quote": {"en": "Build skills, not just certificates.", "ta": ""}}, {"day": 26, "dsa": {"area": "Java + Placement DSA", "topic": "Dynamic Programming I", "cover": "1D DP, memoization, tabulation", "practice": "4 DP problems", "resource": "LeetCode / GeeksforGeeks", "time": "1.5 hrs"}, "aiml": {"area": "AI Engineer", "topic": "RNN", "cover": "sequence idea, hidden state", "practice": "Simple sequence classifier", "resource": "Kaggle Learn / Hugging Face Learn", "time": "1.5 hrs"}, "project": {"area": "Daily Build", "topic": "Sentiment Analysis App", "cover": "Build → test → Git commit → write a 3-line README/demo note.", "practice": "Build → test → Git commit → 3-line README/demo note.", "resource": "GitHub / Portfolio", "time": "1 hr"}, "gate": {"subject": "GATE DA", "topic": "GATE DA Mock 2", "cover": "full mixed mock", "practice": "Analyze score + mistakes", "resource": "GATE PYQs / NPTEL", "time": "1 hr"}, "apt": {"area": "Placement Aptitude", "topic": "Placement Mixed 2", "cover": "quant + verbal", "practice": "25 timed questions", "resource": "IndiaBIX / Placement Practice", "time": "30 min"}, "health": "Hydration + balanced meals; avoid studying continuously for hours.", "quote": {"en": "Your future engineer self is built by today's practice.", "ta": ""}}, {"day": 27, "dsa": {"area": "Java + Placement DSA", "topic": "Dynamic Programming II", "cover": "2D/grid DP and state transitions", "practice": "4 DP problems", "resource": "LeetCode / GeeksforGeeks", "time": "1.5 hrs"}, "aiml": {"area": "AI Engineer", "topic": "LSTM", "cover": "gates, long-term dependencies", "practice": "LSTM text/sequence mini-project", "resource": "Kaggle Learn / Hugging Face Learn", "time": "1.5 hrs"}, "project": {"area": "Daily Build", "topic": "Transformer Text Demo", "cover": "Build → test → Git commit → write a 3-line README/demo note.", "practice": "Build → test → Git commit → 3-line README/demo note.", "resource": "GitHub / Portfolio", "time": "1 hr"}, "gate": {"subject": "GATE DA", "topic": "GATE DA Mock 3", "cover": "full mixed mock", "practice": "Analyze score + mistakes", "resource": "GATE PYQs / NPTEL", "time": "1 hr"}, "apt": {"area": "Placement Aptitude", "topic": "Placement Mixed 3", "cover": "logic + DI", "practice": "25 timed questions", "resource": "IndiaBIX / Placement Practice", "time": "30 min"}, "health": "Morning sunlight/normal outdoor time; keep evening routine calm.", "quote": {"en": "Consistency beats random bursts.", "ta": ""}}, {"day": 28, "dsa": {"area": "Java + Placement DSA", "topic": "DSA Mixed Practice", "cover": "arrays → graphs → DP pattern recognition", "practice": "10-question timed set", "resource": "LeetCode / GeeksforGeeks", "time": "1.5 hrs"}, "aiml": {"area": "AI Engineer", "topic": "NLP Foundations", "cover": "tokenization, TF-IDF, embeddings", "practice": "Text classification", "resource": "Kaggle Learn / Hugging Face Learn", "time": "1.5 hrs"}, "project": {"area": "Daily Build", "topic": "Hugging Face NLP Demo", "cover": "Build → test → Git commit → write a 3-line README/demo note.", "practice": "Build → test → Git commit → 3-line README/demo note.", "resource": "GitHub / Portfolio", "time": "1 hr"}, "gate": {"subject": "GATE DA", "topic": "Final Formula Sprint", "cover": "probability, algebra, calculus, ML, DBMS", "practice": "Rapid recall", "resource": "GATE PYQs / NPTEL", "time": "1 hr"}, "apt": {"area": "Placement Aptitude", "topic": "Placement Mock", "cover": "full mixed aptitude", "practice": "1 timed mock", "resource": "IndiaBIX / Placement Practice", "time": "30 min"}, "health": "Weekly reset: tidy desk, plan meals/study, review sleep consistency.", "quote": {"en": "Learn it. Build it. Explain it.", "ta": ""}}, {"day": 29, "dsa": {"area": "Java + Placement DSA", "topic": "Java DSA Interview Set", "cover": "common interview patterns and clean code", "practice": "8 timed problems", "resource": "LeetCode / GeeksforGeeks", "time": "1.5 hrs"}, "aiml": {"area": "AI Engineer", "topic": "Transformers", "cover": "attention, encoder/decoder intuition", "practice": "Transformer notebook", "resource": "Kaggle Learn / Hugging Face Learn", "time": "1.5 hrs"}, "project": {"area": "Daily Build", "topic": "Prompt Engineering Lab", "cover": "Build → test → Git commit → write a 3-line README/demo note.", "practice": "Build → test → Git commit → 3-line README/demo note.", "resource": "GitHub / Portfolio", "time": "1 hr"}, "gate": {"subject": "GATE DA", "topic": "Final PYQ Sprint", "cover": "mixed previous questions", "practice": "30 timed PYQs", "resource": "GATE PYQs / NPTEL", "time": "1 hr"}, "apt": {"area": "Placement Aptitude", "topic": "Weak Area Repair", "cover": "redo weakest topic", "practice": "25 targeted questions", "resource": "IndiaBIX / Placement Practice", "time": "30 min"}, "health": "Wake 4:30 AM only if you can consistently get enough sleep; water, hygiene, 5–10 min gentle movement.", "quote": {"en": "Discipline is choosing what matters today.", "ta": ""}}, {"day": 30, "dsa": {"area": "Java + Placement DSA", "topic": "DSA Mock + Review", "cover": "full placement-style DSA mock", "practice": "1 mock + error notebook", "resource": "LeetCode / GeeksforGeeks", "time": "1.5 hrs"}, "aiml": {"area": "AI Engineer", "topic": "Hugging Face", "cover": "pipelines, tokenizer, model loading", "practice": "Use a pretrained model", "resource": "Kaggle Learn / Hugging Face Learn", "time": "1.5 hrs"}, "project": {"area": "Daily Build", "topic": "LLM Structured Output App", "cover": "Build → test → Git commit → write a 3-line README/demo note.", "practice": "Build → test → Git commit → 3-line README/demo note.", "resource": "GitHub / Portfolio", "time": "1 hr"}, "gate": {"subject": "GATE DA", "topic": "Probability Basics", "cover": "sample space, events, conditional probability", "practice": "20 questions", "resource": "GATE PYQs / NPTEL", "time": "1 hr"}, "apt": {"area": "Placement Aptitude", "topic": "Final Placement Mock", "cover": "full aptitude simulation", "practice": "1 timed mock", "resource": "IndiaBIX / Placement Practice", "time": "30 min"}, "health": "Healthy breakfast + water; 5–10 min walk/stretch during the day.", "quote": {"en": "One focused day can change the direction of a month.", "ta": ""}}, {"day": 31, "dsa": {"area": "Java + Placement DSA", "topic": "Java Setup + Big-O", "cover": "Install/configure Java, input/output, variables, data types, operators", "practice": "2 easy problems + Big-O notes", "resource": "LeetCode / GeeksforGeeks", "time": "1.5 hrs"}, "aiml": {"area": "AI Engineer", "topic": "GenAI Fundamentals", "cover": "LLMs, tokens, context, inference", "practice": "Prompt experiment notebook", "resource": "Kaggle Learn / Hugging Face Learn", "time": "1.5 hrs"}, "project": {"area": "Daily Build", "topic": "Semantic Search + Agentic AI Demo", "cover": "Build → test → Git commit → write a 3-line README/demo note.", "practice": "Build → test → Git commit → 3-line README/demo note.", "resource": "GitHub / Portfolio", "time": "1 hr"}, "gate": {"subject": "GATE DA", "topic": "Bayes + Random Variables", "cover": "Bayes theorem, expectation basics", "practice": "20 questions", "resource": "GATE PYQs / NPTEL", "time": "1 hr"}, "apt": {"area": "Placement Aptitude", "topic": "Percentages", "cover": "percentage change and comparison", "practice": "20 questions", "resource": "IndiaBIX / Placement Practice", "time": "30 min"}, "health": "Keep regular meals; take short screen breaks every study block.", "quote": {"en": "Small progress is still progress.", "ta": ""}}, {"day": 32, "dsa": {"area": "Java + Placement DSA", "topic": "Conditionals + Loops", "cover": "if/else, switch, for/while, nested loops", "practice": "5 basic pattern/loop problems", "resource": "LeetCode / GeeksforGeeks", "time": "1.5 hrs"}, "aiml": {"area": "AI Engineer", "topic": "Prompt Engineering", "cover": "zero-shot, few-shot, structured outputs", "practice": "Prompt test suite", "resource": "Kaggle Learn / Hugging Face Learn", "time": "1.5 hrs"}, "project": {"area": "Daily Build", "topic": "Mini RAG App + Agentic Workflow", "cover": "Build → test → Git commit → write a 3-line README/demo note.", "practice": "Build → test → Git commit → 3-line README/demo note.", "resource": "GitHub / Portfolio", "time": "1 hr"}, "gate": {"subject": "GATE DA", "topic": "Distributions", "cover": "common discrete/continuous distributions", "practice": "20 questions", "resource": "GATE PYQs / NPTEL", "time": "1 hr"}, "apt": {"area": "Placement Aptitude", "topic": "Ratio + Proportion", "cover": "ratios, mixtures, proportions", "practice": "20 questions", "resource": "IndiaBIX / Placement Practice", "time": "30 min"}, "health": "10–20 min light movement; prepare tomorrow's study list before bed.", "quote": {"en": "Build skills, not just certificates.", "ta": ""}}, {"day": 33, "dsa": {"area": "Java + Placement DSA", "topic": "Methods + Arrays", "cover": "methods, 1D arrays, traversal, min/max/sum", "practice": "5 array problems", "resource": "LeetCode / GeeksforGeeks", "time": "1.5 hrs"}, "aiml": {"area": "AI Engineer", "topic": "Embeddings", "cover": "semantic vectors and similarity", "practice": "Semantic search demo", "resource": "Kaggle Learn / Hugging Face Learn", "time": "1.5 hrs"}, "project": {"area": "Daily Build", "topic": "RAG Evaluation + Agentic AI Notebook", "cover": "Build → test → Git commit → write a 3-line README/demo note.", "practice": "Build → test → Git commit → 3-line README/demo note.", "resource": "GitHub / Portfolio", "time": "1 hr"}, "gate": {"subject": "GATE DA", "topic": "Descriptive Statistics", "cover": "mean, variance, covariance, correlation", "practice": "20 questions", "resource": "GATE PYQs / NPTEL", "time": "1 hr"}, "apt": {"area": "Placement Aptitude", "topic": "Averages", "cover": "weighted and simple averages", "practice": "20 questions", "resource": "IndiaBIX / Placement Practice", "time": "30 min"}, "health": "Hydration + balanced meals; avoid studying continuously for hours.", "quote": {"en": "Your future engineer self is built by today's practice.", "ta": ""}}, {"day": 34, "dsa": {"area": "Java + Placement DSA", "topic": "2D Arrays", "cover": "matrices, row/column traversal", "practice": "3 matrix problems", "resource": "LeetCode / GeeksforGeeks", "time": "1.5 hrs"}, "aiml": {"area": "AI Engineer", "topic": "RAG Fundamentals", "cover": "retrieve → augment → generate", "practice": "Small RAG prototype", "resource": "Kaggle Learn / Hugging Face Learn", "time": "1.5 hrs"}, "project": {"area": "Daily Build", "topic": "RAG + Streamlit UI", "cover": "Build → test → Git commit → write a 3-line README/demo note.", "practice": "Build → test → Git commit → 3-line README/demo note.", "resource": "GitHub / Portfolio", "time": "1 hr"}, "gate": {"subject": "GATE DA", "topic": "Linear Algebra I", "cover": "vectors, matrices, systems", "practice": "20 questions", "resource": "GATE PYQs / NPTEL", "time": "1 hr"}, "apt": {"area": "Placement Aptitude", "topic": "Profit + Loss", "cover": "cost, selling price, discount", "practice": "20 questions", "resource": "IndiaBIX / Placement Practice", "time": "30 min"}, "health": "Morning sunlight/normal outdoor time; keep evening routine calm.", "quote": {"en": "Consistency beats random bursts.", "ta": ""}}, {"day": 35, "dsa": {"area": "Java + Placement DSA", "topic": "Strings in Java", "cover": "String, StringBuilder, char operations", "practice": "5 string basics", "resource": "LeetCode / GeeksforGeeks", "time": "1.5 hrs"}, "aiml": {"area": "AI Engineer", "topic": "RAG Evaluation + Agentic AI", "cover": "retrieval quality, grounded answers, failure cases", "practice": "RAG evaluation sheet", "resource": "Kaggle Learn / Hugging Face Learn", "time": "1.5 hrs"}, "project": {"area": "Daily Build", "topic": "AI Agents + FastAPI ML Endpoint", "cover": "Build → test → Git commit → write a 3-line README/demo note.", "practice": "Build → test → Git commit → 3-line README/demo note.", "resource": "GitHub / Portfolio", "time": "1 hr"}, "gate": {"subject": "GATE DA", "topic": "Linear Algebra II", "cover": "eigen concepts, transformations", "practice": "20 questions", "resource": "GATE PYQs / NPTEL", "time": "1 hr"}, "apt": {"area": "Placement Aptitude", "topic": "Simple Interest", "cover": "SI formulas and applications", "practice": "20 questions", "resource": "IndiaBIX / Placement Practice", "time": "30 min"}, "health": "Weekly reset: tidy desk, plan meals/study, review sleep consistency.", "quote": {"en": "Learn it. Build it. Explain it.", "ta": ""}}, {"day": 36, "dsa": {"area": "Java + Placement DSA", "topic": "Two Pointers", "cover": "left/right pointers and sorted-array patterns", "practice": "4 two-pointer problems", "resource": "LeetCode / GeeksforGeeks", "time": "1.5 hrs"}, "aiml": {"area": "AI Engineer", "topic": "LLM App Design + AI Agents", "cover": "components, prompts, tools, memory boundaries", "practice": "Architecture diagram", "resource": "Kaggle Learn / Hugging Face Learn", "time": "1.5 hrs"}, "project": {"area": "Daily Build", "topic": "AI Agents + FastAPI + Validation", "cover": "Build → test → Git commit → write a 3-line README/demo note.", "practice": "Build → test → Git commit → 3-line README/demo note.", "resource": "GitHub / Portfolio", "time": "1 hr"}, "gate": {"subject": "GATE DA", "topic": "Calculus", "cover": "limits, derivatives, partial derivatives", "practice": "20 questions", "resource": "GATE PYQs / NPTEL", "time": "1 hr"}, "apt": {"area": "Placement Aptitude", "topic": "Compound Interest", "cover": "growth and comparison", "practice": "20 questions", "resource": "IndiaBIX / Placement Practice", "time": "30 min"}, "health": "Wake 4:30 AM only if you can consistently get enough sleep; water, hygiene, 5–10 min gentle movement.", "quote": {"en": "Discipline is choosing what matters today.", "ta": ""}}, {"day": 37, "dsa": {"area": "Java + Placement DSA", "topic": "Sliding Window", "cover": "fixed and variable windows", "practice": "4 sliding-window problems", "resource": "LeetCode / GeeksforGeeks", "time": "1.5 hrs"}, "aiml": {"area": "AI Engineer", "topic": "AI Agents + FastAPI", "cover": "routes, request/response, validation", "practice": "Serve an ML model", "resource": "Kaggle Learn / Hugging Face Learn", "time": "1.5 hrs"}, "project": {"area": "Daily Build", "topic": "Dockerized AI API", "cover": "Build → test → Git commit → write a 3-line README/demo note.", "practice": "Build → test → Git commit → 3-line README/demo note.", "resource": "GitHub / Portfolio", "time": "1 hr"}, "gate": {"subject": "GATE DA", "topic": "Optimization", "cover": "unconstrained optimization and gradients", "practice": "20 questions", "resource": "GATE PYQs / NPTEL", "time": "1 hr"}, "apt": {"area": "Placement Aptitude", "topic": "Time + Work", "cover": "work-rate problems", "practice": "20 questions", "resource": "IndiaBIX / Placement Practice", "time": "30 min"}, "health": "Healthy breakfast + water; 5–10 min walk/stretch during the day.", "quote": {"en": "One focused day can change the direction of a month.", "ta": ""}}, {"day": 38, "dsa": {"area": "Java + Placement DSA", "topic": "Prefix Sum", "cover": "prefix arrays and range-sum thinking", "practice": "4 prefix-sum problems", "resource": "LeetCode / GeeksforGeeks", "time": "1.5 hrs"}, "aiml": {"area": "AI Engineer", "topic": "Docker", "cover": "image, container, requirements, ports", "practice": "Dockerize a small API", "resource": "Kaggle Learn / Hugging Face Learn", "time": "1.5 hrs"}, "project": {"area": "Daily Build", "topic": "AI API Logging + Health Check", "cover": "Build → test → Git commit → write a 3-line README/demo note.", "practice": "Build → test → Git commit → 3-line README/demo note.", "resource": "GitHub / Portfolio", "time": "1 hr"}, "gate": {"subject": "GATE DA", "topic": "Programming Fundamentals", "cover": "Python/programming logic and complexity", "practice": "20 questions", "resource": "GATE PYQs / NPTEL", "time": "1 hr"}, "apt": {"area": "Placement Aptitude", "topic": "Time + Distance", "cover": "speed, distance, trains", "practice": "20 questions", "resource": "IndiaBIX / Placement Practice", "time": "30 min"}, "health": "Keep regular meals; take short screen breaks every study block.", "quote": {"en": "Small progress is still progress.", "ta": ""}}, {"day": 39, "dsa": {"area": "Java + Placement DSA", "topic": "Sorting", "cover": "built-in sort, bubble/selection/insertion concepts", "practice": "5 sorting problems", "resource": "LeetCode / GeeksforGeeks", "time": "1.5 hrs"}, "aiml": {"area": "AI Engineer", "topic": "Deployment Concepts", "cover": "environment variables, logging, health checks", "practice": "Deployment checklist", "resource": "Kaggle Learn / Hugging Face Learn", "time": "1.5 hrs"}, "project": {"area": "Daily Build", "topic": "AI Engineer Mini Capstone", "cover": "Build → test → Git commit → write a 3-line README/demo note.", "practice": "Build → test → Git commit → 3-line README/demo note.", "resource": "GitHub / Portfolio", "time": "1 hr"}, "gate": {"subject": "GATE DA", "topic": "Data Structures", "cover": "arrays, stacks, queues, trees, graphs", "practice": "20 questions", "resource": "GATE PYQs / NPTEL", "time": "1 hr"}, "apt": {"area": "Placement Aptitude", "topic": "Pipes + Cisterns", "cover": "combined work rates", "practice": "15 questions", "resource": "IndiaBIX / Placement Practice", "time": "30 min"}, "health": "10–20 min light movement; prepare tomorrow's study list before bed.", "quote": {"en": "Build skills, not just certificates.", "ta": ""}}, {"day": 40, "dsa": {"area": "Java + Placement DSA", "topic": "Binary Search", "cover": "search space, lower/upper bound idea", "practice": "5 binary-search problems", "resource": "LeetCode / GeeksforGeeks", "time": "1.5 hrs"}, "aiml": {"area": "AI Engineer", "topic": "AI Engineer Project Sprint", "cover": "integrate model + API + UI", "practice": "Working end-to-end demo", "resource": "Kaggle Learn / Hugging Face Learn", "time": "1.5 hrs"}, "project": {"area": "Daily Build", "topic": "Capstone Dataset + Baseline", "cover": "Build → test → Git commit → write a 3-line README/demo note.", "practice": "Build → test → Git commit → 3-line README/demo note.", "resource": "GitHub / Portfolio", "time": "1 hr"}, "gate": {"subject": "GATE DA", "topic": "Algorithms", "cover": "sorting, searching, graph algorithms", "practice": "20 questions", "resource": "GATE PYQs / NPTEL", "time": "1 hr"}, "apt": {"area": "Placement Aptitude", "topic": "Permutations", "cover": "counting basics", "practice": "20 questions", "resource": "IndiaBIX / Placement Practice", "time": "30 min"}, "health": "Hydration + balanced meals; avoid studying continuously for hours.", "quote": {"en": "Your future engineer self is built by today's practice.", "ta": ""}}, {"day": 41, "dsa": {"area": "Java + Placement DSA", "topic": "Array Revision", "cover": "mixed arrays, strings, two pointers, prefix sum", "practice": "Timed 8-question set", "resource": "LeetCode / GeeksforGeeks", "time": "1.5 hrs"}, "aiml": {"area": "AI Engineer", "topic": "Python Recall", "cover": "syntax, functions, collections, exceptions", "practice": "20 short coding questions", "resource": "Kaggle Learn / Hugging Face Learn", "time": "1.5 hrs"}, "project": {"area": "Daily Build", "topic": "Capstone Model Experiment", "cover": "Build → test → Git commit → write a 3-line README/demo note.", "practice": "Build → test → Git commit → 3-line README/demo note.", "resource": "GitHub / Portfolio", "time": "1 hr"}, "gate": {"subject": "GATE DA", "topic": "DBMS I", "cover": "ER model, relational model, SQL", "practice": "20 questions", "resource": "GATE PYQs / NPTEL", "time": "1 hr"}, "apt": {"area": "Placement Aptitude", "topic": "Combinations", "cover": "selection/counting", "practice": "20 questions", "resource": "IndiaBIX / Placement Practice", "time": "30 min"}, "health": "Morning sunlight/normal outdoor time; keep evening routine calm.", "quote": {"en": "Consistency beats random bursts.", "ta": ""}}, {"day": 42, "dsa": {"area": "Java + Placement DSA", "topic": "Linked List Basics", "cover": "Node, traversal, insert/delete", "practice": "4 linked-list problems", "resource": "LeetCode / GeeksforGeeks", "time": "1.5 hrs"}, "aiml": {"area": "AI Engineer", "topic": "NumPy", "cover": "arrays, shapes, indexing, vectorized operations", "practice": "Mini numerical notebook", "resource": "Kaggle Learn / Hugging Face Learn", "time": "1.5 hrs"}, "project": {"area": "Daily Build", "topic": "Capstone Error Analysis", "cover": "Build → test → Git commit → write a 3-line README/demo note.", "practice": "Build → test → Git commit → 3-line README/demo note.", "resource": "GitHub / Portfolio", "time": "1 hr"}, "gate": {"subject": "GATE DA", "topic": "DBMS II", "cover": "normalization, transactions, indexing", "practice": "20 questions", "resource": "GATE PYQs / NPTEL", "time": "1 hr"}, "apt": {"area": "Placement Aptitude", "topic": "Probability Aptitude", "cover": "basic probability questions", "practice": "20 questions", "resource": "IndiaBIX / Placement Practice", "time": "30 min"}, "health": "Weekly reset: tidy desk, plan meals/study, review sleep consistency.", "quote": {"en": "Learn it. Build it. Explain it.", "ta": ""}}, {"day": 43, "dsa": {"area": "Java + Placement DSA", "topic": "Linked List Patterns", "cover": "reverse, middle, cycle", "practice": "4 problems", "resource": "LeetCode / GeeksforGeeks", "time": "1.5 hrs"}, "aiml": {"area": "AI Engineer", "topic": "Pandas", "cover": "Series/DataFrame, filtering, groupby, merge", "practice": "Analyze a small CSV", "resource": "Kaggle Learn / Hugging Face Learn", "time": "1.5 hrs"}, "project": {"area": "Daily Build", "topic": "Capstone API", "cover": "Build → test → Git commit → write a 3-line README/demo note.", "practice": "Build → test → Git commit → 3-line README/demo note.", "resource": "GitHub / Portfolio", "time": "1 hr"}, "gate": {"subject": "GATE DA", "topic": "Machine Learning I", "cover": "supervised learning, regression/classification", "practice": "20 questions", "resource": "GATE PYQs / NPTEL", "time": "1 hr"}, "apt": {"area": "Placement Aptitude", "topic": "Number System", "cover": "divisibility, HCF, LCM", "practice": "20 questions", "resource": "IndiaBIX / Placement Practice", "time": "30 min"}, "health": "Wake 4:30 AM only if you can consistently get enough sleep; water, hygiene, 5–10 min gentle movement.", "quote": {"en": "Discipline is choosing what matters today.", "ta": ""}}, {"day": 44, "dsa": {"area": "Java + Placement DSA", "topic": "Stack", "cover": "Stack API, parentheses, monotonic thinking", "practice": "5 stack problems", "resource": "LeetCode / GeeksforGeeks", "time": "1.5 hrs"}, "aiml": {"area": "AI Engineer", "topic": "EDA", "cover": "missing values, outliers, distributions, correlations", "practice": "EDA report", "resource": "Kaggle Learn / Hugging Face Learn", "time": "1.5 hrs"}, "project": {"area": "Daily Build", "topic": "Capstone UI", "cover": "Build → test → Git commit → write a 3-line README/demo note.", "practice": "Build → test → Git commit → 3-line README/demo note.", "resource": "GitHub / Portfolio", "time": "1 hr"}, "gate": {"subject": "GATE DA", "topic": "Machine Learning II", "cover": "trees, ensembles, clustering, PCA", "practice": "20 questions", "resource": "GATE PYQs / NPTEL", "time": "1 hr"}, "apt": {"area": "Placement Aptitude", "topic": "Algebra", "cover": "equations and identities", "practice": "20 questions", "resource": "IndiaBIX / Placement Practice", "time": "30 min"}, "health": "Healthy breakfast + water; 5–10 min walk/stretch during the day.", "quote": {"en": "One focused day can change the direction of a month.", "ta": ""}}, {"day": 45, "dsa": {"area": "Java + Placement DSA", "topic": "Queue + Deque", "cover": "Queue, ArrayDeque, BFS-ready patterns", "practice": "5 queue/deque problems", "resource": "LeetCode / GeeksforGeeks", "time": "1.5 hrs"}, "aiml": {"area": "AI Engineer", "topic": "Statistics", "cover": "mean, median, variance, probability basics", "practice": "20 stats questions", "resource": "Kaggle Learn / Hugging Face Learn", "time": "1.5 hrs"}, "project": {"area": "Daily Build", "topic": "Capstone Docker", "cover": "Build → test → Git commit → write a 3-line README/demo note.", "practice": "Build → test → Git commit → 3-line README/demo note.", "resource": "GitHub / Portfolio", "time": "1 hr"}, "gate": {"subject": "GATE DA", "topic": "AI I", "cover": "search, knowledge representation basics", "practice": "20 questions", "resource": "GATE PYQs / NPTEL", "time": "1 hr"}, "apt": {"area": "Placement Aptitude", "topic": "Data Interpretation", "cover": "tables and charts", "practice": "2 DI sets", "resource": "IndiaBIX / Placement Practice", "time": "30 min"}, "health": "Keep regular meals; take short screen breaks every study block.", "quote": {"en": "Small progress is still progress.", "ta": ""}}, {"day": 46, "dsa": {"area": "Java + Placement DSA", "topic": "HashMap + HashSet", "cover": "frequency counting, lookup, duplicates", "practice": "6 hashmap/set problems", "resource": "LeetCode / GeeksforGeeks", "time": "1.5 hrs"}, "aiml": {"area": "AI Engineer", "topic": "Probability", "cover": "conditional probability, Bayes theorem", "practice": "15 probability questions", "resource": "Kaggle Learn / Hugging Face Learn", "time": "1.5 hrs"}, "project": {"area": "Daily Build", "topic": "Capstone README", "cover": "Build → test → Git commit → write a 3-line README/demo note.", "practice": "Build → test → Git commit → 3-line README/demo note.", "resource": "GitHub / Portfolio", "time": "1 hr"}, "gate": {"subject": "GATE DA", "topic": "AI II", "cover": "probabilistic reasoning and learning concepts", "practice": "20 questions", "resource": "GATE PYQs / NPTEL", "time": "1 hr"}, "apt": {"area": "Placement Aptitude", "topic": "Logical Series", "cover": "number/letter series", "practice": "20 questions", "resource": "IndiaBIX / Placement Practice", "time": "30 min"}, "health": "10–20 min light movement; prepare tomorrow's study list before bed.", "quote": {"en": "Build skills, not just certificates.", "ta": ""}}, {"day": 47, "dsa": {"area": "Java + Placement DSA", "topic": "Recursion Basics", "cover": "base case, call stack, simple recursion", "practice": "4 recursion problems", "resource": "LeetCode / GeeksforGeeks", "time": "1.5 hrs"}, "aiml": {"area": "AI Engineer", "topic": "Linear Algebra", "cover": "vectors, matrices, dot products", "practice": "NumPy matrix notebook", "resource": "Kaggle Learn / Hugging Face Learn", "time": "1.5 hrs"}, "project": {"area": "Daily Build", "topic": "Capstone Architecture Diagram", "cover": "Build → test → Git commit → write a 3-line README/demo note.", "practice": "Build → test → Git commit → 3-line README/demo note.", "resource": "GitHub / Portfolio", "time": "1 hr"}, "gate": {"subject": "GATE DA", "topic": "Mixed PYQ Set 1", "cover": "Probability + Linear Algebra", "practice": "25 PYQs", "resource": "GATE PYQs / NPTEL", "time": "1 hr"}, "apt": {"area": "Placement Aptitude", "topic": "Coding-Decoding", "cover": "pattern-based reasoning", "practice": "20 questions", "resource": "IndiaBIX / Placement Practice", "time": "30 min"}, "health": "Hydration + balanced meals; avoid studying continuously for hours.", "quote": {"en": "Your future engineer self is built by today's practice.", "ta": ""}}, {"day": 48, "dsa": {"area": "Java + Placement DSA", "topic": "Backtracking Basics", "cover": "subsets, permutations, choose/explore/unchoose", "practice": "3 backtracking problems", "resource": "LeetCode / GeeksforGeeks", "time": "1.5 hrs"}, "aiml": {"area": "AI Engineer", "topic": "ML Workflow", "cover": "problem framing, train/validation/test, leakage", "practice": "Build a clean ML pipeline", "resource": "Kaggle Learn / Hugging Face Learn", "time": "1.5 hrs"}, "project": {"area": "Daily Build", "topic": "Capstone Demo Script", "cover": "Build → test → Git commit → write a 3-line README/demo note.", "practice": "Build → test → Git commit → 3-line README/demo note.", "resource": "GitHub / Portfolio", "time": "1 hr"}, "gate": {"subject": "GATE DA", "topic": "Mixed PYQ Set 2", "cover": "Calculus + Programming", "practice": "25 PYQs", "resource": "GATE PYQs / NPTEL", "time": "1 hr"}, "apt": {"area": "Placement Aptitude", "topic": "Syllogisms", "cover": "logical deductions", "practice": "20 questions", "resource": "IndiaBIX / Placement Practice", "time": "30 min"}, "health": "Morning sunlight/normal outdoor time; keep evening routine calm.", "quote": {"en": "Consistency beats random bursts.", "ta": ""}}, {"day": 49, "dsa": {"area": "Java + Placement DSA", "topic": "Trees Basics", "cover": "binary tree, DFS traversals", "practice": "5 tree problems", "resource": "LeetCode / GeeksforGeeks", "time": "1.5 hrs"}, "aiml": {"area": "AI Engineer", "topic": "Linear Regression", "cover": "loss, gradient idea, evaluation", "practice": "Regression mini-project", "resource": "Kaggle Learn / Hugging Face Learn", "time": "1.5 hrs"}, "project": {"area": "Daily Build", "topic": "Portfolio Project Polish", "cover": "Build → test → Git commit → write a 3-line README/demo note.", "practice": "Build → test → Git commit → 3-line README/demo note.", "resource": "GitHub / Portfolio", "time": "1 hr"}, "gate": {"subject": "GATE DA", "topic": "Mixed PYQ Set 3", "cover": "DBMS + ML", "practice": "25 PYQs", "resource": "GATE PYQs / NPTEL", "time": "1 hr"}, "apt": {"area": "Placement Aptitude", "topic": "Blood Relations + Directions", "cover": "relationship and direction problems", "practice": "20 questions", "resource": "IndiaBIX / Placement Practice", "time": "30 min"}, "health": "Weekly reset: tidy desk, plan meals/study, review sleep consistency.", "quote": {"en": "Learn it. Build it. Explain it.", "ta": ""}}, {"day": 50, "dsa": {"area": "Java + Placement DSA", "topic": "BST", "cover": "search, insert, min/max, inorder property", "practice": "4 BST problems", "resource": "LeetCode / GeeksforGeeks", "time": "1.5 hrs"}, "aiml": {"area": "AI Engineer", "topic": "Logistic Regression", "cover": "classification, sigmoid, threshold", "practice": "Binary classifier", "resource": "Kaggle Learn / Hugging Face Learn", "time": "1.5 hrs"}, "project": {"area": "Daily Build", "topic": "GitHub Portfolio Cleanup", "cover": "Build → test → Git commit → write a 3-line README/demo note.", "practice": "Build → test → Git commit → 3-line README/demo note.", "resource": "GitHub / Portfolio", "time": "1 hr"}, "gate": {"subject": "GATE DA", "topic": "Mixed PYQ Set 4", "cover": "AI + Data Structures", "practice": "25 PYQs", "resource": "GATE PYQs / NPTEL", "time": "1 hr"}, "apt": {"area": "Placement Aptitude", "topic": "Seating Arrangement", "cover": "linear/circular arrangements", "practice": "3 sets", "resource": "IndiaBIX / Placement Practice", "time": "30 min"}, "health": "Wake 4:30 AM only if you can consistently get enough sleep; water, hygiene, 5–10 min gentle movement.", "quote": {"en": "Discipline is choosing what matters today.", "ta": ""}}, {"day": 51, "dsa": {"area": "Java + Placement DSA", "topic": "Tree Patterns", "cover": "height, diameter, balanced tree", "practice": "4 tree problems", "resource": "LeetCode / GeeksforGeeks", "time": "1.5 hrs"}, "aiml": {"area": "AI Engineer", "topic": "KNN", "cover": "distance, scaling, choosing K", "practice": "KNN comparison", "resource": "Kaggle Learn / Hugging Face Learn", "time": "1.5 hrs"}, "project": {"area": "Daily Build", "topic": "Resume Project Bullets", "cover": "Build → test → Git commit → write a 3-line README/demo note.", "practice": "Build → test → Git commit → 3-line README/demo note.", "resource": "GitHub / Portfolio", "time": "1 hr"}, "gate": {"subject": "GATE DA", "topic": "DA Formula Revision", "cover": "build one-page formula sheet", "practice": "30-minute recall", "resource": "GATE PYQs / NPTEL", "time": "1 hr"}, "apt": {"area": "Placement Aptitude", "topic": "Clocks + Calendars", "cover": "common aptitude patterns", "practice": "20 questions", "resource": "IndiaBIX / Placement Practice", "time": "30 min"}, "health": "Healthy breakfast + water; 5–10 min walk/stretch during the day.", "quote": {"en": "One focused day can change the direction of a month.", "ta": ""}}, {"day": 52, "dsa": {"area": "Java + Placement DSA", "topic": "Heap / PriorityQueue", "cover": "min/max heap, top-K pattern", "practice": "4 heap problems", "resource": "LeetCode / GeeksforGeeks", "time": "1.5 hrs"}, "aiml": {"area": "AI Engineer", "topic": "Decision Trees", "cover": "splits, entropy/Gini, overfitting", "practice": "Tree classifier", "resource": "Kaggle Learn / Hugging Face Learn", "time": "1.5 hrs"}, "project": {"area": "Daily Build", "topic": "Technical Interview Project Q&A", "cover": "Build → test → Git commit → write a 3-line README/demo note.", "practice": "Build → test → Git commit → 3-line README/demo note.", "resource": "GitHub / Portfolio", "time": "1 hr"}, "gate": {"subject": "GATE DA", "topic": "GATE DA Mini Mock", "cover": "mixed timed practice", "practice": "1 mini mock", "resource": "GATE PYQs / NPTEL", "time": "1 hr"}, "apt": {"area": "Placement Aptitude", "topic": "Grammar", "cover": "sentence correction and usage", "practice": "20 questions", "resource": "IndiaBIX / Placement Practice", "time": "30 min"}, "health": "Keep regular meals; take short screen breaks every study block.", "quote": {"en": "Small progress is still progress.", "ta": ""}}, {"day": 53, "dsa": {"area": "Java + Placement DSA", "topic": "Graphs Basics", "cover": "adjacency list, BFS, DFS", "practice": "4 graph traversal problems", "resource": "LeetCode / GeeksforGeeks", "time": "1.5 hrs"}, "aiml": {"area": "AI Engineer", "topic": "Random Forest", "cover": "bagging, feature randomness", "practice": "Compare tree vs forest", "resource": "Kaggle Learn / Hugging Face Learn", "time": "1.5 hrs"}, "project": {"area": "Daily Build", "topic": "AI/ML Interview Notebook", "cover": "Build → test → Git commit → write a 3-line README/demo note.", "practice": "Build → test → Git commit → 3-line README/demo note.", "resource": "GitHub / Portfolio", "time": "1 hr"}, "gate": {"subject": "GATE DA", "topic": "Error Log Day", "cover": "redo every wrong/guessed question", "practice": "20 corrected solutions", "resource": "GATE PYQs / NPTEL", "time": "1 hr"}, "apt": {"area": "Placement Aptitude", "topic": "Vocabulary", "cover": "context-based vocabulary", "practice": "20 questions", "resource": "IndiaBIX / Placement Practice", "time": "30 min"}, "health": "10–20 min light movement; prepare tomorrow's study list before bed.", "quote": {"en": "Build skills, not just certificates.", "ta": ""}}, {"day": 54, "dsa": {"area": "Java + Placement DSA", "topic": "Graphs Shortest Path", "cover": "BFS shortest path, weighted-graph concept", "practice": "3 shortest-path problems", "resource": "LeetCode / GeeksforGeeks", "time": "1.5 hrs"}, "aiml": {"area": "AI Engineer", "topic": "SVM", "cover": "margin, kernel intuition", "practice": "SVM classifier", "resource": "Kaggle Learn / Hugging Face Learn", "time": "1.5 hrs"}, "project": {"area": "Daily Build", "topic": "Python Interview Notebook", "cover": "Build → test → Git commit → write a 3-line README/demo note.", "practice": "Build → test → Git commit → 3-line README/demo note.", "resource": "GitHub / Portfolio", "time": "1 hr"}, "gate": {"subject": "GATE DA", "topic": "GATE DA Mock 1", "cover": "full mixed mock", "practice": "Analyze score + mistakes", "resource": "GATE PYQs / NPTEL", "time": "1 hr"}, "apt": {"area": "Placement Aptitude", "topic": "Reading Comprehension", "cover": "short passages", "practice": "3 passages", "resource": "IndiaBIX / Placement Practice", "time": "30 min"}, "health": "Hydration + balanced meals; avoid studying continuously for hours.", "quote": {"en": "Your future engineer self is built by today's practice.", "ta": ""}}, {"day": 55, "dsa": {"area": "Java + Placement DSA", "topic": "Greedy + Intervals", "cover": "interval merge, scheduling, greedy choices", "practice": "5 greedy/interval problems", "resource": "LeetCode / GeeksforGeeks", "time": "1.5 hrs"}, "aiml": {"area": "AI Engineer", "topic": "Naive Bayes", "cover": "probabilistic classification", "practice": "Text classifier", "resource": "Kaggle Learn / Hugging Face Learn", "time": "1.5 hrs"}, "project": {"area": "Daily Build", "topic": "SQL Interview Notebook", "cover": "Build → test → Git commit → write a 3-line README/demo note.", "practice": "Build → test → Git commit → 3-line README/demo note.", "resource": "GitHub / Portfolio", "time": "1 hr"}, "gate": {"subject": "GATE DA", "topic": "GATE DA Mock 2", "cover": "full mixed mock", "practice": "Analyze score + mistakes", "resource": "GATE PYQs / NPTEL", "time": "1 hr"}, "apt": {"area": "Placement Aptitude", "topic": "Placement Mixed 1", "cover": "quant + logic", "practice": "25 timed questions", "resource": "IndiaBIX / Placement Practice", "time": "30 min"}, "health": "Morning sunlight/normal outdoor time; keep evening routine calm.", "quote": {"en": "Consistency beats random bursts.", "ta": ""}}, {"day": 56, "dsa": {"area": "Java + Placement DSA", "topic": "Dynamic Programming I", "cover": "1D DP, memoization, tabulation", "practice": "4 DP problems", "resource": "LeetCode / GeeksforGeeks", "time": "1.5 hrs"}, "aiml": {"area": "AI Engineer", "topic": "Clustering", "cover": "K-Means and cluster evaluation", "practice": "Customer clustering mini-project", "resource": "Kaggle Learn / Hugging Face Learn", "time": "1.5 hrs"}, "project": {"area": "Daily Build", "topic": "ML System Design Sketch", "cover": "Build → test → Git commit → write a 3-line README/demo note.", "practice": "Build → test → Git commit → 3-line README/demo note.", "resource": "GitHub / Portfolio", "time": "1 hr"}, "gate": {"subject": "GATE DA", "topic": "GATE DA Mock 3", "cover": "full mixed mock", "practice": "Analyze score + mistakes", "resource": "GATE PYQs / NPTEL", "time": "1 hr"}, "apt": {"area": "Placement Aptitude", "topic": "Placement Mixed 2", "cover": "quant + verbal", "practice": "25 timed questions", "resource": "IndiaBIX / Placement Practice", "time": "30 min"}, "health": "Weekly reset: tidy desk, plan meals/study, review sleep consistency.", "quote": {"en": "Learn it. Build it. Explain it.", "ta": ""}}, {"day": 57, "dsa": {"area": "Java + Placement DSA", "topic": "Dynamic Programming II", "cover": "2D/grid DP and state transitions", "practice": "4 DP problems", "resource": "LeetCode / GeeksforGeeks", "time": "1.5 hrs"}, "aiml": {"area": "AI Engineer", "topic": "PCA", "cover": "dimensionality reduction", "practice": "2D PCA visualization", "resource": "Kaggle Learn / Hugging Face Learn", "time": "1.5 hrs"}, "project": {"area": "Daily Build", "topic": "Model Deployment Checklist", "cover": "Build → test → Git commit → write a 3-line README/demo note.", "practice": "Build → test → Git commit → 3-line README/demo note.", "resource": "GitHub / Portfolio", "time": "1 hr"}, "gate": {"subject": "GATE DA", "topic": "Final Formula Sprint", "cover": "probability, algebra, calculus, ML, DBMS", "practice": "Rapid recall", "resource": "GATE PYQs / NPTEL", "time": "1 hr"}, "apt": {"area": "Placement Aptitude", "topic": "Placement Mixed 3", "cover": "logic + DI", "practice": "25 timed questions", "resource": "IndiaBIX / Placement Practice", "time": "30 min"}, "health": "Wake 4:30 AM only if you can consistently get enough sleep; water, hygiene, 5–10 min gentle movement.", "quote": {"en": "Discipline is choosing what matters today.", "ta": ""}}, {"day": 58, "dsa": {"area": "Java + Placement DSA", "topic": "DSA Mixed Practice", "cover": "arrays → graphs → DP pattern recognition", "practice": "10-question timed set", "resource": "LeetCode / GeeksforGeeks", "time": "1.5 hrs"}, "aiml": {"area": "AI Engineer", "topic": "Model Evaluation", "cover": "precision, recall, F1, ROC-AUC, confusion matrix", "practice": "Evaluation notebook", "resource": "Kaggle Learn / Hugging Face Learn", "time": "1.5 hrs"}, "project": {"area": "Daily Build", "topic": "RAG Interview Explanation", "cover": "Build → test → Git commit → write a 3-line README/demo note.", "practice": "Build → test → Git commit → 3-line README/demo note.", "resource": "GitHub / Portfolio", "time": "1 hr"}, "gate": {"subject": "GATE DA", "topic": "Final PYQ Sprint", "cover": "mixed previous questions", "practice": "30 timed PYQs", "resource": "GATE PYQs / NPTEL", "time": "1 hr"}, "apt": {"area": "Placement Aptitude", "topic": "Placement Mock", "cover": "full mixed aptitude", "practice": "1 timed mock", "resource": "IndiaBIX / Placement Practice", "time": "30 min"}, "health": "Healthy breakfast + water; 5–10 min walk/stretch during the day.", "quote": {"en": "One focused day can change the direction of a month.", "ta": ""}}, {"day": 59, "dsa": {"area": "Java + Placement DSA", "topic": "Java DSA Interview Set", "cover": "common interview patterns and clean code", "practice": "8 timed problems", "resource": "LeetCode / GeeksforGeeks", "time": "1.5 hrs"}, "aiml": {"area": "AI Engineer", "topic": "Feature Engineering", "cover": "encoding, scaling, feature selection", "practice": "Improve a baseline model", "resource": "Kaggle Learn / Hugging Face Learn", "time": "1.5 hrs"}, "project": {"area": "Daily Build", "topic": "Final Capstone Integration", "cover": "Build → test → Git commit → write a 3-line README/demo note.", "practice": "Build → test → Git commit → 3-line README/demo note.", "resource": "GitHub / Portfolio", "time": "1 hr"}, "gate": {"subject": "GATE DA", "topic": "Probability Basics", "cover": "sample space, events, conditional probability", "practice": "20 questions", "resource": "GATE PYQs / NPTEL", "time": "1 hr"}, "apt": {"area": "Placement Aptitude", "topic": "Weak Area Repair", "cover": "redo weakest topic", "practice": "25 targeted questions", "resource": "IndiaBIX / Placement Practice", "time": "30 min"}, "health": "Keep regular meals; take short screen breaks every study block.", "quote": {"en": "Small progress is still progress.", "ta": ""}}, {"day": 60, "dsa": {"area": "Java + Placement DSA", "topic": "DSA Mock + Review", "cover": "full placement-style DSA mock", "practice": "1 mock + error notebook", "resource": "LeetCode / GeeksforGeeks", "time": "1.5 hrs"}, "aiml": {"area": "AI Engineer", "topic": "ML Project Sprint", "cover": "choose dataset, baseline, experiments", "practice": "Model card + results", "resource": "Kaggle Learn / Hugging Face Learn", "time": "1.5 hrs"}, "project": {"area": "Daily Build", "topic": "Capstone Testing", "cover": "Build → test → Git commit → write a 3-line README/demo note.", "practice": "Build → test → Git commit → 3-line README/demo note.", "resource": "GitHub / Portfolio", "time": "1 hr"}, "gate": {"subject": "GATE DA", "topic": "Bayes + Random Variables", "cover": "Bayes theorem, expectation basics", "practice": "20 questions", "resource": "GATE PYQs / NPTEL", "time": "1 hr"}, "apt": {"area": "Placement Aptitude", "topic": "Final Placement Mock", "cover": "full aptitude simulation", "practice": "1 timed mock", "resource": "IndiaBIX / Placement Practice", "time": "30 min"}, "health": "10–20 min light movement; prepare tomorrow's study list before bed.", "quote": {"en": "Build skills, not just certificates.", "ta": ""}}, {"day": 61, "dsa": {"area": "Java + Placement DSA", "topic": "Java Setup + Big-O", "cover": "Install/configure Java, input/output, variables, data types, operators", "practice": "2 easy problems + Big-O notes", "resource": "LeetCode / GeeksforGeeks", "time": "1.5 hrs"}, "aiml": {"area": "AI Engineer", "topic": "Neural Networks", "cover": "neurons, activations, forward pass", "practice": "Tiny ANN in PyTorch", "resource": "Kaggle Learn / Hugging Face Learn", "time": "1.5 hrs"}, "project": {"area": "Daily Build", "topic": "Capstone Evaluation", "cover": "Build → test → Git commit → write a 3-line README/demo note.", "practice": "Build → test → Git commit → 3-line README/demo note.", "resource": "GitHub / Portfolio", "time": "1 hr"}, "gate": {"subject": "GATE DA", "topic": "Distributions", "cover": "common discrete/continuous distributions", "practice": "20 questions", "resource": "GATE PYQs / NPTEL", "time": "1 hr"}, "apt": {"area": "Placement Aptitude", "topic": "Percentages", "cover": "percentage change and comparison", "practice": "20 questions", "resource": "IndiaBIX / Placement Practice", "time": "30 min"}, "health": "Hydration + balanced meals; avoid studying continuously for hours.", "quote": {"en": "Your future engineer self is built by today's practice.", "ta": ""}}, {"day": 62, "dsa": {"area": "Java + Placement DSA", "topic": "Conditionals + Loops", "cover": "if/else, switch, for/while, nested loops", "practice": "5 basic pattern/loop problems", "resource": "LeetCode / GeeksforGeeks", "time": "1.5 hrs"}, "aiml": {"area": "AI Engineer", "topic": "Backpropagation", "cover": "loss, gradients, optimizer intuition", "practice": "Train an MLP", "resource": "Kaggle Learn / Hugging Face Learn", "time": "1.5 hrs"}, "project": {"area": "Daily Build", "topic": "Capstone Demo", "cover": "Build → test → Git commit → write a 3-line README/demo note.", "practice": "Build → test → Git commit → 3-line README/demo note.", "resource": "GitHub / Portfolio", "time": "1 hr"}, "gate": {"subject": "GATE DA", "topic": "Descriptive Statistics", "cover": "mean, variance, covariance, correlation", "practice": "20 questions", "resource": "GATE PYQs / NPTEL", "time": "1 hr"}, "apt": {"area": "Placement Aptitude", "topic": "Ratio + Proportion", "cover": "ratios, mixtures, proportions", "practice": "20 questions", "resource": "IndiaBIX / Placement Practice", "time": "30 min"}, "health": "Morning sunlight/normal outdoor time; keep evening routine calm.", "quote": {"en": "Consistency beats random bursts.", "ta": ""}}, {"day": 63, "dsa": {"area": "Java + Placement DSA", "topic": "Methods + Arrays", "cover": "methods, 1D arrays, traversal, min/max/sum", "practice": "5 array problems", "resource": "LeetCode / GeeksforGeeks", "time": "1.5 hrs"}, "aiml": {"area": "AI Engineer", "topic": "PyTorch Basics", "cover": "tensors, Dataset, DataLoader, training loop", "practice": "Reusable training template", "resource": "Kaggle Learn / Hugging Face Learn", "time": "1.5 hrs"}, "project": {"area": "Daily Build", "topic": "Capstone Documentation", "cover": "Build → test → Git commit → write a 3-line README/demo note.", "practice": "Build → test → Git commit → 3-line README/demo note.", "resource": "GitHub / Portfolio", "time": "1 hr"}, "gate": {"subject": "GATE DA", "topic": "Linear Algebra I", "cover": "vectors, matrices, systems", "practice": "20 questions", "resource": "GATE PYQs / NPTEL", "time": "1 hr"}, "apt": {"area": "Placement Aptitude", "topic": "Averages", "cover": "weighted and simple averages", "practice": "20 questions", "resource": "IndiaBIX / Placement Practice", "time": "30 min"}, "health": "Weekly reset: tidy desk, plan meals/study, review sleep consistency.", "quote": {"en": "Learn it. Build it. Explain it.", "ta": ""}}, {"day": 64, "dsa": {"area": "Java + Placement DSA", "topic": "2D Arrays", "cover": "matrices, row/column traversal", "practice": "3 matrix problems", "resource": "LeetCode / GeeksforGeeks", "time": "1.5 hrs"}, "aiml": {"area": "AI Engineer", "topic": "CNN", "cover": "convolution, pooling, image classification", "practice": "CNN mini-project", "resource": "Kaggle Learn / Hugging Face Learn", "time": "1.5 hrs"}, "project": {"area": "Daily Build", "topic": "Capstone GitHub Release", "cover": "Build → test → Git commit → write a 3-line README/demo note.", "practice": "Build → test → Git commit → 3-line README/demo note.", "resource": "GitHub / Portfolio", "time": "1 hr"}, "gate": {"subject": "GATE DA", "topic": "Linear Algebra II", "cover": "eigen concepts, transformations", "practice": "20 questions", "resource": "GATE PYQs / NPTEL", "time": "1 hr"}, "apt": {"area": "Placement Aptitude", "topic": "Profit + Loss", "cover": "cost, selling price, discount", "practice": "20 questions", "resource": "IndiaBIX / Placement Practice", "time": "30 min"}, "health": "Wake 4:30 AM only if you can consistently get enough sleep; water, hygiene, 5–10 min gentle movement.", "quote": {"en": "Discipline is choosing what matters today.", "ta": ""}}, {"day": 65, "dsa": {"area": "Java + Placement DSA", "topic": "Strings in Java", "cover": "String, StringBuilder, char operations", "practice": "5 string basics", "resource": "LeetCode / GeeksforGeeks", "time": "1.5 hrs"}, "aiml": {"area": "AI Engineer", "topic": "Transfer Learning", "cover": "pretrained models, fine-tuning", "practice": "Fine-tune a small image model", "resource": "Kaggle Learn / Hugging Face Learn", "time": "1.5 hrs"}, "project": {"area": "Daily Build", "topic": "LinkedIn Project Draft", "cover": "Build → test → Git commit → write a 3-line README/demo note.", "practice": "Build → test → Git commit → 3-line README/demo note.", "resource": "GitHub / Portfolio", "time": "1 hr"}, "gate": {"subject": "GATE DA", "topic": "Calculus", "cover": "limits, derivatives, partial derivatives", "practice": "20 questions", "resource": "GATE PYQs / NPTEL", "time": "1 hr"}, "apt": {"area": "Placement Aptitude", "topic": "Simple Interest", "cover": "SI formulas and applications", "practice": "20 questions", "resource": "IndiaBIX / Placement Practice", "time": "30 min"}, "health": "Healthy breakfast + water; 5–10 min walk/stretch during the day.", "quote": {"en": "One focused day can change the direction of a month.", "ta": ""}}, {"day": 66, "dsa": {"area": "Java + Placement DSA", "topic": "Two Pointers", "cover": "left/right pointers and sorted-array patterns", "practice": "4 two-pointer problems", "resource": "LeetCode / GeeksforGeeks", "time": "1.5 hrs"}, "aiml": {"area": "AI Engineer", "topic": "RNN", "cover": "sequence idea, hidden state", "practice": "Simple sequence classifier", "resource": "Kaggle Learn / Hugging Face Learn", "time": "1.5 hrs"}, "project": {"area": "Daily Build", "topic": "Portfolio Landing Page", "cover": "Build → test → Git commit → write a 3-line README/demo note.", "practice": "Build → test → Git commit → 3-line README/demo note.", "resource": "GitHub / Portfolio", "time": "1 hr"}, "gate": {"subject": "GATE DA", "topic": "Optimization", "cover": "unconstrained optimization and gradients", "practice": "20 questions", "resource": "GATE PYQs / NPTEL", "time": "1 hr"}, "apt": {"area": "Placement Aptitude", "topic": "Compound Interest", "cover": "growth and comparison", "practice": "20 questions", "resource": "IndiaBIX / Placement Practice", "time": "30 min"}, "health": "Keep regular meals; take short screen breaks every study block.", "quote": {"en": "Small progress is still progress.", "ta": ""}}, {"day": 67, "dsa": {"area": "Java + Placement DSA", "topic": "Sliding Window", "cover": "fixed and variable windows", "practice": "4 sliding-window problems", "resource": "LeetCode / GeeksforGeeks", "time": "1.5 hrs"}, "aiml": {"area": "AI Engineer", "topic": "LSTM", "cover": "gates, long-term dependencies", "practice": "LSTM text/sequence mini-project", "resource": "Kaggle Learn / Hugging Face Learn", "time": "1.5 hrs"}, "project": {"area": "Daily Build", "topic": "Project Metrics Dashboard", "cover": "Build → test → Git commit → write a 3-line README/demo note.", "practice": "Build → test → Git commit → 3-line README/demo note.", "resource": "GitHub / Portfolio", "time": "1 hr"}, "gate": {"subject": "GATE DA", "topic": "Programming Fundamentals", "cover": "Python/programming logic and complexity", "practice": "20 questions", "resource": "GATE PYQs / NPTEL", "time": "1 hr"}, "apt": {"area": "Placement Aptitude", "topic": "Time + Work", "cover": "work-rate problems", "practice": "20 questions", "resource": "IndiaBIX / Placement Practice", "time": "30 min"}, "health": "10–20 min light movement; prepare tomorrow's study list before bed.", "quote": {"en": "Build skills, not just certificates.", "ta": ""}}, {"day": 68, "dsa": {"area": "Java + Placement DSA", "topic": "Prefix Sum", "cover": "prefix arrays and range-sum thinking", "practice": "4 prefix-sum problems", "resource": "LeetCode / GeeksforGeeks", "time": "1.5 hrs"}, "aiml": {"area": "AI Engineer", "topic": "NLP Foundations", "cover": "tokenization, TF-IDF, embeddings", "practice": "Text classification", "resource": "Kaggle Learn / Hugging Face Learn", "time": "1.5 hrs"}, "project": {"area": "Daily Build", "topic": "DSA + AI Integrated Challenge", "cover": "Build → test → Git commit → write a 3-line README/demo note.", "practice": "Build → test → Git commit → 3-line README/demo note.", "resource": "GitHub / Portfolio", "time": "1 hr"}, "gate": {"subject": "GATE DA", "topic": "Data Structures", "cover": "arrays, stacks, queues, trees, graphs", "practice": "20 questions", "resource": "GATE PYQs / NPTEL", "time": "1 hr"}, "apt": {"area": "Placement Aptitude", "topic": "Time + Distance", "cover": "speed, distance, trains", "practice": "20 questions", "resource": "IndiaBIX / Placement Practice", "time": "30 min"}, "health": "Hydration + balanced meals; avoid studying continuously for hours.", "quote": {"en": "Your future engineer self is built by today's practice.", "ta": ""}}, {"day": 69, "dsa": {"area": "Java + Placement DSA", "topic": "Sorting", "cover": "built-in sort, bubble/selection/insertion concepts", "practice": "5 sorting problems", "resource": "LeetCode / GeeksforGeeks", "time": "1.5 hrs"}, "aiml": {"area": "AI Engineer", "topic": "Transformers", "cover": "attention, encoder/decoder intuition", "practice": "Transformer notebook", "resource": "Kaggle Learn / Hugging Face Learn", "time": "1.5 hrs"}, "project": {"area": "Daily Build", "topic": "AI Engineer Case Study", "cover": "Build → test → Git commit → write a 3-line README/demo note.", "practice": "Build → test → Git commit → 3-line README/demo note.", "resource": "GitHub / Portfolio", "time": "1 hr"}, "gate": {"subject": "GATE DA", "topic": "Algorithms", "cover": "sorting, searching, graph algorithms", "practice": "20 questions", "resource": "GATE PYQs / NPTEL", "time": "1 hr"}, "apt": {"area": "Placement Aptitude", "topic": "Pipes + Cisterns", "cover": "combined work rates", "practice": "15 questions", "resource": "IndiaBIX / Placement Practice", "time": "30 min"}, "health": "Morning sunlight/normal outdoor time; keep evening routine calm.", "quote": {"en": "Consistency beats random bursts.", "ta": ""}}, {"day": 70, "dsa": {"area": "Java + Placement DSA", "topic": "Binary Search", "cover": "search space, lower/upper bound idea", "practice": "5 binary-search problems", "resource": "LeetCode / GeeksforGeeks", "time": "1.5 hrs"}, "aiml": {"area": "AI Engineer", "topic": "Hugging Face", "cover": "pipelines, tokenizer, model loading", "practice": "Use a pretrained model", "resource": "Kaggle Learn / Hugging Face Learn", "time": "1.5 hrs"}, "project": {"area": "Daily Build", "topic": "End-to-End AI Demo", "cover": "Build → test → Git commit → write a 3-line README/demo note.", "practice": "Build → test → Git commit → 3-line README/demo note.", "resource": "GitHub / Portfolio", "time": "1 hr"}, "gate": {"subject": "GATE DA", "topic": "DBMS I", "cover": "ER model, relational model, SQL", "practice": "20 questions", "resource": "GATE PYQs / NPTEL", "time": "1 hr"}, "apt": {"area": "Placement Aptitude", "topic": "Permutations", "cover": "counting basics", "practice": "20 questions", "resource": "IndiaBIX / Placement Practice", "time": "30 min"}, "health": "Weekly reset: tidy desk, plan meals/study, review sleep consistency.", "quote": {"en": "Learn it. Build it. Explain it.", "ta": ""}}, {"day": 71, "dsa": {"area": "Java + Placement DSA", "topic": "Array Revision", "cover": "mixed arrays, strings, two pointers, prefix sum", "practice": "Timed 8-question set", "resource": "LeetCode / GeeksforGeeks", "time": "1.5 hrs"}, "aiml": {"area": "AI Engineer", "topic": "GenAI Fundamentals", "cover": "LLMs, tokens, context, inference", "practice": "Prompt experiment notebook", "resource": "Kaggle Learn / Hugging Face Learn", "time": "1.5 hrs"}, "project": {"area": "Daily Build", "topic": "Model Failure Analysis", "cover": "Build → test → Git commit → write a 3-line README/demo note.", "practice": "Build → test → Git commit → 3-line README/demo note.", "resource": "GitHub / Portfolio", "time": "1 hr"}, "gate": {"subject": "GATE DA", "topic": "DBMS II", "cover": "normalization, transactions, indexing", "practice": "20 questions", "resource": "GATE PYQs / NPTEL", "time": "1 hr"}, "apt": {"area": "Placement Aptitude", "topic": "Combinations", "cover": "selection/counting", "practice": "20 questions", "resource": "IndiaBIX / Placement Practice", "time": "30 min"}, "health": "Wake 4:30 AM only if you can consistently get enough sleep; water, hygiene, 5–10 min gentle movement.", "quote": {"en": "Discipline is choosing what matters today.", "ta": ""}}, {"day": 72, "dsa": {"area": "Java + Placement DSA", "topic": "Linked List Basics", "cover": "Node, traversal, insert/delete", "practice": "4 linked-list problems", "resource": "LeetCode / GeeksforGeeks", "time": "1.5 hrs"}, "aiml": {"area": "AI Engineer", "topic": "Prompt Engineering", "cover": "zero-shot, few-shot, structured outputs", "practice": "Prompt test suite", "resource": "Kaggle Learn / Hugging Face Learn", "time": "1.5 hrs"}, "project": {"area": "Daily Build", "topic": "Performance Optimization", "cover": "Build → test → Git commit → write a 3-line README/demo note.", "practice": "Build → test → Git commit → 3-line README/demo note.", "resource": "GitHub / Portfolio", "time": "1 hr"}, "gate": {"subject": "GATE DA", "topic": "Machine Learning I", "cover": "supervised learning, regression/classification", "practice": "20 questions", "resource": "GATE PYQs / NPTEL", "time": "1 hr"}, "apt": {"area": "Placement Aptitude", "topic": "Probability Aptitude", "cover": "basic probability questions", "practice": "20 questions", "resource": "IndiaBIX / Placement Practice", "time": "30 min"}, "health": "Healthy breakfast + water; 5–10 min walk/stretch during the day.", "quote": {"en": "One focused day can change the direction of a month.", "ta": ""}}, {"day": 73, "dsa": {"area": "Java + Placement DSA", "topic": "Linked List Patterns", "cover": "reverse, middle, cycle", "practice": "4 problems", "resource": "LeetCode / GeeksforGeeks", "time": "1.5 hrs"}, "aiml": {"area": "AI Engineer", "topic": "Embeddings", "cover": "semantic vectors and similarity", "practice": "Semantic search demo", "resource": "Kaggle Learn / Hugging Face Learn", "time": "1.5 hrs"}, "project": {"area": "Daily Build", "topic": "Security + Input Validation", "cover": "Build → test → Git commit → write a 3-line README/demo note.", "practice": "Build → test → Git commit → 3-line README/demo note.", "resource": "GitHub / Portfolio", "time": "1 hr"}, "gate": {"subject": "GATE DA", "topic": "Machine Learning II", "cover": "trees, ensembles, clustering, PCA", "practice": "20 questions", "resource": "GATE PYQs / NPTEL", "time": "1 hr"}, "apt": {"area": "Placement Aptitude", "topic": "Number System", "cover": "divisibility, HCF, LCM", "practice": "20 questions", "resource": "IndiaBIX / Placement Practice", "time": "30 min"}, "health": "Keep regular meals; take short screen breaks every study block.", "quote": {"en": "Small progress is still progress.", "ta": ""}}, {"day": 74, "dsa": {"area": "Java + Placement DSA", "topic": "Stack", "cover": "Stack API, parentheses, monotonic thinking", "practice": "5 stack problems", "resource": "LeetCode / GeeksforGeeks", "time": "1.5 hrs"}, "aiml": {"area": "AI Engineer", "topic": "RAG Fundamentals", "cover": "retrieve → augment → generate", "practice": "Small RAG prototype", "resource": "Kaggle Learn / Hugging Face Learn", "time": "1.5 hrs"}, "project": {"area": "Daily Build", "topic": "Deployment Dry Run", "cover": "Build → test → Git commit → write a 3-line README/demo note.", "practice": "Build → test → Git commit → 3-line README/demo note.", "resource": "GitHub / Portfolio", "time": "1 hr"}, "gate": {"subject": "GATE DA", "topic": "AI I", "cover": "search, knowledge representation basics", "practice": "20 questions", "resource": "GATE PYQs / NPTEL", "time": "1 hr"}, "apt": {"area": "Placement Aptitude", "topic": "Algebra", "cover": "equations and identities", "practice": "20 questions", "resource": "IndiaBIX / Placement Practice", "time": "30 min"}, "health": "10–20 min light movement; prepare tomorrow's study list before bed.", "quote": {"en": "Build skills, not just certificates.", "ta": ""}}, {"day": 75, "dsa": {"area": "Java + Placement DSA", "topic": "Queue + Deque", "cover": "Queue, ArrayDeque, BFS-ready patterns", "practice": "5 queue/deque problems", "resource": "LeetCode / GeeksforGeeks", "time": "1.5 hrs"}, "aiml": {"area": "AI Engineer", "topic": "RAG Evaluation + Agentic AI", "cover": "retrieval quality, grounded answers, failure cases", "practice": "RAG evaluation sheet", "resource": "Kaggle Learn / Hugging Face Learn", "time": "1.5 hrs"}, "project": {"area": "Daily Build", "topic": "Interview Presentation", "cover": "Build → test → Git commit → write a 3-line README/demo note.", "practice": "Build → test → Git commit → 3-line README/demo note.", "resource": "GitHub / Portfolio", "time": "1 hr"}, "gate": {"subject": "GATE DA", "topic": "AI II", "cover": "probabilistic reasoning and learning concepts", "practice": "20 questions", "resource": "GATE PYQs / NPTEL", "time": "1 hr"}, "apt": {"area": "Placement Aptitude", "topic": "Data Interpretation", "cover": "tables and charts", "practice": "2 DI sets", "resource": "IndiaBIX / Placement Practice", "time": "30 min"}, "health": "Hydration + balanced meals; avoid studying continuously for hours.", "quote": {"en": "Your future engineer self is built by today's practice.", "ta": ""}}, {"day": 76, "dsa": {"area": "Java + Placement DSA", "topic": "HashMap + HashSet", "cover": "frequency counting, lookup, duplicates", "practice": "6 hashmap/set problems", "resource": "LeetCode / GeeksforGeeks", "time": "1.5 hrs"}, "aiml": {"area": "AI Engineer", "topic": "LLM App Design + AI Agents", "cover": "components, prompts, tools, memory boundaries", "practice": "Architecture diagram", "resource": "Kaggle Learn / Hugging Face Learn", "time": "1.5 hrs"}, "project": {"area": "Daily Build", "topic": "Mock Technical Round", "cover": "Build → test → Git commit → write a 3-line README/demo note.", "practice": "Build → test → Git commit → 3-line README/demo note.", "resource": "GitHub / Portfolio", "time": "1 hr"}, "gate": {"subject": "GATE DA", "topic": "Mixed PYQ Set 1", "cover": "Probability + Linear Algebra", "practice": "25 PYQs", "resource": "GATE PYQs / NPTEL", "time": "1 hr"}, "apt": {"area": "Placement Aptitude", "topic": "Logical Series", "cover": "number/letter series", "practice": "20 questions", "resource": "IndiaBIX / Placement Practice", "time": "30 min"}, "health": "Morning sunlight/normal outdoor time; keep evening routine calm.", "quote": {"en": "Consistency beats random bursts.", "ta": ""}}, {"day": 77, "dsa": {"area": "Java + Placement DSA", "topic": "Recursion Basics", "cover": "base case, call stack, simple recursion", "practice": "4 recursion problems", "resource": "LeetCode / GeeksforGeeks", "time": "1.5 hrs"}, "aiml": {"area": "AI Engineer", "topic": "AI Agents + FastAPI", "cover": "routes, request/response, validation", "practice": "Serve an ML model", "resource": "Kaggle Learn / Hugging Face Learn", "time": "1.5 hrs"}, "project": {"area": "Daily Build", "topic": "Mock HR Round", "cover": "Build → test → Git commit → write a 3-line README/demo note.", "practice": "Build → test → Git commit → 3-line README/demo note.", "resource": "GitHub / Portfolio", "time": "1 hr"}, "gate": {"subject": "GATE DA", "topic": "Mixed PYQ Set 2", "cover": "Calculus + Programming", "practice": "25 PYQs", "resource": "GATE PYQs / NPTEL", "time": "1 hr"}, "apt": {"area": "Placement Aptitude", "topic": "Coding-Decoding", "cover": "pattern-based reasoning", "practice": "20 questions", "resource": "IndiaBIX / Placement Practice", "time": "30 min"}, "health": "Weekly reset: tidy desk, plan meals/study, review sleep consistency.", "quote": {"en": "Learn it. Build it. Explain it.", "ta": ""}}, {"day": 78, "dsa": {"area": "Java + Placement DSA", "topic": "Backtracking Basics", "cover": "subsets, permutations, choose/explore/unchoose", "practice": "3 backtracking problems", "resource": "LeetCode / GeeksforGeeks", "time": "1.5 hrs"}, "aiml": {"area": "AI Engineer", "topic": "Docker", "cover": "image, container, requirements, ports", "practice": "Dockerize a small API", "resource": "Kaggle Learn / Hugging Face Learn", "time": "1.5 hrs"}, "project": {"area": "Daily Build", "topic": "Final Resume Review", "cover": "Build → test → Git commit → write a 3-line README/demo note.", "practice": "Build → test → Git commit → 3-line README/demo note.", "resource": "GitHub / Portfolio", "time": "1 hr"}, "gate": {"subject": "GATE DA", "topic": "Mixed PYQ Set 3", "cover": "DBMS + ML", "practice": "25 PYQs", "resource": "GATE PYQs / NPTEL", "time": "1 hr"}, "apt": {"area": "Placement Aptitude", "topic": "Syllogisms", "cover": "logical deductions", "practice": "20 questions", "resource": "IndiaBIX / Placement Practice", "time": "30 min"}, "health": "Wake 4:30 AM only if you can consistently get enough sleep; water, hygiene, 5–10 min gentle movement.", "quote": {"en": "Discipline is choosing what matters today.", "ta": ""}}, {"day": 79, "dsa": {"area": "Java + Placement DSA", "topic": "Trees Basics", "cover": "binary tree, DFS traversals", "practice": "5 tree problems", "resource": "LeetCode / GeeksforGeeks", "time": "1.5 hrs"}, "aiml": {"area": "AI Engineer", "topic": "Deployment Concepts", "cover": "environment variables, logging, health checks", "practice": "Deployment checklist", "resource": "Kaggle Learn / Hugging Face Learn", "time": "1.5 hrs"}, "project": {"area": "Daily Build", "topic": "Final GitHub Review", "cover": "Build → test → Git commit → write a 3-line README/demo note.", "practice": "Build → test → Git commit → 3-line README/demo note.", "resource": "GitHub / Portfolio", "time": "1 hr"}, "gate": {"subject": "GATE DA", "topic": "Mixed PYQ Set 4", "cover": "AI + Data Structures", "practice": "25 PYQs", "resource": "GATE PYQs / NPTEL", "time": "1 hr"}, "apt": {"area": "Placement Aptitude", "topic": "Blood Relations + Directions", "cover": "relationship and direction problems", "practice": "20 questions", "resource": "IndiaBIX / Placement Practice", "time": "30 min"}, "health": "Healthy breakfast + water; 5–10 min walk/stretch during the day.", "quote": {"en": "One focused day can change the direction of a month.", "ta": ""}}, {"day": 80, "dsa": {"area": "Java + Placement DSA", "topic": "BST", "cover": "search, insert, min/max, inorder property", "practice": "4 BST problems", "resource": "LeetCode / GeeksforGeeks", "time": "1.5 hrs"}, "aiml": {"area": "AI Engineer", "topic": "AI Engineer Project Sprint", "cover": "integrate model + API + UI", "practice": "Working end-to-end demo", "resource": "Kaggle Learn / Hugging Face Learn", "time": "1.5 hrs"}, "project": {"area": "Daily Build", "topic": "Final Portfolio Review", "cover": "Build → test → Git commit → write a 3-line README/demo note.", "practice": "Build → test → Git commit → 3-line README/demo note.", "resource": "GitHub / Portfolio", "time": "1 hr"}, "gate": {"subject": "GATE DA", "topic": "DA Formula Revision", "cover": "build one-page formula sheet", "practice": "30-minute recall", "resource": "GATE PYQs / NPTEL", "time": "1 hr"}, "apt": {"area": "Placement Aptitude", "topic": "Seating Arrangement", "cover": "linear/circular arrangements", "practice": "3 sets", "resource": "IndiaBIX / Placement Practice", "time": "30 min"}, "health": "Keep regular meals; take short screen breaks every study block.", "quote": {"en": "Small progress is still progress.", "ta": ""}}, {"day": 81, "dsa": {"area": "Java + Placement DSA", "topic": "Tree Patterns", "cover": "height, diameter, balanced tree", "practice": "4 tree problems", "resource": "LeetCode / GeeksforGeeks", "time": "1.5 hrs"}, "aiml": {"area": "AI Engineer", "topic": "Python Recall", "cover": "syntax, functions, collections, exceptions", "practice": "20 short coding questions", "resource": "Kaggle Learn / Hugging Face Learn", "time": "1.5 hrs"}, "project": {"area": "Daily Build", "topic": "Final AI Engineer Challenge", "cover": "Build → test → Git commit → write a 3-line README/demo note.", "practice": "Build → test → Git commit → 3-line README/demo note.", "resource": "GitHub / Portfolio", "time": "1 hr"}, "gate": {"subject": "GATE DA", "topic": "GATE DA Mini Mock", "cover": "mixed timed practice", "practice": "1 mini mock", "resource": "GATE PYQs / NPTEL", "time": "1 hr"}, "apt": {"area": "Placement Aptitude", "topic": "Clocks + Calendars", "cover": "common aptitude patterns", "practice": "20 questions", "resource": "IndiaBIX / Placement Practice", "time": "30 min"}, "health": "10–20 min light movement; prepare tomorrow's study list before bed.", "quote": {"en": "Build skills, not just certificates.", "ta": ""}}, {"day": 82, "dsa": {"area": "Java + Placement DSA", "topic": "Heap / PriorityQueue", "cover": "min/max heap, top-K pattern", "practice": "4 heap problems", "resource": "LeetCode / GeeksforGeeks", "time": "1.5 hrs"}, "aiml": {"area": "AI Engineer", "topic": "NumPy", "cover": "arrays, shapes, indexing, vectorized operations", "practice": "Mini numerical notebook", "resource": "Kaggle Learn / Hugging Face Learn", "time": "1.5 hrs"}, "project": {"area": "Daily Build", "topic": "Final Weak Topic Repair", "cover": "Build → test → Git commit → write a 3-line README/demo note.", "practice": "Build → test → Git commit → 3-line README/demo note.", "resource": "GitHub / Portfolio", "time": "1 hr"}, "gate": {"subject": "GATE DA", "topic": "Error Log Day", "cover": "redo every wrong/guessed question", "practice": "20 corrected solutions", "resource": "GATE PYQs / NPTEL", "time": "1 hr"}, "apt": {"area": "Placement Aptitude", "topic": "Grammar", "cover": "sentence correction and usage", "practice": "20 questions", "resource": "IndiaBIX / Placement Practice", "time": "30 min"}, "health": "Hydration + balanced meals; avoid studying continuously for hours.", "quote": {"en": "Your future engineer self is built by today's practice.", "ta": ""}}, {"day": 83, "dsa": {"area": "Java + Placement DSA", "topic": "Graphs Basics", "cover": "adjacency list, BFS, DFS", "practice": "4 graph traversal problems", "resource": "LeetCode / GeeksforGeeks", "time": "1.5 hrs"}, "aiml": {"area": "AI Engineer", "topic": "Pandas", "cover": "Series/DataFrame, filtering, groupby, merge", "practice": "Analyze a small CSV", "resource": "Kaggle Learn / Hugging Face Learn", "time": "1.5 hrs"}, "project": {"area": "Daily Build", "topic": "Final Project Demo", "cover": "Build → test → Git commit → write a 3-line README/demo note.", "practice": "Build → test → Git commit → 3-line README/demo note.", "resource": "GitHub / Portfolio", "time": "1 hr"}, "gate": {"subject": "GATE DA", "topic": "GATE DA Mock 1", "cover": "full mixed mock", "practice": "Analyze score + mistakes", "resource": "GATE PYQs / NPTEL", "time": "1 hr"}, "apt": {"area": "Placement Aptitude", "topic": "Vocabulary", "cover": "context-based vocabulary", "practice": "20 questions", "resource": "IndiaBIX / Placement Practice", "time": "30 min"}, "health": "Morning sunlight/normal outdoor time; keep evening routine calm.", "quote": {"en": "Consistency beats random bursts.", "ta": ""}}, {"day": 84, "dsa": {"area": "Java + Placement DSA", "topic": "Graphs Shortest Path", "cover": "BFS shortest path, weighted-graph concept", "practice": "3 shortest-path problems", "resource": "LeetCode / GeeksforGeeks", "time": "1.5 hrs"}, "aiml": {"area": "AI Engineer", "topic": "EDA", "cover": "missing values, outliers, distributions, correlations", "practice": "EDA report", "resource": "Kaggle Learn / Hugging Face Learn", "time": "1.5 hrs"}, "project": {"area": "Daily Build", "topic": "Final Interview Simulation", "cover": "Build → test → Git commit → write a 3-line README/demo note.", "practice": "Build → test → Git commit → 3-line README/demo note.", "resource": "GitHub / Portfolio", "time": "1 hr"}, "gate": {"subject": "GATE DA", "topic": "GATE DA Mock 2", "cover": "full mixed mock", "practice": "Analyze score + mistakes", "resource": "GATE PYQs / NPTEL", "time": "1 hr"}, "apt": {"area": "Placement Aptitude", "topic": "Reading Comprehension", "cover": "short passages", "practice": "3 passages", "resource": "IndiaBIX / Placement Practice", "time": "30 min"}, "health": "Weekly reset: tidy desk, plan meals/study, review sleep consistency.", "quote": {"en": "Learn it. Build it. Explain it.", "ta": ""}}, {"day": 85, "dsa": {"area": "Java + Placement DSA", "topic": "Greedy + Intervals", "cover": "interval merge, scheduling, greedy choices", "practice": "5 greedy/interval problems", "resource": "LeetCode / GeeksforGeeks", "time": "1.5 hrs"}, "aiml": {"area": "AI Engineer", "topic": "Statistics", "cover": "mean, median, variance, probability basics", "practice": "20 stats questions", "resource": "Kaggle Learn / Hugging Face Learn", "time": "1.5 hrs"}, "project": {"area": "Daily Build", "topic": "90-Day Portfolio Showcase", "cover": "Build → test → Git commit → write a 3-line README/demo note.", "practice": "Build → test → Git commit → 3-line README/demo note.", "resource": "GitHub / Portfolio", "time": "1 hr"}, "gate": {"subject": "GATE DA", "topic": "GATE DA Mock 3", "cover": "full mixed mock", "practice": "Analyze score + mistakes", "resource": "GATE PYQs / NPTEL", "time": "1 hr"}, "apt": {"area": "Placement Aptitude", "topic": "Placement Mixed 1", "cover": "quant + logic", "practice": "25 timed questions", "resource": "IndiaBIX / Placement Practice", "time": "30 min"}, "health": "Wake 4:30 AM only if you can consistently get enough sleep; water, hygiene, 5–10 min gentle movement.", "quote": {"en": "Discipline is choosing what matters today.", "ta": ""}}, {"day": 86, "dsa": {"area": "Java + Placement DSA", "topic": "Dynamic Programming I", "cover": "1D DP, memoization, tabulation", "practice": "4 DP problems", "resource": "LeetCode / GeeksforGeeks", "time": "1.5 hrs"}, "aiml": {"area": "AI Engineer", "topic": "Probability", "cover": "conditional probability, Bayes theorem", "practice": "15 probability questions", "resource": "Kaggle Learn / Hugging Face Learn", "time": "1.5 hrs"}, "project": {"area": "Daily Build", "topic": "Next 90-Day Roadmap", "cover": "Build → test → Git commit → write a 3-line README/demo note.", "practice": "Build → test → Git commit → 3-line README/demo note.", "resource": "GitHub / Portfolio", "time": "1 hr"}, "gate": {"subject": "GATE DA", "topic": "Final Formula Sprint", "cover": "probability, algebra, calculus, ML, DBMS", "practice": "Rapid recall", "resource": "GATE PYQs / NPTEL", "time": "1 hr"}, "apt": {"area": "Placement Aptitude", "topic": "Placement Mixed 2", "cover": "quant + verbal", "practice": "25 timed questions", "resource": "IndiaBIX / Placement Practice", "time": "30 min"}, "health": "Healthy breakfast + water; 5–10 min walk/stretch during the day.", "quote": {"en": "One focused day can change the direction of a month.", "ta": ""}}, {"day": 87, "dsa": {"area": "Java + Placement DSA", "topic": "Dynamic Programming II", "cover": "2D/grid DP and state transitions", "practice": "4 DP problems", "resource": "LeetCode / GeeksforGeeks", "time": "1.5 hrs"}, "aiml": {"area": "AI Engineer", "topic": "Linear Algebra", "cover": "vectors, matrices, dot products", "practice": "NumPy matrix notebook", "resource": "Kaggle Learn / Hugging Face Learn", "time": "1.5 hrs"}, "project": {"area": "Daily Build", "topic": "CLI To-Do List in Java", "cover": "Build → test → Git commit → write a 3-line README/demo note.", "practice": "Build → test → Git commit → 3-line README/demo note.", "resource": "GitHub / Portfolio", "time": "1 hr"}, "gate": {"subject": "GATE DA", "topic": "Final PYQ Sprint", "cover": "mixed previous questions", "practice": "30 timed PYQs", "resource": "GATE PYQs / NPTEL", "time": "1 hr"}, "apt": {"area": "Placement Aptitude", "topic": "Placement Mixed 3", "cover": "logic + DI", "practice": "25 timed questions", "resource": "IndiaBIX / Placement Practice", "time": "30 min"}, "health": "Keep regular meals; take short screen breaks every study block.", "quote": {"en": "Small progress is still progress.", "ta": ""}}, {"day": 88, "dsa": {"area": "Java + Placement DSA", "topic": "DSA Mixed Practice", "cover": "arrays → graphs → DP pattern recognition", "practice": "10-question timed set", "resource": "LeetCode / GeeksforGeeks", "time": "1.5 hrs"}, "aiml": {"area": "AI Engineer", "topic": "ML Workflow", "cover": "problem framing, train/validation/test, leakage", "practice": "Build a clean ML pipeline", "resource": "Kaggle Learn / Hugging Face Learn", "time": "1.5 hrs"}, "project": {"area": "Daily Build", "topic": "Student Grade Calculator", "cover": "Build → test → Git commit → write a 3-line README/demo note.", "practice": "Build → test → Git commit → 3-line README/demo note.", "resource": "GitHub / Portfolio", "time": "1 hr"}, "gate": {"subject": "GATE DA", "topic": "Probability Basics", "cover": "sample space, events, conditional probability", "practice": "20 questions", "resource": "GATE PYQs / NPTEL", "time": "1 hr"}, "apt": {"area": "Placement Aptitude", "topic": "Placement Mock", "cover": "full mixed aptitude", "practice": "1 timed mock", "resource": "IndiaBIX / Placement Practice", "time": "30 min"}, "health": "10–20 min light movement; prepare tomorrow's study list before bed.", "quote": {"en": "Build skills, not just certificates.", "ta": ""}}, {"day": 89, "dsa": {"area": "Java + Placement DSA", "topic": "Java DSA Interview Set", "cover": "common interview patterns and clean code", "practice": "8 timed problems", "resource": "LeetCode / GeeksforGeeks", "time": "1.5 hrs"}, "aiml": {"area": "AI Engineer", "topic": "Linear Regression", "cover": "loss, gradient idea, evaluation", "practice": "Regression mini-project", "resource": "Kaggle Learn / Hugging Face Learn", "time": "1.5 hrs"}, "project": {"area": "Daily Build", "topic": "Contact Book", "cover": "Build → test → Git commit → write a 3-line README/demo note.", "practice": "Build → test → Git commit → 3-line README/demo note.", "resource": "GitHub / Portfolio", "time": "1 hr"}, "gate": {"subject": "GATE DA", "topic": "Bayes + Random Variables", "cover": "Bayes theorem, expectation basics", "practice": "20 questions", "resource": "GATE PYQs / NPTEL", "time": "1 hr"}, "apt": {"area": "Placement Aptitude", "topic": "Weak Area Repair", "cover": "redo weakest topic", "practice": "25 targeted questions", "resource": "IndiaBIX / Placement Practice", "time": "30 min"}, "health": "Hydration + balanced meals; avoid studying continuously for hours.", "quote": {"en": "Your future engineer self is built by today's practice.", "ta": ""}}, {"day": 90, "dsa": {"area": "Java + Placement DSA", "topic": "DSA Mock + Review", "cover": "full placement-style DSA mock", "practice": "1 mock + error notebook", "resource": "LeetCode / GeeksforGeeks", "time": "1.5 hrs"}, "aiml": {"area": "AI Engineer", "topic": "Logistic Regression", "cover": "classification, sigmoid, threshold", "practice": "Binary classifier", "resource": "Kaggle Learn / Hugging Face Learn", "time": "1.5 hrs"}, "project": {"area": "Daily Build", "topic": "Number Guessing Game", "cover": "Build → test → Git commit → write a 3-line README/demo note.", "practice": "Build → test → Git commit → 3-line README/demo note.", "resource": "GitHub / Portfolio", "time": "1 hr"}, "gate": {"subject": "GATE DA", "topic": "Distributions", "cover": "common discrete/continuous distributions", "practice": "20 questions", "resource": "GATE PYQs / NPTEL", "time": "1 hr"}, "apt": {"area": "Placement Aptitude", "topic": "Final Placement Mock", "cover": "full aptitude simulation", "practice": "1 timed mock", "resource": "IndiaBIX / Placement Practice", "time": "30 min"}, "health": "Morning sunlight/normal outdoor time; keep evening routine calm.", "quote": {"en": "Consistency beats random bursts.", "ta": ""}}];
+const STORE="lakshana_success_plan_final_v2";
+let completed={};
+let filter="all";
+let page=1;
+const PAGE_SIZE=10;
+
+try{completed=JSON.parse(localStorage.getItem(STORE)||"{}")||{}}catch(e){completed={}}
+
+const labels={dsa:"Java DSA",aiml:"AI Engineer",project:"Daily Project",gate:"GATE DA",apt:"Aptitude"};
+const cls={dsa:"dsa",aiml:"aiml",project:"project",gate:"gate",apt:"apt"};
+
+function esc(x){return String(x??"").replace(/[&<>"']/g,m=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#039;'}[m]))}
+function bullets(s){return String(s||"").split(";").filter(Boolean).map(x=>"<li>"+esc(x.trim())+"</li>").join("")}
+function save(){try{localStorage.setItem(STORE,JSON.stringify(completed))}catch(e){}}
+function toggle(day){completed[day]=!completed[day];save();render();updateStats()}
+function updateStats(){
+ const n=Object.values(completed).filter(Boolean).length;
+ document.getElementById("pct").textContent=n+"%";
+ document.getElementById("count").textContent=n+" / 90 days completed";
+ document.getElementById("progressCount").textContent=n+" / 90";
+ document.getElementById("progressBar").style.width=n+"%";
+ let next=91;for(let i=1;i<=90;i++)if(!completed[i]){next=i;break}
+ const shown=Math.max(1,next<=90?next:90);
+ document.getElementById("currentDay").textContent=shown;
+ document.getElementById("topBar").style.width=(next<=90?next-1:90)+"%";
+ document.getElementById("topPct").textContent=(next<=90?next-1:90)+"% Complete";
+ const q=DATA[shown-1].quote;
+ document.getElementById("sideQuote").innerHTML="<div style='font-size:12px;font-weight:900'>☀ Day "+shown+" Motivation</div><div class='en'>“"+esc(q.en)+"”</div><div class='ta'>“"+esc(q.ta)+"”</div><div style='margin-top:8px'>— Lakshana ♡</div>";
+ renderStreak();
+ renderQuarters();
+}
+function setFilter(f){filter=f;page=1;document.querySelectorAll(".tab").forEach(b=>b.classList.toggle("active",b.dataset.filter===f));render()}
+function linkBadge(x){return x.link?`<div class="linkbadge">${esc(x.link)}</div>`:"";}
+function trackCell(d,key){
+ const x=d[key];
+ const href=(key==="aiml"&&x.source)?x.source:"";
+ const resource=href?`<a class="resource" target="_blank" rel="noopener" href="${esc(href)}">${esc(x.source_name)} ↗</a>`:`<span class="resource">${esc(x.resource||"Practice resources")}</span>`;
+ const practicePlatforms={
+   dsa:[["LeetCode","https://leetcode.com/problemset/"],["GeeksforGeeks","https://www.geeksforgeeks.org/practice/"]],
+   aiml:[["Kaggle Learn","https://www.kaggle.com/learn"],["Hugging Face Learn","https://huggingface.co/learn"]],
+   project:[["GitHub","https://github.com/"],["GitHub Student Portfolio Guide","https://docs.github.com/"]],
+   gate:[["NPTEL","https://nptel.ac.in/courses"],["GATE Official","https://gate2026.iitg.ac.in/"]],
+   apt:[["IndiaBIX Practice","https://www.indiabix.com/"],["Placement Practice","https://www.indiabix.com/aptitude/questions-and-answers/"]]
+ };
+ const practiceLinks=(practicePlatforms[key]||[]).map(([name,url])=>`<a class="resource practice-resource" target="_blank" rel="noopener" href="${url}">Practice: ${name} ↗</a>`).join("");
+ const area=x.area||x.subject||"";
+ const topic=x.topic;
+ const cover=x.cover;
+ const practice=x.practice||x.resource||"Practice";
+ return `<td><span class="pill ${cls[key]}">${esc(labels[key])}</span><br><span class="time">${esc(x.time)}</span></td>
+ <td><div class="topic">${esc(topic)}</div><div style="color:#657398;margin-top:3px">${esc(area)}</div>${linkBadge(x)}</td>
+ <td><span class="cover-title">Exactly cover:</span><ul>${bullets(cover)}</ul></td>
+ <td><b>${esc(x.time)}</b></td>
+ <td class="practice">${esc(practice)}</td>
+ <td><div class="resource-stack">${resource}</div><div class="resource-stack" style="margin-top:3px">${practiceLinks}</div></td>`;
+}
+function render(){
+ const q=document.getElementById("search").value.toLowerCase().trim();
+ let arr=DATA.filter(d=>(!q||JSON.stringify(d).toLowerCase().includes(q)));
+ const start=(page-1)*PAGE_SIZE;
+ const view=arr.slice(start,start+PAGE_SIZE);
+ let head=`<th class="day">Day</th>`;
+ if(filter==="all") head+=`<th>Track</th><th>Topic</th><th>What to cover today (Detailed)</th><th>Time</th><th>Practice / Task</th><th>Resources</th><th>Daily Motivation</th>`;
+ else head+=`<th>Track</th><th>Topic</th><th>What to cover today (Detailed)</th><th>Time</th><th>Practice / Task</th><th>Resources</th>`;
+ document.querySelector("thead tr").innerHTML=head;
+ const rows=view.map(d=>{
+   if(filter==="all"){
+     // All Tracks = one complete row per day, showing all four tracks.
+     return `<tr>
+       <td class="day"><input class="check" type="checkbox" ${completed[d.day]?"checked":""} onchange="toggle(${d.day})"> ${d.day}</td>
+       <td colspan="6">
+         <div style="display:grid;grid-template-columns:repeat(5,1fr);gap:8px">
+           ${["dsa","aiml","project","gate","apt"].map(k=>`<div><span class="pill ${cls[k]}">${labels[k]}</span> <span class="time">${d[k].time}</span><div class="topic">${esc(d[k].topic)}</div>${linkBadge(d[k])}<ul>${bullets(d[k].cover)}</ul><div class="practice"><b>Practice:</b> ${esc(d[k].practice||d[k].resource)}</div></div>`).join("")}
+         </div>
+       </td>
+       <td class="quote-cell"><div class="quote-en">“${esc(d.quote.en)}”</div><div class="quote-ta">“${esc(d.quote.ta)}”</div></td>
+     </tr>`;
+   }
+   const k=filter;
+   return `<tr><td class="day"><input class="check" type="checkbox" ${completed[d.day]?"checked":""} onchange="toggle(${d.day})"> ${d.day}</td>${trackCell(d,k)}</tr>`;
+ }).join("");
+ document.getElementById("tbody").innerHTML=rows||`<tr><td colspan="8" style="padding:30px;text-align:center">No matching days.</td></tr>`;
+ renderPagination(arr.length);
+}
+function renderPagination(total){
+ const pages=Math.max(1,Math.ceil(total/PAGE_SIZE));
+ if(page>pages)page=pages;
+ let html=`<button class="pagebtn" ${page===1?"disabled":""} onclick="page--;render()">← Previous</button>`;
+ for(let i=1;i<=pages;i++) html+=`<button class="pagebtn ${i===page?"active":""}" onclick="page=${i};render()">${i}</button>`;
+ html+=`<button class="pagebtn" ${page===pages?"disabled":""} onclick="page++;render()">Next →</button>`;
+ html+=`<span class="goto">Go to Day <input id="gotoDay" type="number" min="1" max="100" value="${(page-1)*10+1}"><button class="pagebtn" onclick="goDay()">Go</button></span>`;
+ document.getElementById("pagination").innerHTML=html;
+}
+function goDay(){
+ const n=Math.max(1,Math.min(100,parseInt(document.getElementById("gotoDay").value)||1));
+ const search=document.getElementById("search");
+ if(search.value.trim())search.value="";
+ page=Math.ceil(n/PAGE_SIZE);
+ render();
+}
+function renderResources(){
+ const seen={dsa:new Set(),aiml:new Set(),project:new Set(),gate:new Set(),apt:new Set()};
+ const links={aiml:new Map()};
+ DATA.forEach(d=>{
+   ["dsa","aiml","project","gate","apt"].forEach(k=>{
+     const x=d[k];
+     const label=x.resource||"";
+     if(label)seen[k].add(label);
+     if(k==="aiml"&&x.source)links.aiml.set(x.source_name,x.source);
+   });
+ });
+ const html=["dsa","aiml","project","gate","apt"].map(k=>{
+   let extra="";
+   if(k==="aiml"&&links.aiml.size){
+     extra="<ul>"+[...links.aiml.entries()].map(([name,url])=>`<li><a class="resource" target="_blank" rel="noopener" href="${esc(url)}">${esc(name)} ↗</a></li>`).join("")+"</ul>";
+   }
+   return `<p><b>${esc(labels[k])}:</b> ${[...seen[k]].map(esc).join(", ")}</p>${extra}`;
+ }).join("");
+ document.getElementById("resourcesBody").innerHTML=html;
+}
+function calcStreak(){
+ let next=91;for(let i=1;i<=90;i++)if(!completed[i]){next=i;break}
+ let cur=0;
+ for(let i=next-1;i>=1;i--){ if(completed[i])cur++; else break; }
+ let best=0,run=0;
+ for(let i=1;i<=90;i++){ if(completed[i]){run++;best=Math.max(best,run);} else run=0; }
+ return {cur,best};
+}
+function renderStreak(){
+ const {cur,best}=calcStreak();
+ document.getElementById("streakBox").innerHTML=
+  `<div class="stat" style="flex:1;min-width:150px"><div class="icon">🔥</div><div><div class="num">${cur}</div><div class="label">Current Streak</div><div class="sub">consecutive days done</div></div></div>`+
+  `<div class="stat" style="flex:1;min-width:150px"><div class="icon">🏆</div><div><div class="num">${best}</div><div class="label">Best Streak</div><div class="sub">longest run so far</div></div></div>`;
+}
+function renderQuarters(){
+ const ranges=[[1,25],[26,50],[51,75],[76,100]];
+ const html=ranges.map(([a,b])=>{
+   let n=0;for(let i=a;i<=b;i++)if(completed[i])n++;
+   const pct=Math.round(n/(b-a+1)*100);
+   return `<div style="margin-bottom:8px"><div style="display:flex;justify-content:space-between;font-size:12px;font-weight:800;color:#40548D"><span>Days ${a}–${b}</span><span>${n}/${b-a+1}</span></div><div class="progress" style="height:9px"><div style="height:100%;background:var(--lav);width:${pct}%"></div></div></div>`;
+ }).join("");
+ document.getElementById("quarterBox").innerHTML=html;
+}
+/* ===== Notes v2: write + attach files ===== */
+const NOTES_KEY="lakshana_notes_v2";
+const OLD_NOTES_KEY="lakshana_notes_final";
+const NOTE_TYPES=["General","Mistakes","Formulas","Doubts","Interview","Revision"];
+const MAX_FILE=10*1024*1024;
+let NOTES=[],curId=null,ntTimer=null,ntUrls=[];
+const memFiles={};
+let idbP=null;
+
+function uid(){return Date.now().toString(36)+Math.random().toString(36).slice(2,7)}
+function ntStatus(t,ms){const el=document.getElementById("noteStatus");if(!el)return;el.textContent=t;clearTimeout(ntStatus.t);if(ms)ntStatus.t=setTimeout(()=>{el.textContent=""},ms)}
+function fmtSize(b){return b<1024?b+" B":b<1048576?(b/1024).toFixed(0)+" KB":(b/1048576).toFixed(1)+" MB"}
+function fileIcon(f){const e=(f.name.split(".").pop()||"").toLowerCase();
+  if(e==="pdf")return"📕";if(["doc","docx"].includes(e))return"📘";if(["xls","xlsx","csv"].includes(e))return"📗";
+  if(["ppt","pptx"].includes(e))return"📙";if(["zip","rar","7z"].includes(e))return"🗜";if(["txt","md","log","json"].includes(e))return"📄";return"📎"}
+
+/* file storage (IndexedDB, in-memory fallback) */
+function idb(){
+  if(idbP)return idbP;
+  idbP=new Promise((res,rej)=>{try{const r=indexedDB.open("lakshana_notes_files",1);r.onupgradeneeded=()=>r.result.createObjectStore("files");r.onsuccess=()=>res(r.result);r.onerror=()=>rej(r.error)}catch(e){rej(e)}});
+  return idbP;
+}
+async function putFile(id,blob){
+  memFiles[id]=blob;
+  try{const db=await idb();await new Promise((res,rej)=>{const t=db.transaction("files","readwrite");t.objectStore("files").put(blob,id);t.oncomplete=res;t.onerror=()=>rej(t.error)})}
+  catch(e){ntStatus("⚠ File kept for this session only (browser blocked storage)",4000)}
+}
+async function getFile(id){
+  if(memFiles[id])return memFiles[id];
+  try{const db=await idb();return await new Promise((res,rej)=>{const q=db.transaction("files").objectStore("files").get(id);q.onsuccess=()=>res(q.result||null);q.onerror=()=>rej(q.error)})}
+  catch(e){return null}
+}
+async function delFile(id){
+  delete memFiles[id];
+  try{const db=await idb();await new Promise((res,rej)=>{const t=db.transaction("files","readwrite");t.objectStore("files").delete(id);t.oncomplete=res;t.onerror=()=>rej(t.error)})}catch(e){}
+}
+
+/* notes data */
+function makeNote(o){const t=Date.now();return Object.assign({id:uid(),title:"",day:"",type:"General",body:"",files:[],created:t,updated:t},o||{})}
+function persistNotes(){try{localStorage.setItem(NOTES_KEY,JSON.stringify(NOTES));return true}catch(e){ntStatus("⚠ Couldn't save – browser storage is full");return false}}
+function loadNotes(){
+  try{NOTES=JSON.parse(localStorage.getItem(NOTES_KEY)||"[]")||[]}catch(e){NOTES=[]}
+  if(!NOTES.length){
+    let old="";try{old=localStorage.getItem(OLD_NOTES_KEY)||""}catch(e){}
+    if(old.trim()){NOTES.push(makeNote({title:"My notes",body:old}));persistNotes()}
+  }
+}
+function cur(){return NOTES.find(n=>n.id===curId)}
+function sortedNotes(){return NOTES.slice().sort((a,b)=>b.updated-a.updated)}
+
+function renderNoteList(){
+  const q=(document.getElementById("ntSearch").value||"").toLowerCase().trim();
+  const list=sortedNotes().filter(n=>!q||(n.title+" "+n.body+" "+n.type+" "+(n.day?"day "+n.day:"")+" "+n.files.map(f=>f.name).join(" ")).toLowerCase().includes(q));
+  document.getElementById("ntList").innerHTML=list.map(n=>{
+    const snip=(n.body||"").replace(/\s+/g," ").trim().slice(0,60)||"Empty note";
+    const badges=(n.day?`<span class="nt-badge">Day ${esc(n.day)}</span>`:"")+`<span class="nt-badge">${esc(n.type)}</span>`+(n.files.length?`<span class="nt-badge">📎 ${n.files.length}</span>`:"");
+    return `<button class="nt-item ${n.id===curId?"active":""}" onclick="selectNote('${n.id}')"><b>${esc(n.title||"Untitled note")}</b><span class="snip">${esc(snip)}</span><div class="nt-badges">${badges}</div></button>`;
+  }).join("")||`<div style="font-size:13px;color:var(--muted);padding:6px">No matching notes.</div>`;
+}
+function loadEditor(){
+  const n=cur();if(!n)return;
+  document.getElementById("ntTitle").value=n.title;
+  document.getElementById("ntDay").value=n.day||"";
+  document.getElementById("ntType").value=n.type||"General";
+  document.getElementById("ntBody").value=n.body;
+  document.getElementById("ntStamp").textContent="Last edited "+new Date(n.updated).toLocaleString([], {dateStyle:"medium",timeStyle:"short"});
+  renderFiles();
+}
+function readEditor(){
+  const n=cur();if(!n)return;
+  n.title=document.getElementById("ntTitle").value;
+  n.day=document.getElementById("ntDay").value;
+  n.type=document.getElementById("ntType").value;
+  n.body=document.getElementById("ntBody").value;
+  n.updated=Date.now();
+}
+function scheduleSave(){ntStatus("Typing…");clearTimeout(ntTimer);ntTimer=setTimeout(()=>saveCurrent(),700)}
+function saveCurrent(manual){
+  if(!cur())return;
+  clearTimeout(ntTimer);readEditor();
+  if(persistNotes()){ntStatus("Saved ✓",2500);document.getElementById("ntStamp").textContent="Last edited "+new Date(cur().updated).toLocaleString([], {dateStyle:"medium",timeStyle:"short"})}
+  renderNoteList();
+}
+function selectNote(id){saveCurrent();curId=id;loadEditor();renderNoteList()}
+function newNote(){
+  saveCurrent();
+  const n=makeNote();NOTES.push(n);curId=n.id;persistNotes();
+  document.getElementById("ntSearch").value="";
+  renderNoteList();loadEditor();document.getElementById("ntTitle").focus();
+}
+async function deleteNote(){
+  const n=cur();if(!n)return;
+  if(!confirm("Delete this note"+(n.files.length?" and its "+n.files.length+" attached file(s)":"")+"? This cannot be undone."))return;
+  for(const f of n.files)await delFile(f.id);
+  NOTES=NOTES.filter(x=>x.id!==n.id);
+  if(!NOTES.length)NOTES.push(makeNote());
+  curId=sortedNotes()[0].id;persistNotes();renderNoteList();loadEditor();
+}
+function ntInsert(pre,post){
+  const t=document.getElementById("ntBody"),s=t.selectionStart,e=t.selectionEnd;
+  const sel=t.value.slice(s,e);
+  t.value=t.value.slice(0,s)+pre+sel+post+t.value.slice(e);
+  t.focus();t.selectionStart=s+pre.length;t.selectionEnd=s+pre.length+sel.length;scheduleSave();
+}
+
+/* attachments */
+async function addFiles(list){
+  const n=cur();if(!n)return;
+  let added=0;const skipped=[];
+  for(const file of Array.from(list)){
+    if(file.size>MAX_FILE){skipped.push(file.name);continue}
+    const id=uid();await putFile(id,file);
+    n.files.push({id,name:file.name||("pasted-"+id+".png"),type:file.type||"",size:file.size,added:Date.now()});added++;
+  }
+  saveCurrent();await renderFiles();
+  if(added)ntStatus("Attached "+added+" file"+(added>1?"s":"")+" ✓",2500);
+  if(skipped.length)alert("Skipped (over 10 MB):\n"+skipped.join("\n"));
+}
+async function renderFiles(){
+  ntUrls.forEach(u=>URL.revokeObjectURL(u));ntUrls=[];
+  const n=cur(),box=document.getElementById("ntFiles");
+  if(!n||!n.files.length){box.innerHTML="";return}
+  const items=await Promise.all(n.files.map(async f=>{
+    const blob=await getFile(f.id);
+    let thumb;
+    if(blob&&f.type.startsWith("image/")){const u=URL.createObjectURL(blob);ntUrls.push(u);thumb=`<img src="${u}" alt="">`}
+    else thumb=`<div class="nt-ico">${fileIcon(f)}</div>`;
+    const canOpen=canPreview(f);
+    const canText=f.type.startsWith("text/")||/\.(txt|md|csv|log)$/i.test(f.name);
+    return `<div class="nt-file"><div class="nt-thumb" onclick="previewFile('${f.id}')" title="Click to open">${thumb}</div><div class="nt-fname" onclick="previewFile('${f.id}')" title="${esc(f.name)}">${esc(f.name)}</div><div class="nt-fsize">${fmtSize(f.size)}${blob?"":" · file missing"}</div><div class="nt-fbtns">${canOpen&&blob?`<button onclick="previewFile('${f.id}')">Open</button>`:""}${blob?`<button onclick="downloadFile('${f.id}')">Save</button>`:""}${canText&&blob?`<button onclick="insertFileText('${f.id}')">Insert text</button>`:""}<button class="x" onclick="removeFile('${f.id}')">✕</button></div></div>`;
+  }));
+  box.innerHTML=items.join("");
+}
+async function openFile(id){
+  const w=window.open("","_blank");const b=await getFile(id);
+  if(!b){if(w)w.close();return}
+  const u=URL.createObjectURL(b);if(w)w.location.href=u;else window.open(u,"_blank");
+}
+async function downloadFile(id){
+  const f=cur().files.find(x=>x.id===id),b=await getFile(id);if(!b)return;
+  const a=document.createElement("a");a.href=URL.createObjectURL(b);a.download=f.name;a.click();setTimeout(()=>URL.revokeObjectURL(a.href),1000);
+}
+async function insertFileText(id){
+  const f=cur().files.find(x=>x.id===id),b=await getFile(id);if(!b)return;
+  const txt=await b.text(),t=document.getElementById("ntBody");
+  t.value+=(t.value?"\n\n":"")+"── "+f.name+" ──\n"+txt;scheduleSave();ntStatus("Text inserted ✓",2500);
+}
+async function removeFile(id){
+  const n=cur(),f=n.files.find(x=>x.id===id);
+  if(!f||!confirm("Remove “"+f.name+"” from this note?"))return;
+  await delFile(id);n.files=n.files.filter(x=>x.id!==id);saveCurrent();renderFiles();
+}
+
+/* backup / restore (includes files) */
+function blobToDataURL(b){return new Promise((res,rej)=>{const r=new FileReader();r.onload=()=>res(r.result);r.onerror=()=>rej(r.error);r.readAsDataURL(b)})}
+function dataURLToBlob(u){
+  const i=u.indexOf(","),meta=u.slice(5,i),type=meta.split(";")[0]||"application/octet-stream";
+  const bin=atob(u.slice(i+1)),arr=new Uint8Array(bin.length);
+  for(let k=0;k<bin.length;k++)arr[k]=bin.charCodeAt(k);
+  return new Blob([arr],{type});
+}
+async function exportData(){
+  saveCurrent();
+  const notesV2=[];
+  for(const n of NOTES){
+    const files=[];
+    for(const f of n.files){const b=await getFile(f.id);files.push(Object.assign({},f,{data:b?await blobToDataURL(b):null}))}
+    notesV2.push(Object.assign({},n,{files}));
+  }
+  const payload={completed,notes:NOTES.map(n=>(n.title?"# "+n.title+"\n":"")+n.body).join("\n\n"),notesV2,exportedAt:new Date().toISOString()};
+  const blob=new Blob([JSON.stringify(payload,null,2)],{type:"application/json"});
+  const a=document.createElement("a");
+  a.href=URL.createObjectURL(blob);
+  a.download="lakshana_90day_progress_backup.json";
+  a.click();
+  setTimeout(()=>URL.revokeObjectURL(a.href),1000);
+}
+function importData(file){
+  if(!file)return;
+  const reader=new FileReader();
+  reader.onload=async function(){
+    try{
+      const payload=JSON.parse(reader.result);
+      if(payload.completed && typeof payload.completed==="object"){completed=payload.completed;save()}
+      if(Array.isArray(payload.notesV2)){
+        for(const n of payload.notesV2){
+          const files=[];
+          for(const f of (n.files||[])){
+            if(f.data){await putFile(f.id,dataURLToBlob(f.data))}
+            const meta=Object.assign({},f);delete meta.data;files.push(meta);
+          }
+          const note=Object.assign(makeNote(),n,{files});
+          const i=NOTES.findIndex(x=>x.id===note.id);
+          if(i>=0)NOTES[i]=note;else NOTES.push(note);
+        }
+        persistNotes();
+      }else if(typeof payload.notes==="string"&&payload.notes.trim()){
+        NOTES.push(makeNote({title:"Imported notes",body:payload.notes}));persistNotes();
+      }
+      if(!NOTES.some(x=>x.id===curId))curId=sortedNotes()[0].id;
+      renderNoteList();loadEditor();
+      render();updateStats();
+      document.getElementById("importStatus").textContent=" Imported ✓";
+    }catch(e){
+      document.getElementById("importStatus").textContent=" Invalid file";
+    }
+  };
+  reader.readAsText(file);
+}
+function initNotes(){
+  document.getElementById("ntDay").innerHTML='<option value="">— none —</option>'+Array.from({length:90},(_,i)=>`<option value="${i+1}">Day ${i+1}</option>`).join("");
+  document.getElementById("ntType").innerHTML=NOTE_TYPES.map(t=>`<option>${t}</option>`).join("");
+  loadNotes();
+  if(!NOTES.length){NOTES.push(makeNote());persistNotes()}
+  curId=sortedNotes()[0].id;
+  ["ntTitle","ntBody"].forEach(id=>document.getElementById(id).addEventListener("input",scheduleSave));
+  ["ntDay","ntType"].forEach(id=>document.getElementById(id).addEventListener("change",scheduleSave));
+  document.getElementById("ntSearch").addEventListener("input",renderNoteList);
+  document.getElementById("ntFile").addEventListener("change",e=>{addFiles(e.target.files);e.target.value=""});
+  const drop=document.getElementById("ntDrop");
+  ["dragenter","dragover"].forEach(ev=>drop.addEventListener(ev,e=>{e.preventDefault();drop.classList.add("over")}));
+  ["dragleave","drop"].forEach(ev=>drop.addEventListener(ev,e=>{e.preventDefault();drop.classList.remove("over")}));
+  drop.addEventListener("drop",e=>{if(e.dataTransfer&&e.dataTransfer.files.length)addFiles(e.dataTransfer.files)});
+  document.getElementById("ntBody").addEventListener("paste",e=>{
+    const fs=Array.from((e.clipboardData&&e.clipboardData.items)||[]).filter(i=>i.kind==="file").map(i=>i.getAsFile()).filter(Boolean);
+    if(fs.length){e.preventDefault();addFiles(fs)}
+  });
+  window.addEventListener("beforeunload",()=>{if(cur()){readEditor();persistNotes()}});
+  renderNoteList();loadEditor();
+}
+/* ===== In-dashboard file viewer (click a file to read it here) ===== */
+let fvUrls=[],fvToken=0,fvId=null;
+const NS_W="http://schemas.openxmlformats.org/wordprocessingml/2006/main";
+const NS_R="http://schemas.openxmlformats.org/officeDocument/2006/relationships";
+
+/* --- tiny zip reader (docx/xlsx/pptx are zip files); no internet/library needed --- */
+async function fvUnzip(blob){
+  const buf=new Uint8Array(await blob.arrayBuffer()),dv=new DataView(buf.buffer);
+  let e=buf.length-22;while(e>=0&&dv.getUint32(e,true)!==0x06054b50)e--;
+  if(e<0)throw new Error("not a zip-based file");
+  const cnt=dv.getUint16(e+10,true);let p=dv.getUint32(e+16,true);const ents={};
+  for(let i=0;i<cnt;i++){
+    if(dv.getUint32(p,true)!==0x02014b50)break;
+    const method=dv.getUint16(p+10,true),csize=dv.getUint32(p+20,true);
+    const nl=dv.getUint16(p+28,true),el=dv.getUint16(p+30,true),cl=dv.getUint16(p+32,true),lho=dv.getUint32(p+42,true);
+    ents[new TextDecoder().decode(buf.subarray(p+46,p+46+nl))]={method,csize,lho};
+    p+=46+nl+el+cl;
+  }
+  return{
+    has:n=>!!ents[n],
+    names:()=>Object.keys(ents),
+    async read(n){
+      const en=ents[n];if(!en)throw new Error("missing "+n);
+      const nl=dv.getUint16(en.lho+26,true),el=dv.getUint16(en.lho+28,true),s=en.lho+30+nl+el;
+      const raw=buf.subarray(s,s+en.csize);
+      if(en.method===0)return raw;
+      if(en.method!==8)throw new Error("unsupported compression");
+      if(typeof DecompressionStream==="undefined")throw new Error("this browser is too old to open Word files here");
+      const out=new Response(new Blob([raw]).stream().pipeThrough(new DecompressionStream("deflate-raw")));
+      return new Uint8Array(await out.arrayBuffer());
+    },
+    async text(n){return new TextDecoder().decode(await this.read(n))}
+  };
+}
+function fvXml(s){
+  const d=new DOMParser().parseFromString(s,"application/xml");
+  if(d.getElementsByTagName("parsererror").length)throw new Error("unreadable XML");
+  return d;
+}
+const fvCh=(el,n)=>el?Array.from(el.childNodes).filter(c=>c.nodeType===1&&c.localName===n):[];
+const fvC1=(el,n)=>{if(!el)return null;for(const c of el.childNodes)if(c.nodeType===1&&c.localName===n)return c;return null};
+const fvWa=(el,n)=>el?(el.getAttributeNS(NS_W,n)||el.getAttribute("w:"+n)||""):"";
+const fvAll=(el,n)=>Array.from(el.getElementsByTagNameNS("*",n));
+
+/* --- Word (.docx) --- */
+async function fvDocx(blob){
+  const z=await fvUnzip(blob);
+  if(!z.has("word/document.xml"))throw new Error("this is not a Word (.docx) file");
+  const doc=fvXml(await z.text("word/document.xml"));
+  /* styles */
+  const styles={};
+  if(z.has("word/styles.xml")){
+    fvAll(fvXml(await z.text("word/styles.xml")),"style").forEach(s=>{
+      const id=fvWa(s,"styleId");if(!id)return;
+      const pPr=fvC1(s,"pPr"),np=fvC1(pPr,"numPr");
+      styles[id]={name:fvWa(fvC1(s,"name"),"val"),base:fvWa(fvC1(s,"basedOn"),"val"),
+        numId:np?fvWa(fvC1(np,"numId"),"val"):"",ilvl:np?fvWa(fvC1(np,"ilvl"),"val"):""};
+    });
+  }
+  const styleInfo=id=>{
+    let sid=id,name="",numId="",ilvl="";
+    for(let i=0;i<6&&sid&&styles[sid];i++){
+      const s=styles[sid];if(!name)name=s.name;
+      if(!numId&&s.numId){numId=s.numId;ilvl=s.ilvl}
+      sid=s.base;
+    }
+    return{name:name||id||"",numId,ilvl};
+  };
+  /* numbering */
+  const nums={},abs={};
+  if(z.has("word/numbering.xml")){
+    const nd=fvXml(await z.text("word/numbering.xml"));
+    fvAll(nd,"abstractNum").forEach(a=>{
+      const lv={};fvCh(a,"lvl").forEach(l=>{lv[fvWa(l,"ilvl")]={fmt:fvWa(fvC1(l,"numFmt"),"val"),start:parseInt(fvWa(fvC1(l,"start"),"val")||"1",10)}});
+      abs[fvWa(a,"abstractNumId")]=lv;
+    });
+    fvAll(nd,"num").forEach(n=>{nums[fvWa(n,"numId")]=fvWa(fvC1(n,"abstractNumId"),"val")});
+  }
+  /* relationships: links + pictures */
+  const rels={};
+  if(z.has("word/_rels/document.xml.rels")){
+    for(const r of fvAll(fvXml(await z.text("word/_rels/document.xml.rels")),"Relationship")){
+      const id=r.getAttribute("Id"),type=r.getAttribute("Type")||"",target=r.getAttribute("Target")||"";
+      if(r.getAttribute("TargetMode")==="External"){rels[id]={url:target};continue}
+      if(/\/image$/.test(type)){
+        let path=target.startsWith("/")?target.slice(1):"word/"+target;
+        path=path.replace(/[^\/]+\/\.\.\//g,"");
+        const ext=(path.split(".").pop()||"").toLowerCase();
+        const mime={png:"image/png",jpg:"image/jpeg",jpeg:"image/jpeg",gif:"image/gif",webp:"image/webp",bmp:"image/bmp",svg:"image/svg+xml"}[ext];
+        if(mime&&z.has(path)){const u=URL.createObjectURL(new Blob([await z.read(path)],{type:mime}));fvUrls.push(u);rels[id]={img:u}}
+      }
+    }
+  }
+  const st={counters:{}};
+  const MONO=/courier|consolas|mono|menlo|lucida console|source code|fira code|cascadia/i;
+  const HL={yellow:"#FFF176",green:"#B9F6CA",cyan:"#A7FFEB",magenta:"#F8BBD0",blue:"#BBDEFB",red:"#FFCDD2",lightGray:"#E0E0E0",darkYellow:"#FBC02D"};
+  const on=el=>{if(!el)return false;const v=fvWa(el,"val").toLowerCase();return v!=="0"&&v!=="false"&&v!=="off"&&v!=="none"};
+
+  function drawing(d){
+    const bl=fvAll(d,"blip")[0];if(!bl)return"";
+    const id=bl.getAttributeNS(NS_R,"embed"),r=rels[id];
+    if(!r||!r.img)return'<span class="fv-noimg">[picture]</span>';
+    const ext=fvAll(d,"extent")[0],w=ext?Math.round(parseInt(ext.getAttribute("cx")||"0",10)/9525):0;
+    const dp=fvAll(d,"docPr")[0],alt=dp?dp.getAttribute("descr")||"":"";
+    return`<img class="fv-img" src="${r.img}" alt="${esc(alt)}"${w>20?` style="width:${w}px"`:""}>`;
+  }
+  function run(r,ctx){
+    const rPr=fvC1(r,"rPr");let s="",hasText=false;
+    for(const c of r.childNodes){
+      if(c.nodeType!==1)continue;
+      const n=c.localName;
+      if(n==="t"){s+=esc(c.textContent);if(c.textContent.trim())hasText=true}
+      else if(n==="tab")s+="\u00a0\u00a0\u00a0\u00a0";
+      else if(n==="br"||n==="cr")s+=fvWa(c,"type")==="page"?'<hr class="fv-pb">':"<br>";
+      else if(n==="noBreakHyphen")s+="-";
+      else if(n==="drawing"||n==="pict"){s+=drawing(c)}
+    }
+    if(!s)return{html:"",mono:true,text:false};
+    const fonts=fvC1(rPr,"rFonts"),fname=fonts?(fvWa(fonts,"ascii")||fvWa(fonts,"hAnsi")):"";
+    const mono=MONO.test(fname);
+    let css="";
+    const col=fvWa(fvC1(rPr,"color"),"val");
+    if(/^[0-9A-Fa-f]{6}$/.test(col)&&(col.toUpperCase()!=="FFFFFF"||ctx.keepWhite))css+=`color:#${col};`;
+    const hl=fvWa(fvC1(rPr,"highlight"),"val");if(hl&&HL[hl])css+=`background:${HL[hl]};`;
+    const shd=fvWa(fvC1(rPr,"shd"),"fill");if(/^[0-9A-Fa-f]{6}$/.test(shd)&&shd.toUpperCase()!=="FFFFFF"&&!css.includes("background"))css+=`background:#${shd};`;
+    if(css||mono)s=`<span${mono?' class="fv-mono"':""}${css?` style="${css}"`:""}>${s}</span>`;
+    if(on(fvC1(rPr,"b")))s=`<b>${s}</b>`;
+    if(on(fvC1(rPr,"i")))s=`<i>${s}</i>`;
+    if(on(fvC1(rPr,"u")))s=`<u>${s}</u>`;
+    if(on(fvC1(rPr,"strike")))s=`<s>${s}</s>`;
+    const va=fvWa(fvC1(rPr,"vertAlign"),"val");
+    if(va==="superscript")s=`<sup>${s}</sup>`;else if(va==="subscript")s=`<sub>${s}</sub>`;
+    return{html:s,mono:mono||!hasText,text:hasText};
+  }
+  function inlines(p,ctx,acc){
+    for(const c of p.childNodes){
+      if(c.nodeType!==1)continue;
+      const n=c.localName;
+      if(n==="r"){const r=run(c,ctx);acc.html+=r.html;if(r.text){acc.text=true;if(!r.mono)acc.allMono=false}}
+      else if(n==="hyperlink"){
+        const rid=c.getAttributeNS(NS_R,"id"),url=rels[rid]&&rels[rid].url,sub={html:"",text:false,allMono:true};
+        inlines(c,ctx,sub);
+        acc.html+=(url&&/^(https?:|mailto:)/i.test(url))?`<a href="${esc(url)}" target="_blank" rel="noopener noreferrer">${sub.html}</a>`:sub.html;
+        if(sub.text){acc.text=true;if(!sub.allMono)acc.allMono=false}
+      }
+      else if(n==="ins"||n==="smartTag"||n==="fldSimple"||n==="sdt"||n==="sdtContent")inlines(c,ctx,acc);
+    }
+    return acc;
+  }
+  const ROMAN=n=>{const m=[[1000,"m"],[900,"cm"],[500,"d"],[400,"cd"],[100,"c"],[90,"xc"],[50,"l"],[40,"xl"],[10,"x"],[9,"ix"],[5,"v"],[4,"iv"],[1,"i"]];let s="";for(const[v,t]of m)while(n>=v){s+=t;n-=v}return s};
+  function marker(numId,ilvl){
+    const lv=(abs[nums[numId]]||{})[ilvl]||{fmt:"decimal",start:1};
+    if(lv.fmt==="bullet")return["•","◦","▪"][ilvl%3];
+    const arr=st.counters[numId]||(st.counters[numId]=[]);
+    arr[ilvl]=(arr[ilvl]==null?lv.start:arr[ilvl]+1);arr.length=ilvl+1;
+    const v=arr[ilvl];
+    if(lv.fmt==="lowerLetter")return String.fromCharCode(96+((v-1)%26+1))+".";
+    if(lv.fmt==="upperLetter")return String.fromCharCode(64+((v-1)%26+1))+".";
+    if(lv.fmt==="lowerRoman")return ROMAN(v)+".";
+    if(lv.fmt==="upperRoman")return ROMAN(v).toUpperCase()+".";
+    return v+".";
+  }
+  function para(p,ctx){
+    const pPr=fvC1(p,"pPr"),sid=fvWa(fvC1(pPr,"pStyle"),"val"),si=styleInfo(sid);
+    const acc=inlines(p,ctx,{html:"",text:false,allMono:true});
+    let numId="",ilvl="0";
+    const np=fvC1(pPr,"numPr");
+    if(np){numId=fvWa(fvC1(np,"numId"),"val");ilvl=fvWa(fvC1(np,"ilvl"),"val")||"0"}
+    else if(si.numId){numId=si.numId;ilvl=si.ilvl||"0"}
+    if(numId==="0")numId="";
+    const jc=fvWa(fvC1(pPr,"jc"),"val"),align=jc==="center"?"text-align:center;":jc==="right"||jc==="end"?"text-align:right;":jc==="both"?"text-align:justify;":"";
+    const nm=si.name.toLowerCase(),hm=/^heading\s*(\d)/.exec(nm);
+    if(!acc.html)return{html:'<div class="fv-gap"></div>'};
+    if(hm){const l=Math.min(6,Math.max(1,+hm[1]));return{html:`<h${l} style="${align}">${acc.html}</h${l}>`}}
+    if(nm==="title")return{html:`<h1 class="fv-title" style="${align}">${acc.html}</h1>`};
+    if(nm==="subtitle")return{html:`<p class="fv-sub" style="${align}">${acc.html}</p>`};
+    if(numId){
+      const l=parseInt(ilvl,10)||0;
+      return{html:`<div class="fv-li" style="margin-left:${10+l*24}px"><span class="fv-mk">${marker(numId,l)}</span><span class="fv-lt">${acc.html}</span></div>`};
+    }
+    if(acc.text&&(acc.allMono||/code/i.test(si.name)))return{code:acc.html};
+    const ind=fvC1(pPr,"ind"),left=ind?parseInt(fvWa(ind,"left")||fvWa(ind,"start")||"0",10):0;
+    const pad=left>0?`margin-left:${Math.round(left/20)}px;`:"";
+    return{html:`<p style="${align}${pad}">${acc.html}</p>`};
+  }
+  function table(tbl,ctx){
+    const open={},rows=[];
+    fvCh(tbl,"tr").forEach(tr=>{
+      let col=0;const cells=[];
+      fvCh(tr,"tc").forEach(tc=>{
+        const pr=fvC1(tc,"tcPr"),span=parseInt(fvWa(fvC1(pr,"gridSpan"),"val")||"1",10)||1;
+        const vm=fvC1(pr,"vMerge"),vv=vm?(fvWa(vm,"val")||"continue"):"";
+        const fill=fvWa(fvC1(pr,"shd"),"fill"),okFill=/^[0-9A-Fa-f]{6}$/.test(fill)?fill:"";
+        if(vm&&vv==="continue"&&open[col]){open[col].rowspan++;col+=span;return}
+        const cell={span,rowspan:1,fill:okFill,html:blocks(tc,{keepWhite:!!okFill&&okFill.toUpperCase()!=="FFFFFF"})};
+        cells.push(cell);
+        if(vm&&vv==="restart")open[col]=cell;else delete open[col];
+        col+=span;
+      });
+      rows.push(cells);
+    });
+    return'<div class="fv-tw"><table class="fv-t">'+rows.map(r=>"<tr>"+r.map(c=>`<td${c.span>1?` colspan="${c.span}"`:""}${c.rowspan>1?` rowspan="${c.rowspan}"`:""}${c.fill?` style="background:#${c.fill}"`:""}>${c.html}</td>`).join("")+"</tr>").join("")+"</table></div>";
+  }
+  function blocks(container,ctx){
+    let out="",code=[];
+    const flush=()=>{if(code.length){out+=`<div class="fv-code">${code.join("\n")}</div>`;code=[]}};
+    const walk=el=>{
+      for(const c of el.childNodes){
+        if(c.nodeType!==1)continue;
+        if(c.localName==="p"){const r=para(c,ctx);if(r.code!==undefined)code.push(r.code);else{flush();out+=r.html}}
+        else if(c.localName==="tbl"){flush();out+=table(c,ctx)}
+        else if(c.localName==="sdt"){const sc=fvC1(c,"sdtContent");if(sc)walk(sc)}
+      }
+    };
+    walk(container);flush();return out;
+  }
+  const body=fvAll(doc,"body")[0];
+  const html=blocks(body,{});
+  return`<div class="fv-doc">${html||'<p class="fv-msg">This document is empty.</p>'}</div>`;
+}
+
+/* --- Excel (.xlsx) --- */
+async function fvXlsx(blob){
+  const z=await fvUnzip(blob);
+  if(!z.has("xl/workbook.xml"))throw new Error("this is not an Excel (.xlsx) file");
+  const wb=fvXml(await z.text("xl/workbook.xml"));
+  const rels={};
+  if(z.has("xl/_rels/workbook.xml.rels"))fvAll(fvXml(await z.text("xl/_rels/workbook.xml.rels")),"Relationship").forEach(r=>{rels[r.getAttribute("Id")]=r.getAttribute("Target")});
+  const sst=[];
+  if(z.has("xl/sharedStrings.xml"))fvAll(fvXml(await z.text("xl/sharedStrings.xml")),"si").forEach(si=>{
+    sst.push(fvAll(si,"t").filter(t=>!(t.parentNode&&t.parentNode.localName==="rPh")).map(t=>t.textContent).join(""));
+  });
+  const colNum=ref=>{const m=/^([A-Z]+)/.exec(ref||"");if(!m)return 0;let n=0;for(const ch of m[1])n=n*26+ch.charCodeAt(0)-64;return n-1};
+  const colName=i=>{let s="";i++;while(i>0){const m=(i-1)%26;s=String.fromCharCode(65+m)+s;i=Math.floor((i-1)/26)}return s};
+  const MAXR=300,MAXC=40;let out='<div class="fv-doc">';
+  for(const sh of fvAll(wb,"sheet")){
+    const name=sh.getAttribute("name")||"Sheet",tg=rels[sh.getAttributeNS(NS_R,"id")];
+    if(!tg)continue;
+    const path=tg.startsWith("/")?tg.slice(1):"xl/"+tg;
+    if(!z.has(path))continue;
+    const sx=fvXml(await z.text(path)),rows=[];let totalRows=0,maxc=0;
+    fvAll(sx,"row").forEach(row=>{
+      totalRows++;if(rows.length>=MAXR)return;
+      const arr=[];
+      fvCh(row,"c").forEach(c=>{
+        const ci=colNum(c.getAttribute("r"));if(ci>=MAXC)return;
+        const t=c.getAttribute("t"),v=fvC1(c,"v");let val="";
+        if(t==="s")val=sst[parseInt(v?v.textContent:"-1",10)]||"";
+        else if(t==="inlineStr")val=fvAll(c,"t").map(x=>x.textContent).join("");
+        else if(t==="b")val=v&&v.textContent==="1"?"TRUE":"FALSE";
+        else val=v?v.textContent:"";
+        arr[ci]=val;if(ci+1>maxc)maxc=ci+1;
+      });
+      rows.push(arr);
+    });
+    out+=`<h3>${esc(name)}</h3>`;
+    if(!rows.length){out+='<p class="fv-msg">Empty sheet.</p>';continue}
+    out+='<div class="fv-tw"><table class="fv-t fv-x"><tr><th></th>'+Array.from({length:maxc},(_,i)=>`<th>${colName(i)}</th>`).join("")+"</tr>";
+    rows.forEach((r,i)=>{out+=`<tr><th>${i+1}</th>`+Array.from({length:maxc},(_,j)=>`<td>${esc(r[j]??"")}</td>`).join("")+"</tr>"});
+    out+="</table></div>";
+    if(totalRows>MAXR)out+=`<p class="fv-msg">Showing the first ${MAXR} of ${totalRows} rows. Use Save to open the full sheet in Excel.</p>`;
+  }
+  return out+"</div>";
+}
+
+/* --- PowerPoint (.pptx): text only --- */
+async function fvPptx(blob){
+  const z=await fvUnzip(blob);
+  const slides=z.names().map(n=>({n,m:/^ppt\/slides\/slide(\d+)\.xml$/.exec(n)})).filter(x=>x.m).sort((a,b)=>a.m[1]-b.m[1]);
+  if(!slides.length)throw new Error("this is not a PowerPoint (.pptx) file");
+  let out='<div class="fv-doc"><p class="fv-msg">Text only. Open the file in PowerPoint (Save button) to see the design and pictures.</p>';
+  for(let i=0;i<slides.length;i++){
+    const sx=fvXml(await z.text(slides[i].n));let first=true,body="";
+    fvAll(sx,"p").forEach(p=>{
+      if(p.namespaceURI&&!/drawingml/.test(p.namespaceURI))return;
+      let t="";for(const c of p.getElementsByTagNameNS("*","*")){if(c.localName==="t")t+=c.textContent;else if(c.localName==="br")t+="\n"}
+      if(!t.trim())return;
+      const pr=fvC1(p,"pPr"),lvl=pr?parseInt(pr.getAttribute("lvl")||"0",10):0;
+      body+=first?`<p class="fv-st">${esc(t)}</p>`:`<p style="margin-left:${lvl*20}px">${esc(t)}</p>`;first=false;
+    });
+    out+=`<section class="fv-slide"><div class="fv-sn">Slide ${i+1}</div>${body||'<p class="fv-msg">(no text on this slide)</p>'}</section>`;
+  }
+  return out+"</div>";
+}
+
+/* --- open / close the viewer --- */
+function fvExt(f){return((f.name.split(".").pop()||"")).toLowerCase()}
+function canPreview(f){
+  const e=fvExt(f);
+  return/^(docx|docm|xlsx|xlsm|pptx|pdf|png|jpe?g|gif|webp|bmp|svg|txt|md|csv|log|json)$/.test(e)||/^(image\/|text\/|application\/pdf)/.test(f.type||"");
+}
+function fvClose(){
+  fvToken++;fvId=null;
+  document.getElementById("fvOverlay").classList.add("hidden");
+  document.getElementById("fvBody").innerHTML="";
+  fvUrls.forEach(u=>URL.revokeObjectURL(u));fvUrls=[];
+  document.body.style.overflow="";
+}
+function fvSave(){if(fvId)downloadFile(fvId)}
+function fvMsg(t){return`<p class="fv-msg">${esc(t)}</p>`}
+async function previewFile(id){
+  const n=cur(),f=n&&n.files.find(x=>x.id===id);if(!f)return;
+  const my=++fvToken;fvId=id;
+  fvUrls.forEach(u=>URL.revokeObjectURL(u));fvUrls=[];
+  const ov=document.getElementById("fvOverlay"),bd=document.getElementById("fvBody");
+  document.getElementById("fvName").textContent=f.name;
+  bd.innerHTML=fvMsg("Opening…");bd.scrollTop=0;
+  ov.classList.remove("hidden");document.body.style.overflow="hidden";
+  const b=await getFile(id);
+  if(my!==fvToken)return;
+  if(!b){bd.innerHTML=fvMsg("This file is no longer in the browser's storage. Upload it again, or use Import Progress on the Progress page to restore your backup.");return}
+  const e=fvExt(f);let html;
+  try{
+    if(e==="docx"||e==="docm")html=await fvDocx(b);
+    else if(e==="xlsx"||e==="xlsm")html=await fvXlsx(b);
+    else if(e==="pptx")html=await fvPptx(b);
+    else if(e==="pdf"||f.type==="application/pdf"){const u=URL.createObjectURL(new Blob([b],{type:"application/pdf"}));fvUrls.push(u);html=`<iframe class="fv-pdf" src="${u}" title="${esc(f.name)}"></iframe>`}
+    else if(/^image\//.test(f.type)||/^(png|jpe?g|gif|webp|bmp|svg)$/.test(e)){const u=URL.createObjectURL(b.type?b:new Blob([b],{type:"image/"+(e==="jpg"?"jpeg":e)}));fvUrls.push(u);html=`<div class="fv-imgwrap"><img class="fv-img" src="${u}" alt="${esc(f.name)}"></div>`}
+    else if(/^text\//.test(f.type)||/^(txt|md|csv|log|json)$/.test(e)){const t=await b.text();html=`<pre class="fv-text">${esc(t.length>2000000?t.slice(0,2000000)+"\n… (file is long, use Save to see everything)":t)}</pre>`}
+    else if(/^(doc|xls|ppt)$/.test(e))html=fvMsg("This is an old-format ."+e+" file, which can't be shown here. Use Save to open it in Word, Excel or PowerPoint, or re-save it as ."+e+"x.");
+    else html=fvMsg("This file type can't be shown here. Use Save to download it.");
+  }catch(err){
+    html=fvMsg("Couldn't show this file here ("+(err&&err.message?err.message:"unknown error")+"). Use Save to open it on your computer.");
+  }
+  if(my!==fvToken)return;
+  bd.innerHTML=html;
+}
+document.addEventListener("keydown",e=>{
+  if(e.key==="Escape"&&!document.getElementById("fvOverlay").classList.contains("hidden"))fvClose();
+});
+
+function resetProgress(){
+ if(!confirm("Reset all 90 days of progress? This cannot be undone."))return;
+ completed={};
+ save();
+ render();
+ updateStats();
+}
+function showPage(name){
+ ["dashboard","progressPage","resourcesPage","notesPage","guidePage","routinePage","printPage"].forEach(id=>document.getElementById(id).classList.add("hidden"));
+ document.getElementById(name==="dashboard"?"dashboard":name+"Page").classList.remove("hidden");
+ document.querySelectorAll(".nav button").forEach(b=>b.classList.toggle("active",b.dataset.page===name));
+}
+document.querySelectorAll(".tab").forEach(b=>b.addEventListener("click",()=>setFilter(b.dataset.filter)));
+document.getElementById("search").addEventListener("input",()=>{page=1;render()});
+document.querySelectorAll(".nav button").forEach(b=>b.addEventListener("click",()=>{
+ const p=b.dataset.page;
+ if(p==="dashboard"||p==="plan")showPage("dashboard");
+ else if(p==="progress")showPage("progress");
+ else if(p==="resources")showPage("resources");
+ else if(p==="guide")showPage("guide");
+ else if(p==="notes")showPage("notes");
+ else if(p==="routine")showPage("routine");
+ else showPage("print");
+}));
+updateStats();render();renderResources();initNotes();
+</script>
+</body>
+</html>
