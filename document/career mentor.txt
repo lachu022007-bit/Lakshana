@@ -1,0 +1,18 @@
+C:\Users\Lakshanadevi M\Documents\Codex\2026-08-10\files-mentioned-by-the-user-you
+
+backend 
+cd "C:\Users\Lakshanadevi M\Documents\Codex\2026-08-10\files-mentioned-by-the-user-you\CareerAI-Mentor\backend"
+python -m pip install "pwdlib[argon2]"
+
+backend main
+cd "C:\Users\Lakshanadevi M\Documents\Codex\2026-08-10\files-mentioned-by-the-user-you\CareerAI-Mentor\backend"
+$env:FRONTEND_ORIGINS="http://127.0.0.1:5174"
+python -m uvicorn app.main:app --reload --host 127.0.0.1 --port 8000
+
+frontend main
+cd "C:\Users\Lakshanadevi M\Documents\Codex\2026-08-10\files-mentioned-by-the-user-you\CareerAI-Mentor\frontend"
+npm.cmd install
+npm.cmd run dev -- --host 127.0.0.1 --port 5174
+
+open
+http://127.0.0.1:5174/

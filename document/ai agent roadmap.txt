@@ -1,0 +1,12 @@
+ai agent(Task-tool) -> loop
+Example: 
+Input(LinkedIn post) -> Ai agent(think, action(tool), observe, think again, Result
+                           
+                      2026 PR_Agent
+                           |
+                     No Coding - Coding
+         n8n,cladue,kimi,codex - crewAI, LangGraph,                     Context Engineering, RAG engineering, Harness Engineering, Memory(LTM),operation Engineering(error),Deployment, loop engineering
+
+
+claude
+skills(.md), Connector(tool calling),

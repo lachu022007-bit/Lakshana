@@ -1,0 +1,18 @@
+1.what is ml
+2.types of ml
+3.supervised learning ->
+ example(student,teacher)
+ mapping function
+4.how the supervised learning work with diagram
+5.key concepts(training data, feature, label, model, loss function, optimization algorithm)
+6.steps involved in supervised learning
+7.types of supervised learning and common algorithm
+8.steps in supervised learning, application and challenges
+9.unsupervised learning(what, why use)
+10. working
+types, algorithm, key concepts, adv, disadv
+
+
+
+
+
